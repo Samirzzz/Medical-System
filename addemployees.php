@@ -21,9 +21,9 @@ include_once'navigation.php';
             <div class="card-body p-5" style="height: 19cm;">
               <div class="choose">
              <div class="nav"> 
-             <a href="addemployees.php" class="bo">AddUser        </a>
-              <a href="#" class="bo">EditUser       </a>
-              <a href="#" class="bo">ViewUsers      </a>
+             <a href="addemployees.php" class="bo"> Add User</a>
+              <a href="#" class="bo">Edit User       </a>
+              <a href="viewusers.php" class="bo">View Users      </a>
              </div>
               
               </div>
