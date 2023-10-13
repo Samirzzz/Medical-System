@@ -10,89 +10,10 @@
     <title>VeZeeTa</title>
 </head>
 <body class="body">
-    <section class="header">
-        <div class="logo">
-            <i class="ri-menu-line menu"></i>
-            <h2><span>VE</span>ZeeTa.</h2>
-        </div>
-        <div class="header--items">
-            <i class="ri-search-2-line"></i>
-            <div class="dark--theme--btn">
-                <i class="ri-moon-line moon"></i>
-                <i class="ri-sun-line sun"></i>
-            </div>
-            <i class="ri-notification-2-line"></i>
-            <i class="ri-wechat-2-line chat"></i>
-            <div class="profile">
-                <img src="assets/images/profile.jpg" alt=""> <!--el pp-->
-            </div>
-        </div>
-    </section>
-    <section class="main">
-        <div class="sidebar">
-            <ul class="sidebar--items">
-                <li>
-                    <a href="#" class="active">
-                        <span class="icon"><i class="ri-bar-chart-line"></i></span>
-                        <div class="sidebar--item">Overview</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-empathize-line"></i></span>
-                        <div class="sidebar--item">Appointments</div>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                    <a  href="#">
-                        <span class="icon"><i class="ri-user-line"></i></span>
-                        <div class="sidebar--item">Users</div>
-                    </a>
-                    <div class="dropdown-options">
-                        
-                         <a href="addpatient.php">Patients</a>
-                   <a href="addemployees.php">Employees</a>
-    
-  </div>
-  </div>
-
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-calendar-line"></i></span>
-                        <div class="sidebar--item">Calender</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-profile-line"></i></span>
-                        <div class="sidebar--item">Profile</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-settings-3-line"></i></span>
-                        <div class="sidebar--item">Settings</div>
-                    </a>
-                </li>
-            </ul>
-            <ul class="sidebar--bottom--items">
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-question-line"></i></span>
-                        <div class="sidebar--item">Help</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-logout-box-r-line"></i></span>
-                        <div class="sidebar--item">Logout</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main--container">
+<?php
+include_once'navigation.php';
+?>
+<div class="main--container">
             <div class="section--title">
                 <h3 class="title">Welcome back, Jenny</h3>
                 <select name="date" id="date">
