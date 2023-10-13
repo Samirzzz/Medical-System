@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-include_once'navigation.php';
+include'navigation.php';
 ?>
 <section class="vh-100 bg-image"
   style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
@@ -28,12 +28,14 @@ include_once'navigation.php';
               
               </div>
               <h2 class="text-uppercase text-center mb-5">Add User</h2>
-
+<br><br><br>
               <form>
+            
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Name</label>
+                  <input type="email" id="form3Example1cg" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
+                
+                  <label class="form-label" for="form3Example1cg">Name</label>  
                 </div>
 
                 <div class="form-outline mb-4">
