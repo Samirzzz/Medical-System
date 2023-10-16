@@ -128,7 +128,7 @@ include_once'navigation.php';
                                                     </td>
                                                     <td>
                                                         <div class="widget-26-job-title">
-                                                            <a href="#">Senior Software Engineer / Developer</a>
+                                                            <a href="patientinfo.php">Senior Software Engineer / Developer</a>
                                                             <p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>
                                                         </div>
                                                     </td>
