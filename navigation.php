@@ -66,7 +66,7 @@
 
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="calendar.php">
                         <span class="icon"><i class="ri-calendar-line"></i></span>
                         <div class="sidebar--item">Calender</div>
                     </a>
