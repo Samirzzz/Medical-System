@@ -10,7 +10,7 @@
 				initial-scale=1.0">
 	<title>GeeksForGeeks</title>
 	<link rel="stylesheet"
-		href="style.css">
+		href="drprofile.css">
 	<link rel="stylesheet"
 		href="responsive.css">
 </head>
