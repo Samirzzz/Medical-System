@@ -1,17 +1,5 @@
 <?php
-$cdb_server = 'localhost'; // Change "local host :80" to "localhost"
-$cdb_user = 'root';
-$cdb_pass = '';
-$cdb_name = 'calendar';
-
-$cdb = mysqli_connect($cdb_server, $cdb_user, $cdb_pass, $cdb_name);
-
-if ($cdb) {
-    echo "Connected to the database successfully";
-} else {
-    echo "Couldn't connect to the database: " . mysqli_connect_error();
-}
-
+include_once "includes/calendardb.php";
 
 
 function get_events($start_date,$end_date){
@@ -35,6 +23,7 @@ function count_events_on_date($date, $events) {
 }
 
 
+
 ?>
 
 <html>
@@ -43,7 +32,7 @@ function count_events_on_date($date, $events) {
     <link rel="stylesheet"  href="calendar.css">
 </head>
 <body>
-    <div id = "calendar">
+<div id="calendar">
     <h1>Event Calendar</h1>
     <?php
     $year = date("Y");
@@ -80,7 +69,7 @@ function count_events_on_date($date, $events) {
         echo "<td>";
         echo "<a href='$day_link'>$day</a>";
         if ($event_count > 0) {
-            echo "<br><span class='event-count'>$event_count events</span>";
+            echo "<span class='event-count'>$event_count events</span>";
         }
         echo "</td>";
 
@@ -90,15 +79,18 @@ function count_events_on_date($date, $events) {
     echo "</tr>";
     echo "</table>";
     ?>
-    </div>
+
+    <a href="includes/addevent.php">Add Event</a>
+</div>
 
 
 
-    <a href="add_event.php">Add Event</a>
+
+    <a href="includes/addevent.php">Add Event</a>
 </body>
 
 <style>
-    /* Calendar Container */
+/* Calendar Container */
 #calendar {
     width: 80%;
     margin: 0 auto;
@@ -116,7 +108,7 @@ function count_events_on_date($date, $events) {
 #calendar table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    border: 1px solid #ddd;
 }
 
 /* Calendar Table Headers */
@@ -131,12 +123,15 @@ function count_events_on_date($date, $events) {
 #calendar td {
     text-align: center;
     padding: 10px;
+    position: relative;
+    border: 1px solid #ddd;
+    color:white;
 }
 
 /* Highlight Today's Date */
 #calendar td a {
     text-decoration: none;
-    color: #333;
+    color: white;
 }
 
 #calendar td a:hover {
@@ -147,6 +142,10 @@ function count_events_on_date($date, $events) {
 .event-count {
     font-size: 12px;
     color: #ff5733;
+    background-color: #fff;
+    padding: 2px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 /* Add Event Link */
@@ -154,7 +153,7 @@ function count_events_on_date($date, $events) {
     display: block;
     text-align: center;
     background-color: #333;
-    color: black;
+    color: white;
     padding: 10px;
     text-decoration: none;
     margin: 10px 0;
