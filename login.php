@@ -4,14 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traventure login or sign up</title>
+    <title> login or sign up</title>
     <link rel="stylesheet" href="interface.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
 </head>
-
+<style>
+      body {
+        background-image: url('test.jpg');
+        background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+      }
+    </style>
 <body>
     <div id="cont">
             <div id="frm">

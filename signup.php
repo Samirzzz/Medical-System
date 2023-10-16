@@ -17,7 +17,14 @@
 <!-- Assuming you have included the necessary jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
+<style>
+      body {
+        background-image: url('test.jpg');
+        background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+      }
+    </style>
 
   </head>
   <body>
