@@ -12,7 +12,7 @@
 	<link rel="stylesheet"
 		href="drprofile.css">
 	<link rel="stylesheet"
-		href="responsive.css">
+		href="drprofileR.css">
 </head>
 
 <body>
