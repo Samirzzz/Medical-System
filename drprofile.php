@@ -10,6 +10,7 @@
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
 <body class="w3-light-grey">
+<?php include_once'navigation.php';?>
 
 
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
