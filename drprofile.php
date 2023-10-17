@@ -1,269 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<title>Doctor Details</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible"
-		content="IE=edge">
-	<meta name="viewport"
-		content="width=device-width, 
-				initial-scale=1.0">
-	<title>GeeksForGeeks</title>
-	<link rel="stylesheet"
-		href="drprofile.css">
-	<link rel="stylesheet"
-		href="drprofileR.css">
-</head>
 
-<body>
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-	<!-- for header part -->
-	<header>
 
-		<div class="logosec">
-			<div class="logo">GeeksForGeeks</div>
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
-				class="icn menuicn"
-				id="menuicn"
-				alt="menu-icon">
-		</div>
+  <div class="w3-row-padding">
 
-		<div class="searchbar">
-			<input type="text"
-				placeholder="Search">
-			<div class="searchbtn">
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-					class="icn srchicn"
-					alt="search-icon">
-			</div>
-		</div>
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="dr.jpg" style="width:100%" alt="Avatar">
+          <div class="w3-display-bottomleft w3-container w3-text-black">
+            <h2>Samuel Smith</h2>
+          </div>
+        </div>
+        <div class="w3-container">
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Pediatric cardiologist</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>samuel_smith@mail.com</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+          <hr>
 
-		<div class="message">
-			<div class="circle"></div>
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
-				class="icn"
-				alt="">
-			<div class="dp">
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
-					class="dpicn"
-					alt="dp">
-			</div>
-		</div>
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+          <p>English</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <p>Spanish</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
+          </div>
+          <p>German</p>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>
+          </div>
+          <br>
+        </div>
+      </div><br>
 
-	</header>
+    <!-- End Left Column -->
+    </div>
 
-	<div class="main-container">
-		<div class="navcontainer">
-			<nav class="nav">
-				<div class="nav-upper-options">
-					<div class="nav-option option1">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
-							class="nav-img"
-							alt="dashboard">
-						<h3> Dashboard</h3>
-					</div>
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>About</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Short Biography</b></h5>
+          <p>Dr. Samuel Smith is a neurosurgeon in East Patchogue,Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. He received his medical degree from Harvard Medical School and has been in practice for 21 years. He is one of 5 doctors at Brookhaven Memorial Hospital Medical Center and one of 9 at Southside Hospital who specialize in Neurological Surgery.</p>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="w3-twothird">
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Johns Hopkins Hospital</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2017</h6>
+          <p>Cardiology, Pediatric cardiologist</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>UCLA Medical Center</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2017</h6>
+          <p>Cardiology, Pediatric cardiologist </p><br>
+        </div>
+      </div>
+    </div>
 
-					<div class="option2 nav-option">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
-							class="nav-img"
-							alt="articles">
-						<h3> Articles</h3>
-					</div>
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>Harvad University</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2017</h6>
+          <p>Bachelor of Medicine, Pediatric cardiologist, 8.5</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>University of Campbridge</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2014 - 2018</h6>
+          <p>Bachelor of Science in Biotechnology, physiologist, 8.5</p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-					<div class="nav-option option3">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
-							class="nav-img"
-							alt="report">
-						<h3> Report</h3>
-					</div>
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+</footer>
 
-					<div class="nav-option option4">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
-							class="nav-img"
-							alt="institution">
-						<h3> Institution</h3>
-					</div>
-
-					<div class="nav-option option5">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-							class="nav-img"
-							alt="blog">
-						<h3> Profile</h3>
-					</div>
-
-					<div class="nav-option option6">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
-							class="nav-img"
-							alt="settings">
-						<h3> Settings</h3>
-					</div>
-
-					<div class="nav-option logout">
-						<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-							class="nav-img"
-							alt="logout">
-						<h3>Logout</h3>
-					</div>
-
-				</div>
-			</nav>
-		</div>
-		<div class="main">
-
-			<div class="searchbar2">
-				<input type="text"
-					name=""
-					id=""
-					placeholder="Search">
-				<div class="searchbtn">
-				<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-						class="icn srchicn"
-						alt="search-button">
-				</div>
-			</div>
-
-			<div class="box-container">
-
-				<div class="box box1">
-					<div class="text">
-						<h2 class="topic-heading">60.5k</h2>
-						<h2 class="topic">Article Views</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
-						alt="Views">
-				</div>
-
-				<div class="box box2">
-					<div class="text">
-						<h2 class="topic-heading">150</h2>
-						<h2 class="topic">Likes</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
-						alt="likes">
-				</div>
-
-				<div class="box box3">
-					<div class="text">
-						<h2 class="topic-heading">320</h2>
-						<h2 class="topic">Comments</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-						alt="comments">
-				</div>
-
-				<div class="box box4">
-					<div class="text">
-						<h2 class="topic-heading">70</h2>
-						<h2 class="topic">Published</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
-				</div>
-			</div>
-
-			<div class="report-container">
-				<div class="report-header">
-					<h1 class="recent-Articles">Recent Articles</h1>
-					<button class="view">View All</button>
-				</div>
-
-				<div class="report-body">
-					<div class="report-topic-heading">
-						<h3 class="t-op">Article</h3>
-						<h3 class="t-op">Views</h3>
-						<h3 class="t-op">Comments</h3>
-						<h3 class="t-op">Status</h3>
-					</div>
-
-					<div class="items">
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 73</h3>
-							<h3 class="t-op-nextlvl">2.9k</h3>
-							<h3 class="t-op-nextlvl">210</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 72</h3>
-							<h3 class="t-op-nextlvl">1.5k</h3>
-							<h3 class="t-op-nextlvl">360</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 71</h3>
-							<h3 class="t-op-nextlvl">1.1k</h3>
-							<h3 class="t-op-nextlvl">150</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 70</h3>
-							<h3 class="t-op-nextlvl">1.2k</h3>
-							<h3 class="t-op-nextlvl">420</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 69</h3>
-							<h3 class="t-op-nextlvl">2.6k</h3>
-							<h3 class="t-op-nextlvl">190</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 68</h3>
-							<h3 class="t-op-nextlvl">1.9k</h3>
-							<h3 class="t-op-nextlvl">390</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 67</h3>
-							<h3 class="t-op-nextlvl">1.2k</h3>
-							<h3 class="t-op-nextlvl">580</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 66</h3>
-							<h3 class="t-op-nextlvl">3.6k</h3>
-							<h3 class="t-op-nextlvl">160</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-						<div class="item1">
-							<h3 class="t-op-nextlvl">Article 65</h3>
-							<h3 class="t-op-nextlvl">1.3k</h3>
-							<h3 class="t-op-nextlvl">220</h3>
-							<h3 class="t-op-nextlvl label-tag">Published</h3>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script src="./index.js"></script>
 </body>
 </html>
