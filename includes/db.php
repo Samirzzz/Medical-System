@@ -1,13 +1,14 @@
 <?php
-$cdb_server = 'localhost'; // Change "local host :80" to "localhost"
-$cdb_user = 'root';
-$cdb_pass = '';
-$cdb_name = 'tabiby';
+$db_server = 'localhost'; // Change "local host :80" to "localhost"
+$db_user = 'root';
+$db_pass = '';
+$db_name = 'tabiby';
 
-$cdb = mysqli_connect($cdb_server, $cdb_user, $cdb_pass, $cdb_name);
+$conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
-if ($cdb) {
+if ($conn) {
     echo "Connected to the database successfully";
+    echo "<br>";
 } else {
     echo "Couldn't connect to the database: " . mysqli_connect_error();
 }

@@ -1,5 +1,5 @@
 <?php
-include_once "db.php";
+include_once "includes/db.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     // $t = $_POST['title'];
@@ -31,6 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+  include "includes/appnavbar.php"
+    ?>
     <title>Document</title>
 </head>
 <body>
@@ -45,8 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="text" placeholder ="enter status " id="s" name="status">
     <br>
     <input type="submit" id="submit" name="submit">
-  
-  
 
     
    </form> 
