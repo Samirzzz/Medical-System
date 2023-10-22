@@ -1,15 +1,19 @@
 <?php
-include_once "calendardb.php";
+include_once "db.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
-    $t = $_POST['title'];
-    $s = $_POST['startdate']; 
-    $e = $_POST['enddate']; 
-    $d = $_POST['description'];
+    // $t = $_POST['title'];
+    // $s = $_POST['startdate']; 
+    // $e = $_POST['enddate']; 
+    // $d = $_POST['description'];
+    $a_date = htmlspecialchars($_POST['date']);
+    $a_time = htmlspecialchars($_POST['time']);
+    $a_status = htmlspecialchars($_POST['status']);
+
 
     // Process form data here
 
-    $sql = "INSERT INTO events (title, start_date, end_date, description) VALUES ('$t', '$s', '$e', '$d')";
+    $sql = "INSERT INTO appointments (date, time, status , pid , did ,cid) VALUES ('$a_date', '$a_time', '$a_status','40','430','540')";
     $res = mysqli_query($cdb, $sql);
 
     if ($res) {
@@ -31,17 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 </head>
 <body>
    <form action="" method = 'post' autocomplete="off">
-    <label for="t">title</label>
-    <input type="text"  placeholder="enter the title" id="t" name="title">
+    <label for="d">date</label>
+    <input type="date"  placeholder="choose the date" id="d" name="date">
     <br>
-    <label for="sd">start date</label>
-    <input type="date" placeholder ="enter start date" id="sd" name="startdate">
+    <label for="t">time</label>
+    <input type="text" placeholder ="enter the time" id="t" name="time">
     <br>
-    <label for="ed">end date</label>
-    <input type="date" placeholder ="enter end date" id="ed" name="enddate">
-    <br>
-    <label for="d">description</label>
-    <input type="text"  placeholder="enter the description" id="d"name="description">
+    <label for="s">status</label>
+    <input type="text" placeholder ="enter status " id="s" name="status">
     <br>
     <input type="submit" id="submit" name="submit">
   

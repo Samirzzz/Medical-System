@@ -2,7 +2,7 @@
 $cdb_server = 'localhost'; // Change "local host :80" to "localhost"
 $cdb_user = 'root';
 $cdb_pass = '';
-$cdb_name = 'calendar';
+$cdb_name = 'tabiby';
 
 $cdb = mysqli_connect($cdb_server, $cdb_user, $cdb_pass, $cdb_name);
 
