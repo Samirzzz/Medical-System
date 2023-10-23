@@ -1,193 +1,183 @@
 <?php
-// include_once "db.inc.php";
+ session_start();
+include_once "db.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8" />
-    <title> login or sign up</title>
-    <link rel="stylesheet" href="pSignup.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration or Sign Up form</title>
 
- 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Assuming you have included the necessary jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<style>
+    <!-- Add Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap">
+    <style>
       body {
         background-image: url('test.jpg');
         background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
       }
+      .form-control {
+        width: 350px;
+      }
+      .card {
+        max-width: 400px;
+        margin: 0 auto; 
+        margin-top: 5vh; 
+        background-color: rgba(255, 255, 255, 0.9); 
+      }
+      
     </style>
-
   </head>
   <body>
-    <div class="container">
-      <header>Signup Form</header>
-      <div class="progress-bar">
-        <div class="step">
-          <p>Name</p>
-          <div class="bullet">
-            <span>1</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-        <div class="step">
-          <p>Contact</p>
-          <div class="bullet">
-            <span>2</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-        <div class="step">
-          <p>Birth</p>
-          <div class="bullet">
-            <span>3</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-        <div class="step">
-          <p>Submit</p>
-          <div class="bullet">
-            <span>4</span>
-          </div>
-          <div class="check fas fa-check"></div>
-        </div>
-      </div>
-      <div class="form-outer">
-        <form action="" method ='post' onsubmit="">
-          <div class="page slide-page">
-            <div class="title">Basic Info:</div>
-            <div class="field">
-              <div class="label">First Name</div>
-              <input type="text" id="fn" name="firstname" required>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i><br>
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Registration</h2>
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="Fname">First Name:</label>
+              <input type="text" class="form-control" id="Fname" placeholder="First Name" name="Fname" required>
             </div>
-            <div class="error"></div>
-            <div class="field">
-              <div class="label">Last Name</div>
-              <input type="text" id="ln" name="lastname" required>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
+            <div class="form-group">
+              <label for="Lname">Last Name:</label>
+              <input type="text" class="form-control" id="Lname" placeholder="Last Name" name="Lname" required>
             </div>
-            <div class="error"></div>
-            <div class="field">
-              <button class="firstNext next">Next</button>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" required>
             </div>
-          </div>
-          <div class="page">
-            <div class="title">Contact Info:</div>
-            <div class="field">
-              <div class="label">Email Address</div>
-              <input type="text" id="mail" name="mail" required>
-              <span id="email-error"></span>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="number" class="form-control" id="age" name="age" required>
             </div>
-            <div class="error"></div>
-            <div class="field">
-              <div class="label">Phone Number</div>
-              <input type="number" id="phone" name="phone" required>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
-            </div>
-            <div class="error"><span id="mailerr"></span> </div>
-            <div class="field btns">
-              <button  class="prev-1 prev">Previous</button>
-              <button id="next1btn"class="next-1 next">Next</button>
-            </div>
-          </div>
-          <div class="page">
-            <div class="title">Date of Birth:</div>
-            <div class="field">
-              <div class="label">Age</div>
-              <input type="number" id="dob" name="dob" required>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
-            </div>
-            <div class="error"></div>
-            <div class="field">
-              <div class="label">Gender</div>
-              <select id="gender" >
-                <option>Male</option>
-                <option>Female</option>
+            <div class="form-group">
+              <label for="gender">Gender:</label>
+              <select class="form-control" id="gender" name="gender">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
               </select>
             </div>
-            <div class="field btns">
-              <button class="prev-2 prev">Previous</button>
-              <button class="next-2 next">Next</button>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
             </div>
-          </div>
-          <div class="page">
-            <div class="title">Login Details:</div>
-            <div class="field">
-              <div class="label">Username</div>
-              <input type="text" id="user" name="username" required>
-              <span id="result"></span>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="number" required>
             </div>
-            <div class="error"></div>
-            <div class="field">
-              <div class="label">Password</div>
-              <input type="password" id="pass" name="password" required>
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
             </div>
-            <div class="error"></div>
-            <div class="field">
-              <div class="label">Confirm Password</div>
-              <input type="password" id="passconf" name="confirmpassword" required>  
-              <input type="hidden" name="type" value="client">
-              <input type="hidden" name="token" value="0">
-              <i class="fas fa-exclamation-circle failure-icon"></i>
-              <i class="far fa-check-circle success-icon"></i>
+            <div class="form-group">
+              <label for="password">Confirm password:</label>
+              <input type="password" class="form-control" id="password" placeholder="Password" name="cpassword" required>
             </div>
-            <div class="error"></div>
-            <div class="field btns">
-              <button class="prev-3 prev">Previous</button>
-              <button class="submit">Submit</button>
+            <div class="form-group">
+              <label for="userType">User Type:</label>
+              <select class="form-control" id="userType" name="userType" onchange="toggleDoctorFields()">
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+              </select>
             </div>
-          </div>
-        </form>
+            <div class="form-group" id="doctor-fields" style="display: none;">
+              <label for="specialization">Specialization:</label>
+              <input type="text" class="form-control" id="specialization" placeholder="Specialization" name="specialization">
+              <br>
+              <label for="education">Education:</label>
+              <input type="text" class="form-control" id="education" placeholder="Education" name="education">
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="acceptTerms">
+                <label class="form-check-label" for="acceptTerms">I accept all terms & conditions</label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register Now</button>
+            <p class="mt-3">Already have an account? <a href="login.php">Login now</a></p>
+          </form>
+        </div>
       </div>
     </div>
-    <script src="signup.js"></script>
 
+    <!-- Add Bootstrap JS (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script>
+      function toggleDoctorFields() {
+        var doctorFields = document.getElementById("doctor-fields");
+        var userTypeSelect = document.getElementById("userType");
 
-
-
-    <?php
-//  //grap data from user if form was submitted 
-
-//   if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
-// 	$firstname=htmlspecialchars($_POST["firstname"]);
-// 	$lastname=htmlspecialchars($_POST["lastname"]);
-// 	$mail=htmlspecialchars($_POST["mail"]);
-// 	$password=htmlspecialchars($_POST["password"]);
-// 	$dob=htmlspecialchars($_POST["dob"]);
-    
-
-//     //insert it to database 
-// 	$sql="insert into users(FirstName,LastName,Email,Password,Hobby) 
-// 	values('$firstname','$lastname','$mail','$password','$dob')";
-// 	$result=mysqli_query($conn,$sql);
-
-//     //redirect the user back to index.php 
-// 	if($result)	{
-// 		header("Location:index.php");
-// 	}
-// }
-
-?>
-
+        if (userTypeSelect.value === "doctor") {
+          doctorFields.style.display = "block";
+        } else {
+          doctorFields.style.display = "none";
+        }
+      }
+    </script>
   </body>
+  <?php
+ 
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $userType = htmlspecialchars($_POST['userType']); 
+
+    echo "User Type: $userType";
+
+    $sql = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$password', '$userType') ";
+    $result = mysqli_query($conn, $sql);
+    $uid = mysqli_insert_id($conn);
+    if ($result) {
+      if ($userType === "patient") 
+      {
+        $Fname = $_POST["Fname"];
+        $Lname = $_POST["Lname"];
+        $age = $_POST["age"];
+        $gender = $_POST["gender"];
+        $address = $_POST["address"];
+        $phone = $_POST["number"];
+        $sql="INSERT INTO patient (firstname,lastname,age,gender,address,number,uid) VALUES ('$Fname','$Lname','$age','$gender','$address','$phone','$uid')";
+        $ress=mysqli_query($conn,$sql);
+        if($ress)
+        {
+          // header("location:login.php");
+        }
+        else {
+          echo "Error inserting data into the patient table: " . mysqli_error($conn);
+      }
+    } 
+    elseif ($userType === "doctor") 
+    {
+      $Fname = $_POST["Fname"];
+      $Lname = $_POST["Lname"];
+      $phone = $_POST["number"];
+      $password = $_POST["password"];
+      $specialization = $_POST["specialization"];
+      $education = $_POST["education"];
+      $sql="INSERT INTO dr (firstname,lastname,specialization,number,educ,uid) VALUES ('$Fname','$Lname','$specialization','$phone','$education','$uid')";
+      $resss=mysqli_query($conn,$sql);
+      if($resss)
+      {
+        // header("location:login.php");
+        echo "testinggg";
+      }
+      else {
+        echo "Error inserting data into the patient table: " . mysqli_error($conn);
+    }
+        
+    }
+    else {
+      echo "Error inserting data into the patient table: " . mysqli_error($conn);
+  }
+    }
+}
+  ?>
 </html>

@@ -29,18 +29,18 @@ include'navigation.php';
               </div>
               <h2 class="text-uppercase text-center mb-5">Add User</h2>
 <br><br><br>
-              <form>
+              <form method="post" action="">
             
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
+                  <input type="text" id="form3Example1cg" name="name" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
                 
                   <label class="form-label" for="form3Example1cg">Name</label>  
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Email</label>
+                  <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
+                  <label class="form-label"  for="form3Example3cg">Email</label>
                 </div>
 
                 <div class="form-outline mb-4">
@@ -49,18 +49,20 @@ include'navigation.php';
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+                  <input type="password" name="pass" id="form3Example4cdg" class="form-control form-control-lg" />
                   <label class="form-label" for="form3Example4cdg">Confirm password</label>
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="radio" id="one" />
-                  <label class="form-label" for="form3Example4cdg">Admin</label><br>
-                  <input type="radio" id="two" />
-                  <label class="form-label" for="form3Example4cdg">Patient</label>
-                </div>
+    <input type="radio" id="admin" name="type" value="admin">
+    <label class="form-label" for="admin">Admin</label><br>
+    
+    <input type="radio" id="patient" name="type" value="patient">
+    <label class="form-label" for="patient">Patient</label>
+</div>
             
                 <div class="d-flex justify-content-center">
-                  <button type="button"
+                  <button type="submit"
+                  
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Save</button>
                 </div>
 
@@ -74,5 +76,36 @@ include'navigation.php';
     </div>
   </div>
 </section>
+
+
+<?php 
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = htmlspecialchars($_POST["email"]);
+    $pass = htmlspecialchars($_POST["pass"]);
+    $type = htmlspecialchars($_POST["type"]);
+    $name = htmlspecialchars($_POST["name"]);
+
+    $sql_user_acc = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$pass', '$type')";
+    $result_user_acc = mysqli_query($conn, $sql_user_acc);
+
+    if ($result_user_acc) {
+        $last_uid = mysqli_insert_id($conn);
+
+        $sql_patient = "INSERT INTO patient (firstname, uid) VALUES ('$name', $last_uid)";
+        $result_patient = mysqli_query($conn, $sql_patient);
+
+        if ($result_patient) {
+            header("Location: users.php");
+        } else {
+            echo "Error inserting data into the patient table: " . mysqli_error($conn);
+        }
+    } else {
+        echo "Error inserting data into the user_acc table: " . mysqli_error($conn);
+    }
+}
+?>
+
+
 </body>
 </html>

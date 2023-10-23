@@ -11,7 +11,9 @@
 <link rel="stylesheet" href="navcss.css">
 </head>
 <body>
-    
+<?php include_once 'connection.php';
+   session_start();
+   ?>
 <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>
@@ -99,7 +101,6 @@
                 </li>
             </ul>
         </div>
-
 
 
 </body>
