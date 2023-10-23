@@ -12,6 +12,7 @@
   <a href="#news">clincs</a>
   <a href="#news">contact us </a>
   <a href="#news">about</a>
+ 
   <div class="dropdown">
     <button class="dropbtn">serach by condtion
       <i class="fa fa-caret-down"></i>
@@ -22,6 +23,8 @@
       <a href="#">Link 3</a>
     </div>
   </div>
+   <a style="margin-left:700px" href="signup.php">sign-up</a>
+  <a href="login.php">login</a>
 </div>  
 </body>
 </html>
