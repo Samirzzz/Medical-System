@@ -86,15 +86,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = htmlspecialchars($_POST["type"]);
     $name = htmlspecialchars($_POST["name"]);
 
-    // Insert data into the user_acc table
     $sql_user_acc = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$pass', '$type')";
     $result_user_acc = mysqli_query($conn, $sql_user_acc);
 
     if ($result_user_acc) {
-        // Retrieve the last inserted user's ID (uid)
         $last_uid = mysqli_insert_id($conn);
 
-        // Insert data into the patient table with the corresponding uid
         $sql_patient = "INSERT INTO patient (firstname, uid) VALUES ('$name', $last_uid)";
         $result_patient = mysqli_query($conn, $sql_patient);
 
