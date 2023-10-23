@@ -9,10 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <title>VeZeeTa</title>
 </head>
-<body class="body">
 <?php
 include_once'navigation.php';
 ?>
+<body class="body">
+
+
 <div class="main--container">
             <div class="section--title">
                 <h3 class="title">Welcome back, Jenny</h3>
