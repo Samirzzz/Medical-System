@@ -136,7 +136,7 @@ include_once "db.php";
     $result = mysqli_query($conn, $sql);
     $uid = mysqli_insert_id($conn);
     if ($result) {
-      if ($userType === "client") 
+      if ($userType === "patient") 
       {
         $Fname = $_POST["Fname"];
         $Lname = $_POST["Lname"];
@@ -148,7 +148,7 @@ include_once "db.php";
         $ress=mysqli_query($conn,$sql);
         if($ress)
         {
-          header("location:login.php");
+          // header("location:login.php");
         }
         else {
           echo "Error inserting data into the patient table: " . mysqli_error($conn);
@@ -162,7 +162,7 @@ include_once "db.php";
       $password = $_POST["password"];
       $specialization = $_POST["specialization"];
       $education = $_POST["education"];
-      $sql="INSERT INTO dr (firstname,lastname,specialization,number,educ,uid) VALUES ('$Fname','$Lname','$specialization','$education','$phone','$uid')";
+      $sql="INSERT INTO dr (firstname,lastname,specialization,number,educ,uid) VALUES ('$Fname','$Lname','$specialization','$phone','$education','$uid')";
       $resss=mysqli_query($conn,$sql);
       if($resss)
       {
