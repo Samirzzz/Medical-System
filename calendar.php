@@ -1,168 +1,101 @@
 <?php
-include_once "includes/calendardb.php";
+include_once("includes/db.php");
 
+// Define the date format conversion function
+function convertDateToEvoFormat($date)
+{
+    // Remove backslashes from the date
+    $date = stripslashes($date);
+    
+    $timestamp = strtotime($date);
+    $formattedDate = date('F/d/Y', $timestamp);
 
-function get_events($start_date,$end_date){
-    global $cdb;
-    $query = "SELECT * FROM events WHERE start_date BETWEEN '$start_date' AND '$end_date'";
-    $result = mysqli_query($cdb,$query);
-    $events = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $events[] = $row;
-    }
-    return $events;
-}
-function count_events_on_date($date, $events) {
-    $count = 0;
-    foreach ($events as $event) {
-        if ($event['start_date'] == $date) {
-            $count++;
-        }
-    }
-    return $count;
+    return $formattedDate;
 }
 
+$sql = "select * from appointments";
+$result = mysqli_query($conn, $sql);
 
+$events = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $formattedDate = convertDateToEvoFormat($row['date']);
+    
+    // Create an event object
+    $event = array(
+        'id' => $row['Appid'],
+        'date' => $formattedDate,
+        'name' => $row['time'],
+        'type' => $row['status'],
+        'description'=> 'appointment id : '.$row['Appid']
+    );
+    
+    $events[] = $event;
+}
 
+// Convert the PHP $events array to a JSON array
+$eventsJson = json_encode($events);
 ?>
 
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Dynamic Calendar</title>
-    <link rel="stylesheet"  href="calendar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="evo/evo-calendar.midnight-blue.min.css">
+    <link rel="stylesheet" href="evo/evo-calendar.min.css">
+    <link rel="stylesheet" href="evo/evo-calendar.orange-coral.min.css">
+    <link rel="stylesheet" href="evo/evo-calendar.royal-navy.min.css">
 </head>
 <body>
-<div id="calendar">
-    <h1>Event Calendar</h1>
-    <?php
-    $year = date("Y");
-    $month = date("n");
-
-    echo "<h2>" . date("F", mktime(0, 0, 0, $month, 1, $year)) . " $year</h2>";
-
-    $start_date = date("$year-$month-01");
-    $end_date = date("$year-$month-t");
-
-    $events = get_events($start_date, $end_date);
-
-    $days_in_month = date("t", mktime(0, 0, 0, $month, 1, $year));
-    $first_day = date("N", mktime(0, 0, 0, $month, 1, $year));
-
-    echo "<table border='1'>";
-    echo "<tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>";
-    echo "<tr>";
-
-    for ($i = 1; $i < $first_day; $i++) {
-        echo "<td></td>";
-    }
-
-    for ($day = 1; $day <= $days_in_month; $day++) {
-        if ($first_day > 7) {
-            echo "</tr><tr>";
-            $first_day = 1;
-        }
-
-        $current_date = date("$year-$month-$day");
-        $event_count = count_events_on_date($current_date, $events);
-        $day_link = "view_day.php?date=$current_date";
-
-        echo "<td>";
-        echo "<a href='$day_link'>$day</a>";
-        if ($event_count > 0) {
-            echo "<span class='event-count'>$event_count events</span>";
-        }
-        echo "</td>";
-
-        $first_day++;
-    }
-
-    echo "</tr>";
-    echo "</table>";
-    ?>
-
-    <a href="includes/addevent.php">Add Event</a>
+<div class="hero">
+    <div id="calendar"></div>
 </div>
-
-
-
-
-    <a href="includes/addevent.php">Add Event</a>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="evo/evo-calendar.min.js"></script>
+<script>
+    
+  $(document).ready(function() {
+    $('#calendar').evoCalendar({
+        theme: 'Royal Navy',
+        
+       calendarEvents: <?php echo $eventsJson; ?>, // Pass the events array here
+      
+        
+    });
+});
+</script>
 </body>
-
-<style>
-/* Calendar Container */
-#calendar {
-    width: 80%;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-}
-
-/* Calendar Header */
-#calendar h1 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-/* Calendar Table */
-#calendar table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-}
-
-/* Calendar Table Headers */
-#calendar th {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-}
-
-/* Calendar Table Cells */
-#calendar td {
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    border: 1px solid #ddd;
-    color:white;
-}
-
-/* Highlight Today's Date */
-#calendar td a {
-    text-decoration: none;
-    color: white;
-}
-
-#calendar td a:hover {
-    background-color: #f2f2f2;
-}
-
-/* Event Count Indicator */
-.event-count {
-    font-size: 12px;
-    color: #ff5733;
-    background-color: #fff;
-    padding: 2px 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Add Event Link */
-#calendar a {
-    display: block;
-    text-align: center;
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    margin: 10px 0;
-}
-
-#calendar a:hover {
-    background-color: #555;
-}
-
-</style>
 </html>
 
+
+
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body, html {
+        height: 100%;
+    }
+
+    .hero {
+        width: 100%;
+        height: 100%;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(234,13,13,0.7176120448179272) 0%, rgba(0,212,255,1) 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #calendar {
+        width: 80%;
+        max-width: 1200px;
+    }
+</style>
+</html>

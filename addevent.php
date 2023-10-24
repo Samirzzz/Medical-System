@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if ($res) {
             echo "Form submitted successfully!";
         } else {
-            echo "Error: " . mysqli_error($db);
+            echo "Error: " . mysqli_error($conn);
         }
     } else {
         // Display validation errors
