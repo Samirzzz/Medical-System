@@ -52,4 +52,9 @@
 
 <script src="homescript.js"></script>
 </body>
+<footer>
+    <?php
+    include_once "./includes/footer.php";
+    ?>
+   </footer>
 </html>

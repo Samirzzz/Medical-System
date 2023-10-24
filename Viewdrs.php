@@ -71,4 +71,9 @@
         <!-- Add more doctor boxes as needed -->
     </div>
 </body>
+<footer>
+    <?php
+    include_once "./includes/footer.php";
+    ?>
+   </footer>
 </html>
