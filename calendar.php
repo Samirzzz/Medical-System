@@ -98,4 +98,9 @@ $eventsJson = json_encode($events);
         max-width: 1200px;
     }
 </style>
+<footer>
+    <?php
+    include_once "./includes/footer.php";
+    ?>
+   </footer>
 </html>

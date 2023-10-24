@@ -38,23 +38,31 @@ include_once "db.php";
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">Registration</h2>
-          <form action="" method="post">
+          <form action="" method="post" onsubmit="return validateForm()">
             <div class="form-group">
               <label for="Fname">First Name:</label>
               <input type="text" class="form-control" id="Fname" placeholder="First Name" name="Fname" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="Lname">Last Name:</label>
               <input type="text" class="form-control" id="Lname" placeholder="Last Name" name="Lname" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="email">Email:</label>
               <input type="text" class="form-control" id="email" placeholder="Email Address" name="email" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="age">Age:</label>
               <input type="number" class="form-control" id="age" name="age" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="gender">Gender:</label>
               <select class="form-control" id="gender" name="gender">
@@ -62,22 +70,32 @@ include_once "db.php";
                 <option value="F">Female</option>
               </select>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="address">Address:</label>
               <input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="phone">Phone Number:</label>
               <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="number" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="password">Password:</label>
               <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="password">Confirm password:</label>
               <input type="password" class="form-control" id="password" placeholder="Password" name="cpassword" required>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group">
               <label for="userType">User Type:</label>
               <select class="form-control" id="userType" name="userType" onchange="toggleDoctorFields()">
@@ -85,6 +103,8 @@ include_once "db.php";
                 <option value="doctor">Doctor</option>
               </select>
             </div>
+            <div id="error-message" class="text-danger"></div>
+
             <div class="form-group" id="doctor-fields" style="display: none;">
               <label for="specialization">Specialization:</label>
               <input type="text" class="form-control" id="specialization" placeholder="Specialization" name="specialization">
@@ -105,7 +125,7 @@ include_once "db.php";
       </div>
     </div>
 
-    <!-- Add Bootstrap JS (Optional) -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -121,6 +141,39 @@ include_once "db.php";
           doctorFields.style.display = "none";
         }
       }
+  function validateForm() {
+    
+    var fname = document.getElementById("Fname").value;
+    var lname = document.getElementById("Lname").value;
+    var email = document.getElementById("email").value;
+    var age = document.getElementById("age").value;
+    var address = document.getElementById("address").value;
+    var phone = document.getElementById("phone").value;
+    var password = document.getElementById("password").value;
+    var cpassword = document.getElementById("cpassword").value;
+
+    document.getElementById("error-message").innerHTML = "";
+
+    if (fname === "" || lname === "" || email === "" || age === "" || address === "" || phone === "" || password === "" || cpassword === "") {
+      document.getElementById("error-message").innerHTML = "All fields are required.";
+      return false;
+    }
+
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(email)) {
+      document.getElementById("error-message").innerHTML = "Invalid email address.";
+      return false;
+    }
+
+    if (password !== cpassword) {
+      document.getElementById("error-message").innerHTML = "Passwords do not match.";
+      return false;
+    }
+
+
+    return true; 
+  }
+
     </script>
   </body>
   <?php
@@ -180,4 +233,9 @@ include_once "db.php";
     }
 }
   ?>
+   <footer>
+    <?php
+    include_once "./includes/footer.php";
+    ?>
+   </footer>
 </html>
