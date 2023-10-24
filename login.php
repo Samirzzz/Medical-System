@@ -95,4 +95,9 @@
 }
 
    ?>
+   <footer>
+    <?php
+    include_once "./includes/footer.php";
+    ?>
+   </footer>
 </html>

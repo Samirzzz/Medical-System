@@ -10,7 +10,7 @@
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
 <body class="w3-light-grey">
-<?php include_once'navigation.php';?>
+<?php include_once 'navigation.php';?>
 
 
 <div class="w3-content w3-margin-top" style="max-width:1024px;">
@@ -22,7 +22,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <img src="dr.jpg" style="width:100%" alt="Avatar">
+          <img src="..\images\dr.jpg" style="width:100%" alt="Avatar">
           <div class="w3-display-bottomleft w3-container w3-text-black">
             <h2>Samuel Smith</h2>
           </div>
