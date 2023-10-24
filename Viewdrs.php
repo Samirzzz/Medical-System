@@ -3,73 +3,99 @@
 <head>
     <link rel="stylesheet" type="text/css" href="viewdrs.css">
 </head>
+<header>
+<?php  include_once 'Navbar.php';  ?>
+
+</header>
+<style>
+    body {
+    background-color: #5d5959; 
+}
+.doctor-box {
+    width: 600px; 
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin: 10px;
+    margin top:50px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+.doctor-info {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h2 {
+    text-align: left;
+    margin-top: 0; 
+}
+
+.book-appointment-button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none; 
+    text-align: center;
+    cursor: pointer;
+}
+
+.book-appointment-button:hover {
+    background-color: #0056b3;
+}
+
+.book-appointment-button:active {
+    background-color: #003b7a;
+}
+ header{
+    margin bottom:10px;
+ }
+
+
+
+</style>
+
 <body>
 
-<!-- temp nav bar -->
-<nav class="navbar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
     <div class="container">
 <div class="doctor-list">
-        <div class="doctor-box">
-            <img src="test.jpg" alt="Doctor 1">
-            <div class="doctor-info">
-                <h2>Dr. John Doe</h2>
-                <p>Specialty: Cardiologist</p>
-                <p>Fee: $150</p>
-                <p>Average Waiting Time: 20 minutes</p>
-            </div>
-            <button class="bookb">Book Appointment</button>
-        </div>
-    </div>
-    
-<div class="container">
-        <div class="doctor-box">
-            <img src="test.jpg" alt="Doctor 2">
-            <div class="doctor-info">
-                <h2>Dr. Jane Smith</h2>
-                <p>Specialty: Pediatrician</p>
-                <p>Fee: $120</p>
-                <p>Average Waiting Time: 15 minutes</p>
-            </div>
-            <button class="bookb">Book Appointment</button>
-        </div>
-    </div>
-        
-        <div class="container">
-        <div class="doctor-box">
-            <img src="test.jpg" alt="Doctor 2">
-            <div class="doctor-info">
-                <h2>Dr. Jane Smith</h2>
-                <p>Specialty: Pediatrician</p>
-                <p>Fee: $120</p>
-                <p>Average Waiting Time: 15 minutes</p>
-            </div>
-            <button class="bookb">Book Appointment</button>
-        </div>
-    </div>
-        
-        <div class="container">
-        <div class="doctor-box">
-            <img src="test.jpg" alt="Doctor 2">
-            <div class="doctor-info">
-                <h2>Dr. Jane Smith</h2>
-                <p>Specialty: Pediatrician</p>
-                <p>Fee: $120</p>
-                <p>Average Waiting Time: 15 minutes</p>
-            </div>
-            <button class="bookb">Book Appointment</button>
-        </div>
-    </div>
-        
+     
+        <?php
+       include_once "db.php";
 
-        <!-- Add more doctor boxes as needed -->
+      
+        $sql = "SELECT firstname,lastname, specialization, educ,number FROM dr";
+
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            // Loop through the data and generate HTML for each doctor
+            while ($row = mysqli_fetch_array($result)) {
+                echo '<div class="doctor-box">';
+                echo '<div class="doctor-info">';
+                echo '<h2>'."Dr. " . $row['firstname']." " .$row['lastname']. '</h2>';
+                echo '<p>Specialty: ' . $row['specialization'] . '</p>';
+                echo '<p>Education: ' . $row['educ'] . '</p>';
+                echo '<p>Number: ' . $row['number'] . '</p>';
+                echo '<a href="calendar.php" class="book-appointment-button">Book Appointment</a>';
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo 'No doctors found.';
+        }
+
+
+        ?>
     </div>
+</div>
 </body>
 <footer>
     <?php

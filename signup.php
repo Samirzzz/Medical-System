@@ -10,10 +10,9 @@ include_once "db.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration or Sign Up form</title>
 
-    <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <!-- Add Google Fonts -->
+   
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap">
     <style>
         body {
@@ -36,6 +35,10 @@ include_once "db.php";
 
     </style>
 </head>
+<header>
+<?php  include_once'Navbar.php';  ?>
+
+</header>
 <body>
 <div class="container mt-5">
     <div class="card">
@@ -117,7 +120,6 @@ include_once "db.php";
     </div>
 </div>
 
-<!-- Add Bootstrap JS (Optional) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -141,7 +143,7 @@ include_once "db.php";
             errorElements[i].innerHTML = "";
         }
 
-        // Get input values
+
         var fname = document.getElementById("Fname").value;
         var lname = document.getElementById("Lname").value;
         var email = document.getElementById("email").value;
@@ -153,7 +155,6 @@ include_once "db.php";
 
         var isValid = true;
 
-        // Check if fields are empty
         if (fname === "") {
             document.getElementById("fname-error").innerHTML = "First Name is required.";
             isValid = false;
@@ -187,20 +188,31 @@ include_once "db.php";
             isValid = false;
         }
 
-        // Validate email format
         var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         if (!emailPattern.test(email)) {
             document.getElementById("email-error").innerHTML = "Invalid email address.";
             isValid = false;
         }
 
-        // Check if password and confirm password match
         if (password !== cpassword) {
             document.getElementById("cpassword-error").innerHTML = "Passwords do not match.";
             isValid = false;
         }
+        if(age<16)
+        {
+          document.getElementById("age-error").innerHTML = "You have to be older than 16 years old.";
+            isValid = false;
+        }
+        if (phone.length <11||phone.length>11) {
+            document.getElementById("phone-error").innerHTML = "Invalid phone number.";
+            isValid = false;
+        }
+        if (password.length <6) {
+            document.getElementById("password-error").innerHTML = "Password must be atleast 6 characters.";
+            isValid = false;
+        }
 
-        return isValid; // Form is valid
+        return isValid; 
     }
 </script>
 </body>

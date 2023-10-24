@@ -13,7 +13,8 @@
 </head>
 <body>
 
-<?php  include_once'Navbar.php';  ?>
+<?php session_start();
+ include_once'Navbar.php';  ?>
 
 
                   <div id="img-slideshow" stye=" width:100%;">
