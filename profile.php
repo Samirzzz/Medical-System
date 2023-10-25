@@ -13,72 +13,59 @@
 <body>
 <?php
 session_start();
-include_once 'db.php';
+include_once "includes/db.php";
 
-// Assuming you have a database connection in db.php
+$userID = $_SESSION["ID"];
 
-// Query the user_acc table to get email and type
-if (isset($_SESSION['ID'])) {
-    $userID = $_SESSION['ID'];
+// Query the user_acc table to get email, type, and number
+$userAccQuery = "SELECT email, type FROM user_acc WHERE uid=$userID";
+$userAccResult = mysqli_query($conn, $userAccQuery);
 
-    // Query the user_acc table to get email and type
-    $userAccQuery = "SELECT email, type FROM user_acc WHERE uid=$userID";
-    $userAccResult = mysqli_query($conn, $userAccQuery);
+if ($userAccResult) {
+    $userAccRow = mysqli_fetch_array($userAccResult);
 
-    if (!$userAccResult) {
-        die("Database query failed.");
+    if ($_SESSION["type"] === 'doctor') {
+        $sql = "SELECT firstname, lastname, number FROM dr WHERE Did=$userID";
+    } elseif ($_SESSION["type"] === 'patient') {
+        $sql = "SELECT firstname, lastname, number FROM patient WHERE Pid=$userID";
     }
 
-    while ($userAccRow = mysqli_fetch_array($userAccResult)) {
-        $_SESSION['email'] = $userAccRow['email'];
-        $_SESSION['type'] = $userAccRow['type'];
+    $result = mysqli_query($conn, $sql);
 
-        if ( $_SESSION['type'] === 'doctor') {
-            $sql = "SELECT firstname, lastname, number FROM dr WHERE Did=$userID";
-        } elseif ( $_SESSION['type'] === 'patient') {
-            $sql = "SELECT firstname, lastname, phone FROM patient WHERE Pid=$userID";
-        }
+    if ($userRow = mysqli_fetch_array($result)) {
+        $_SESSION["name"] = $userRow['firstname'] . ' ' . $userRow['lastname'];
+        $_SESSION["email"] = $userAccRow['email'];
+        $_SESSION["number"] = $userRow['number'];
 
-        $result = mysqli_query($conn, $sql);
-
-        if ($userRow = mysqli_fetch_array($result)) {
-            $_SESSION['name'] = $userRow['firstname'] . ' ' . $userRow['lastname'];
-            $_SESSION['phone'] = $userRow['number'];
-
-            echo "<div class='outer-block'>";
-            echo "<section class='profile-body'>";
-            echo "<br />";
-            echo "<div class='side-block'>";
-            echo "<div class='form-group'>";
-            echo "<label for='name'>Name:</label>";
-            echo "<h1 id='name' class='form-control-static'>" . $_SESSION['name'] . "</h1>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-            echo "<label for='email'>Email:</label>";
-            echo "<h1 id='email' class='form-control-static'>" . $_SESSION['email'] . "</h1>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-            echo "<label for='phone'>Phone:</label>";
-            echo "<h1 id='phone' class='form-control-static'>" . $_SESSION['phone'] . "</h1>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-            echo "<label for='type'>Type:</label>";
-            echo "<h1 id='type' class='form-control-static'>" . $_SESSION['type'] . "</h1>";
-            echo "</div>";
-            echo "</div>";
-            echo "</section>";
-            echo "</div>";
-            
-        }
+        echo "<div class='outer-block'>";
+        echo "<section class='profile-body'>";
+        echo "<br />";
+        echo "<div class='side-block'>";
+        echo "<div class='form-group'>";
+        echo "<label for='name'>Name:</label>";
+        echo "<h1 id='name' class='form-control-static'>" . $_SESSION["name"] . "</h1>";
+        echo "</div>";
+        echo "<div class='form-group'>";
+        echo "<label for='email'>Email:</label>";
+        echo "<h1 id='email' class='form-control-static'>" . $_SESSION["email"] . "</h1>";
+        echo "</div>";
+        echo "<div class 'form-group'>";
+        echo "<label for='phone'>Phone:</label>";
+        echo "<h1 id='phone' class='form-control-static'>" . $_SESSION["number"] . "</h1>";
+        echo "</div>";
+        echo "<div class='form-group'>";
+        echo "<label for='type'>Type:</label>";
+        echo "<h1 id='type' class='form-control-static'>" . $_SESSION["type"] . "</h1>";
+        echo "</div>";
+        echo "</div>";
+        echo "</section>";
+        echo "</div>";
     }
 } else {
-    // Handle the case where the user is not logged in or ID is not set
-    echo "User is not logged in.";
+    echo "Error showing page";
 }
-
-// Close the database connection
-mysqli_close($conn);
 ?>
+
 
 
   <!-- Include Bootstrap JS and jQuery if needed -->

@@ -53,7 +53,8 @@
 <header>
 <?php    session_start();
   include_once'Navbar.php'; 
-  include_once "db.php";
+  include_once "includes/db.php";
+
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $email = $_POST["email"];
    $pass = $_POST["password"];
@@ -62,6 +63,7 @@
 
    if ($row = mysqli_fetch_array($result)) {
        $_SESSION["type"] = $row['type'];
+       $_SESSION["email"] = $row['email'];
        $_SESSION["ID"] = $row['uid'];
        
        if ($row['type'] === 'patient') {

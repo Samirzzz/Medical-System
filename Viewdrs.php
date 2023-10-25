@@ -68,7 +68,7 @@ h2 {
 <div class="doctor-list">
      
         <?php session_start();
-       include_once "db.php";
+include_once "includes/db.php";
 
       
         $sql = "SELECT firstname,lastname, specialization, educ,number FROM dr";

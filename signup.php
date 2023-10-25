@@ -1,7 +1,4 @@
-<?php
-session_start();
-include_once "db.php";
-?>
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -36,7 +33,64 @@ include_once "db.php";
     </style>
 </head>
 <header>
-<?php  include_once'Navbar.php';  ?>
+<?php  include_once'Navbar.php';
+include_once "includes/db.php";
+
+     
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $email = htmlspecialchars($_POST['email']);
+  $password = htmlspecialchars($_POST['password']);
+  $userType = htmlspecialchars($_POST['userType']); 
+
+  echo "User Type: $userType";
+
+  $sql = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$password', '$userType') ";
+  $result = mysqli_query($conn, $sql);
+  $uid = mysqli_insert_id($conn);
+  if ($result) {
+    if ($userType === "patient") 
+    {
+      $Fname = $_POST["Fname"];
+      $Lname = $_POST["Lname"];
+      $age = $_POST["age"];
+      $gender = $_POST["gender"];
+      $address = $_POST["address"];
+      $phone = $_POST["number"];
+      $sql="INSERT INTO patient (firstname,lastname,age,gender,address,number,uid) VALUES ('$Fname','$Lname','$age','$gender','$address','$phone','$uid')";
+      $ress=mysqli_query($conn,$sql);
+      if($ress)
+      {
+         header("location:login.php");
+      }
+      else {
+        echo "Error inserting data into the patient table: " . mysqli_error($conn);
+    }
+  } 
+  elseif ($userType === "doctor") 
+  {
+    $Fname = $_POST["Fname"];
+    $Lname = $_POST["Lname"];
+    $phone = $_POST["number"];
+    $password = $_POST["password"];
+    $specialization = $_POST["specialization"];
+    $education = $_POST["education"];
+    $sql="INSERT INTO dr (firstname,lastname,specialization,number,educ,uid) VALUES ('$Fname','$Lname','$specialization','$phone','$education','$uid')";
+    $resss=mysqli_query($conn,$sql);
+    if($resss)
+    {
+       header("location:login.php");
+    }
+    else {
+      echo "Error inserting data into the patient table: " . mysqli_error($conn);
+  }
+      
+  }
+  else {
+    echo "Error inserting data into the patient table: " . mysqli_error($conn);
+}
+  }
+}
+?>
 
 </header>
 <body>
@@ -217,63 +271,7 @@ include_once "db.php";
 </script>
 </body>
 
-<?php
-     
-     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-       $email = htmlspecialchars($_POST['email']);
-       $password = htmlspecialchars($_POST['password']);
-       $userType = htmlspecialchars($_POST['userType']); 
-    
-       echo "User Type: $userType";
-    
-       $sql = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$password', '$userType') ";
-       $result = mysqli_query($conn, $sql);
-       $uid = mysqli_insert_id($conn);
-       if ($result) {
-         if ($userType === "patient") 
-         {
-           $Fname = $_POST["Fname"];
-           $Lname = $_POST["Lname"];
-           $age = $_POST["age"];
-           $gender = $_POST["gender"];
-           $address = $_POST["address"];
-           $phone = $_POST["number"];
-           $sql="INSERT INTO patient (firstname,lastname,age,gender,address,number,uid) VALUES ('$Fname','$Lname','$age','$gender','$address','$phone','$uid')";
-           $ress=mysqli_query($conn,$sql);
-           if($ress)
-           {
-             // header("location:login.php");
-           }
-           else {
-             echo "Error inserting data into the patient table: " . mysqli_error($conn);
-         }
-       } 
-       elseif ($userType === "doctor") 
-       {
-         $Fname = $_POST["Fname"];
-         $Lname = $_POST["Lname"];
-         $phone = $_POST["number"];
-         $password = $_POST["password"];
-         $specialization = $_POST["specialization"];
-         $education = $_POST["education"];
-         $sql="INSERT INTO dr (firstname,lastname,specialization,number,educ,uid) VALUES ('$Fname','$Lname','$specialization','$phone','$education','$uid')";
-         $resss=mysqli_query($conn,$sql);
-         if($resss)
-         {
-           // header("location:login.php");
-           echo "testinggg";
-         }
-         else {
-           echo "Error inserting data into the patient table: " . mysqli_error($conn);
-       }
-           
-       }
-       else {
-         echo "Error inserting data into the patient table: " . mysqli_error($conn);
-     }
-       }
-    }
-     ?>
+
 
 <footer>
     <?php
