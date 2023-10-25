@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
         if ($res) {
             echo "Form submitted successfully!";
+            header("location:viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($conn);
         }

@@ -19,8 +19,9 @@ $result = mysqli_query($conn,$sql);
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
-            <th>Clinic</th>
             <th>Actions</th>
+            <th>Clinic</th>
+            
         </tr>
         <?php
         if ($result->num_rows > 0) {
