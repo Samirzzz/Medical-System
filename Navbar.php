@@ -8,7 +8,7 @@
 <body>
   <div class="navbar">
   <a href="home.php">Home</a>
-  <a href="viewdrs.php">Doctors</a>
+  <a href="Viewdrs.php">Doctors</a>
   <a href="#news">clincs</a>
   <a href="#news">contact us </a>
   <a href="profile.php">Profile</a>
