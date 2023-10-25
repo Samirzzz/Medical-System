@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="navcss.css">
 </head>
 <body>
-<?php include_once 'connection.php';
+<?php include_once 'includes/db.php';
    session_start();
    ?>
 <section class="header">

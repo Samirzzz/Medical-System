@@ -7,8 +7,8 @@ $db_name = 'tabiby';
 $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
 if ($conn) {
-    echo "Connected to the database successfully";
-    echo "<br>";
+    // echo "Connected to the database successfully";
+    // echo "<br>";
 } else {
     echo "Couldn't connect to the database: " . mysqli_connect_error();
 }
