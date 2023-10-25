@@ -11,7 +11,7 @@
   <a href="viewdrs.php">Doctors</a>
   <a href="#news">clincs</a>
   <a href="#news">contact us </a>
-  <a href="#news">about</a>
+  <a href="profile.php">Profile</a>
  
   <div class="dropdown">
     <button class="dropbtn">serach by condtion

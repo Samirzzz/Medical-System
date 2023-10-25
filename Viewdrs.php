@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="viewdrs.css">
+    <!-- <link rel="stylesheet" type="text/css" href="viewdrs.css"> -->
 </head>
 <header>
 <?php  include_once 'Navbar.php';  ?>
@@ -9,7 +9,7 @@
 </header>
 <style>
     body {
-    background-color: #5d5959; 
+    background-color: #a0a0a0; 
 }
 .doctor-box {
     width: 600px; 
@@ -37,7 +37,7 @@ h2 {
 }
 
 .book-appointment-button {
-    background-color: red;
+    background-color: blue;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -67,7 +67,7 @@ h2 {
     <div class="container">
 <div class="doctor-list">
      
-        <?php
+        <?php session_start();
        include_once "db.php";
 
       
