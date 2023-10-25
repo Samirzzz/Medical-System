@@ -10,6 +10,25 @@
     <?php
     session_start();
     include_once 'Navbar.php';
+    include_once 'includes/db.php';
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $x = $_SESSION['email'];
+        $UserType = $_SESSION["type"];
+
+        if ($UserType == 'patient') {
+            $sql = "DELETE FROM patient WHERE uid = " . $_SESSION['ID'];
+        } elseif ($UserType == 'doctor') {
+            $sql = "DELETE FROM dr WHERE uid = " . $_SESSION['ID'];
+        }
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            echo 'User deleted successfully';
+            header("location:home.php");
+        }
+    }
     ?>
 </header>
 <body>
@@ -30,6 +49,10 @@
         ?>
         
         <a class="btn btn-primary" href="Editprofile.php">Edit Profile</a>
+   
+        <form action="" method="post">
+            <button class="btn btn-danger" name="delete" onclick="return confirm('Are you sure you want to delete your profile?');">Delete Profile</button>
+        </form>
     </div>
 </body>
 <footer>
