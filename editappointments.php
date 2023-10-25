@@ -2,6 +2,14 @@
 include_once "includes/db.php";
 include "includes/appnavbar.php";
 $errors = array();
+if (isset($_GET['Appid'])) {
+    $appointmentId = $_GET['Appid'];
+}
+
+
+$sql = "SELECT * FROM appointments WHERE Appid = $appointmentId";
+$result = mysqli_query($conn, $sql);
+$appointment = mysqli_fetch_assoc($result);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_date = htmlspecialchars($_POST['date']);
@@ -30,13 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     }
 
     if (count($errors) === 0) {
-        // Process form data here
-
-        $sql = "INSERT INTO appointments (date, time, status, pid, did, cid) VALUES ('$a_date', '$a_time', '$a_status', '40', '430', '540')";
+        // Update the appointment using an SQL UPDATE statement with a WHERE clause
+        $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status' WHERE Appid = $appointmentId";
         $res = mysqli_query($conn, $sql);
 
         if ($res) {
             echo "Form submitted successfully!";
+            header("location:viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($db);
         }
@@ -55,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Another Form</title>
+    <title>Update Appointment</title>
     <style>
         /* Style for the overall form container */
         body {
@@ -118,14 +126,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <body>
    <form action="" method="post" autocomplete="off" onsubmit="return validateForm();">
     <label for="d">Date</label>
-    <input type="date" placeholder="Choose the date" id="d" name="date">
+    <input type="date" placeholder="Choose the date" id="d" name="date" value="<?php echo $appointment['date']; ?>">
     <br>
     <label for="t">Time</label>
-    <input type="text" placeholder="Enter the time" id="t" name="time">
+    <input type="text" placeholder="Enter the time" id="t" name="time" value="<?php echo $appointment['time']; ?>">
     <br>
     <label for="s">Status</label>
-    <input type="text" placeholder="Enter status" id="s" name="status">
+    <input type="text" placeholder="Enter status" id="s" name="status" value="<?php echo $appointment['status']; ?>">
     <br>
+    <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
     <input type="submit" id="submit" name="submit">
    </form>
    <script>

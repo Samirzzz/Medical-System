@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="viewappointments.php">
                         <span class="icon"><i class="ri-empathize-line"></i></span>
                         <div class="sidebar--item">Appointments</div>
                     </a>
