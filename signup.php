@@ -14,9 +14,7 @@
     <style>
         body {
             background-image: url('test.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+           
         }
 
         .form-control {
