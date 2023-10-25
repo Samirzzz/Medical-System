@@ -5,8 +5,9 @@
     margin: auto;
     position: relative;
     overflow: hidden;
-    border: 4px solid black;
+    border: 4px solid #000000;
     border-radius:13px;
+  display: flexbox;
   }
 
   .slider .list{
