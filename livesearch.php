@@ -1,44 +1,88 @@
 <style>
-    /* Style for search results container */
-#search-result {
-    margin-top: 20px; /* Add some spacing at the top */
+#search-bar {
+    display: flex;
+    margin-top: 20px;
 }
 
-/* Style for each result item */
-#search-result a {
-    text-decoration: none; /* Remove the underline from links */
+#search-bar select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+#search-bar input[type="text"] {
+    padding: 5px;
+    flex: 1;
+}
+
+#search-results {
+    margin-top: 10px;
+}
+
+#search-results table {
+    width: 198%;
+    border-collapse: collapse;
+}
+
+#search-results table th, #search-results table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#search-results table th {
+    background-color: #f5f5f5;
+}
+
+#search-results a {
+    text-decoration: none;
     color: black;
-    display: block; /* Display the links as block elements for better spacing */
-    padding: 10px 0; /* Add padding around each result item */
-    border-bottom: 1px solid #ddd; /* Add a border at the bottom of each result item */
-    margin-left: 230px;
+    display: block;
 }
 
-/* Add a hover effect for result items */
-#search-result a:hover {
-    background-color: #f5f5f5; /* Change the background color on hover */
-    color: blue;
-}
 
 </style>
+
 <?php
-include("connection.php");
+include("includes/db.php");
 
 if (isset($_POST["query"])) {
-    $search = $conn->real_escape_string($_POST["query"]);
-    $sql = "SELECT * FROM patient WHERE firstname LIKE '%$search%'";
+    $usertype = $_POST['type'];
+    $search = $_POST["query"];
+    if ($usertype == 'patient') {
+        $sql = "SELECT user_acc.uid, user_acc.email, patient.firstname, patient.lastname 
+                FROM patient 
+                JOIN user_acc ON user_acc.uid = patient.uid 
+                WHERE email LIKE '%$search%'";
+    } elseif ($usertype == 'admin') {
+        $sql = "SELECT user_acc.uid, user_acc.email, dr.firstname, dr.lastname 
+                FROM dr 
+                JOIN user_acc ON user_acc.uid = dr.uid  
+                WHERE email LIKE '%$search%'";
+    }
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         echo '<div id="search-result">';
+        echo '<table>';
+        echo '<tr>';
+        echo '<th>ID</th>';
+        echo '<th>Email</th>';
+        echo '<th>First Name</th>';
+        echo '<th>Last Name</th>';
+        echo '</tr>';
         while ($row = $result->fetch_assoc()) {
-            
-            echo '<a href="patientinfo.php?uid=' . $row["uid"] . '"><h6>'."Id #". $row["uid"] .' &nbsp  &nbsp'. $row["firstname"] . ' ' . $row["lastname"] . '</h6></a><br>';
+            echo '<tr>';
+            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["uid"] . '</a>'.'</td>';
+            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["email"] . '</a>'.'</td>';
+            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["firstname"] . '</a>'.'</td>';
+            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["lastname"] . '</a>'.'</td>';
+
+            echo '</tr>';
         }
+        echo '</table>';
         echo '</div>';
     } else {
         echo "No results found.";
     }
 }
 ?>
-

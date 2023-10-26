@@ -27,14 +27,10 @@ include_once'navigation.php';
                         <div class="col-12">
                             <div class="row no-gutters">
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Location</option>
-                                        <option>London</option>
-                                        <option>Boston</option>
-                                        <option>Mumbai</option>
-                                        <option>New York</option>
-                                        <option>Toronto</option>
-                                        <option>Paris</option>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="type">
+                                        <option>patient</option>
+                                        <option>admin</option>
+                                        
                                     </select>
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-sm-12 p-0">
@@ -68,11 +64,12 @@ include_once'navigation.php';
         $(document).ready(function() {
             $("#search").on("input", function() {
                 var query = $(this).val();
+                var type=$("select[name='type']").val();
                 if (query !== "") {
                     $.ajax({
                         url: "livesearch.php",
                         method: "POST",
-                        data: { query: query },
+                        data: { query: query, type: type },
                         success: function(data) {
                             $("#search-results").html(data);
                         }
