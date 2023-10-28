@@ -112,11 +112,7 @@ h2 {
   </div>
 </div>
         <?php session_start();
-<<<<<<< HEAD
        include_once "./includes/db.php";
-=======
-include_once "includes/db.php";
->>>>>>> 778b56cc28e293e1304a2a3988dc76130626781b
 
       
         $sql = "SELECT firstname,lastname, specialization, educ,number FROM dr";
