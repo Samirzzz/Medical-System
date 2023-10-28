@@ -112,7 +112,7 @@ h2 {
   </div>
 </div>
         <?php session_start();
-include_once "includes/db.php";
+       include_once "./includes/db.php";
 
       
         $sql = "SELECT firstname,lastname, specialization, educ,number FROM dr";
