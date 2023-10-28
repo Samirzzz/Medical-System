@@ -69,41 +69,46 @@
                         <div class="row mt-2">
                         <div class="col-md-6">
                         <label class="labels">First Name</label>
-                        <input type="text" class="form-control" value="<?php echo $row['firstname']; ?>"> 
-                        <input type="button" value="submit" name="fne">
+                        <input type="text" class="form-control" name="firstname"  value="<?php echo $row['firstname']; ?>"> 
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Last Name</label>
                         <input type="text" class="form-control" value="<?php echo $row['lastname']; ?>">
+
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Number</label>
                         <input type="text" class="form-control" value="<?php echo $row['number']; ?>" value="">
+
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Address</label>
                         <input type="text" class="form-control" value="<?php echo $row['address']; ?>" value="">
+
                     </div>
                     
                     <div class="col-md-12">
                         <label class="labels">Diagnoses</label>
                         <input type="text" class="form-control" value="<?php echo $row['diagnosis']; ?>" value="">
+
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Gender</label>
                         <input type="text" class="form-control" value="<?php echo $row['gender']; ?>" value="">
+
                     </div>
                     <div class="col-md-6">
                         <label class="labels">treatment</label>
                         <input type="text" class="form-control"  value="<?php echo $row['treatment']; ?>">
+
                     </div>
                 </div>
                 <div class="mt-5 text-center">
-                    <button class="btn btn-primary profile-button" type="button">Confirm</button>
+                    <button class="btn btn-primary profile-button" name="con" type="submit">Confirm</button>
                 </div>
             </div>
         </div>
@@ -123,17 +128,18 @@
                   
     
 <?php
+if($_SERVER['REQUEST_METHOD']== "POST"){
     if (isset($_GET['uid'])) {
         $uid = $_GET['uid'];
         
 
-    if (isset($_POST["fne"])) {
+    if (isset($_POST["con"])) {
         $firstname = $_POST['firstname'];
         $sql = "update patient set firstname='$firstname' WHERE patient.uid ='$uid'";
     } 
 
     $result = mysqli_query($conn, $sql);
-
+    }
     // if ($result) {
     //     if (isset($_POST["updateEmail"])) {
     //         $_SESSION['email'] = $email;

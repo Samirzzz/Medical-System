@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="navcss.css">
+<link rel="stylesheet" href="adminnav.css">
 </head>
 <body>
 <?php include_once 'includes/db.php';
@@ -17,7 +17,7 @@
 <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>
-            <h2><span>VE</span>ZeeTa.</h2>
+            <h2><span>Ta</span>BeeBy.</h2>
         </div>
         <div class="header--items">
 
@@ -61,7 +61,7 @@
                     <div class="dropdown-options">
                         
                          <a href="patients.php">Patients</a>
-                   <a href="users.php">Employees</a>
+                   <a href="users.php">AddUsers</a>
     
   </div>
   </div>

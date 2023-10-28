@@ -10,8 +10,9 @@
 </head>
 <body>
 <?php
- include_once 'navigation.php';
+include_once'navigation.php';
 ?>
+
 <section class="vh-100 bg-image"
   style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -19,32 +20,31 @@
       <div class="row d-flex justify-content-center align-items-center h-100" >
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5" style="height: 19cm;">
+          <div class="card-body p-5" style="height: 19cm;">
+
               <div class="choose">
              <div class="nav"> 
-             <a href="users.php" class="bo"> Add User</a>
-              <a href="#" class="bo">Edit User       </a>
-              <a href="viewusers.php" class="bo">View Users      </a>
+            
              </div>
               
               </div>
               <h2 class="text-uppercase text-center mb-5">Add User</h2>
 <br><br><br>
-              <form name="f1" onsubmit="return validateForm()">
+              <form  class="mar" name="f1" onsubmit="return validateForm()" method="post">
             
 
-                <div class="form-outline mb-4">
-                  <input type="text" id="fname" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
+                <div class="form-outline mb-4" style=" margin-top: -100px;">
+                  <input type="text" id="fname" name="firstname" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
                   <label class="form-label" for="fname">First Name</label>  
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="lname" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
+                  <input type="text" id="lname" name="lastname" class="form-control form-control-lg" />  <!-- text betsheel el input?????? -->
                   <label class="form-label" for="lname">Last Name</label>  
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="email" class="form-control form-control-lg" />
+                  <input type="email" id="email" name="email" class="form-control form-control-lg" />
                   <label class="form-label" for="email">Email</label>
                 </div>
 
@@ -58,15 +58,14 @@
                   <label class="form-label" for="confpass">Confirm password</label>
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="radio" id="userType" />
+                  <input type="radio" name="type" id="userType" />
                   <label class="form-label" for="userType">Admin</label><br>
                   <input type="radio" id="userType" />
                   <label class="form-label" for="userType">Patient</label>
                 </div>
-            
-                <div class="d-flex justify-content-center">
-                  <button type="submit" value="Save" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >
+                <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Save</button>
                 </div>
+            
 
                
               </form>
@@ -143,5 +142,35 @@
   return true;
 }
     </script>
+    <?php 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $email = htmlspecialchars($_POST["email"]);
+    $firstname = htmlspecialchars($_POST["firstname"]);
+    $lastname = htmlspecialchars($_POST["lastname"]);
+
+    $pass = htmlspecialchars($_POST["pass"]);
+    $type = htmlspecialchars($_POST["type"]);
+    $name = htmlspecialchars($_POST["name"]);
+
+    $sql_user_acc = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$pass', '$type')";
+    $result_user_acc = mysqli_query($conn, $sql_user_acc);
+
+    if ($result_user_acc) {
+        $last_uid = mysqli_insert_id($conn);
+
+        $sql_patient = "INSERT INTO patient (firstname,lastname, uid) VALUES ('$firstname','$lastname', $last_uid)";
+        $result_patient = mysqli_query($conn, $sql_patient);
+
+        if ($result_patient) {
+            header("Location: users.php");
+        } else {
+            echo "Error inserting data into the patient table: " . mysqli_error($conn);
+        }
+    } else {
+        echo "Error inserting data into the user_acc table: " . mysqli_error($conn);
+    }
+}
+?>
+
 </body>
 </html>
