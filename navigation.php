@@ -74,15 +74,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="drprofile.php">
                         <span class="icon"><i class="ri-profile-line"></i></span>
                         <div class="sidebar--item">Profile</div>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="clinic.php">
                         <span class="icon"><i class="ri-settings-3-line"></i></span>
-                        <div class="sidebar--item">Settings</div>
+                        <div class="sidebar--item">clinics</div>
                     </a>
                 </li>
             </ul>

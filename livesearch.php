@@ -59,6 +59,11 @@ if (isset($_POST["query"])) {
                 JOIN user_acc ON user_acc.uid = dr.uid  
                 WHERE email LIKE '%$search%'";
     }
+    elseif ($usertype == 'clinic') {
+        $sql = "SELECT clinic.cname,clinic.cid,clinic.cloc,clinic.cnumber   
+                FROM clinic 
+                WHERE cname LIKE '%$search%'";
+    }
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -70,7 +75,7 @@ if (isset($_POST["query"])) {
         echo '<th>First Name</th>';
         echo '<th>Last Name</th>';
         echo '</tr>';
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_array()) {
             echo '<tr>';
             echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["uid"] . '</a>'.'</td>';
             echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["email"] . '</a>'.'</td>';
