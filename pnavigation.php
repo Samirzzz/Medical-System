@@ -88,9 +88,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-profile-line"></i></span>
-                        <div class="sidebar--item">Profile</div>
+                    <a href="settings.php">
+                        <span class="icon"><i class="ri-settings-line"></i></span>
+                        <div class="sidebar--item">Settings</div>
                     </a>
                 </li>
 
