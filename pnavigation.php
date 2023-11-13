@@ -31,9 +31,14 @@
 .profile-box span {
     font-weight: 600;
 }
+
 .sidebar--items {
-        margin-top: -300px; 
-    }
+    margin-top: -300px;
+}
+
+li {
+    padding-top: 10px;
+}
 </style>
 
 <body>

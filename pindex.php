@@ -114,6 +114,12 @@ include_once 'pnavigation.php';
     border: none;
     cursor: pointer;
 }
+body {
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            
+        }
 
 </style>
 

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<header>
-    <?php
-    session_start();
-    include_once 'Navbar.php';
+<?php
+    include_once 'pnavigation.php';
     include_once "includes/db.php";
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -36,7 +35,6 @@
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            // Update session variables with new values
             $_SESSION["firstname"] = $Fname;
             $_SESSION["lastname"] = $Lname;
             $_SESSION["number"] = $number;
@@ -54,24 +52,39 @@
         }
     }
     ?>
-</header>
+<style>
+.container {
+    padding-left: 250px;
+}
+
+body {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+
+}
+</style>
+
 <body>
-    <div class="container mt-4">
+    <div class="container ">
         <h1>Edit Profile</h1>
         <form action="" method="post" onsubmit="return validateForm()">
             <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $_SESSION["firstname"]; ?>">
+                <input type="text" class="form-control" id="firstname" name="firstname"
+                    value="<?php echo $_SESSION["firstname"]; ?>">
                 <div class="error-message" id="fname-error"></div>
             </div>
             <div class="form-group">
                 <label for "lastname">Last Name</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $_SESSION["lastname"]; ?>">
+                <input type="text" class="form-control" id="lastname" name="lastname"
+                    value="<?php echo $_SESSION["lastname"]; ?>">
                 <div class="error-message" id="lname-error"></div>
             </div>
             <div class="form-group">
                 <label for="number">Phone</label>
-                <input type="tel" class="form-control" id="number" name="number" value="<?php echo $_SESSION["number"]; ?>">
+                <input type="tel" class="form-control" id="number" name="number"
+                    value="<?php echo $_SESSION["number"]; ?>">
                 <div class="error-message" id="phone-error"></div>
             </div>
 
@@ -96,45 +109,53 @@
                     </div>';
             }
             ?>
-            
+            <!-- <div class="form-group">
+                <label for="number">Password</label>
+                <input type="password" class="form-control" id="number" name="password" >
+                <div class="error-message" id="pass-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="number">Confirm Password</label>
+                <input type="tel" class="form-control" id="number" name="Cpassword">
+                <div class="error-message" id="pass-error"></div>
+            </div> -->
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 
     <script>
-        function validateForm() {
-            // Reset error messages
-            var errorElements = document.querySelectorAll(".error-message");
-            for (var i = 0; i < errorElements.length; i++) {
-                errorElements[i].innerHTML = "";
-            }
-
-            var fname = document.getElementById("firstname").value;
-            var lname = document.getElementById("lastname").value;
-            var phone = document.getElementById("number").value;
-
-            var isValid = true;
-
-            if (fname === "") {
-                document.getElementById("fname-error").innerHTML = "First Name is required.";
-                isValid = false;
-            }
-            if (lname === "") {
-                document.getElementById("lname-error").innerHTML = "Last Name is required.";
-                isValid = false;
-            }
-            if (phone === "") {
-                document.getElementById("phone-error").innerHTML = "Phone Number is required.";
-                isValid = false;
-            }
-
-            if (phone.length !== 11) {
-                document.getElementById("phone-error").innerHTML = "Invalid phone number. It should be 11 digits.";
-                isValid = false;
-            }
-
-            return isValid;
+    function validateForm() {
+        var errorElements = document.querySelectorAll(".error-message");
+        for (var i = 0; i < errorElements.length; i++) {
+            errorElements[i].innerHTML = "";
         }
+
+        var fname = document.getElementById("firstname").value;
+        var lname = document.getElementById("lastname").value;
+        var phone = document.getElementById("number").value;
+
+        var isValid = true;
+
+        if (fname === "") {
+            document.getElementById("fname-error").innerHTML = "First Name is required.";
+            isValid = false;
+        }
+        if (lname === "") {
+            document.getElementById("lname-error").innerHTML = "Last Name is required.";
+            isValid = false;
+        }
+        if (phone === "") {
+            document.getElementById("phone-error").innerHTML = "Phone Number is required.";
+            isValid = false;
+        }
+
+        if (phone.length !== 11) {
+            document.getElementById("phone-error").innerHTML = "Invalid phone number. It should be 11 digits.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
     </script>
 </body>
 <footer>
@@ -142,4 +163,5 @@
     include_once "./includes/footer.php";
     ?>
 </footer>
+
 </html>
