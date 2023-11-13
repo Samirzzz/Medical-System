@@ -73,37 +73,37 @@
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Last Name</label>
-                        <input type="text" class="form-control" value="<?php echo $row['lastname']; ?>">
+                        <input type="text" class="form-control" name="lastname" value="<?php echo $row['lastname']; ?>">
 
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Number</label>
-                        <input type="text" class="form-control" value="<?php echo $row['number']; ?>" value="">
+                        <input type="text" class="form-control" name="number" value="<?php echo $row['number']; ?>">
 
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Address</label>
-                        <input type="text" class="form-control" value="<?php echo $row['address']; ?>" value="">
+                        <input type="text" class="form-control" name="address" value="<?php echo $row['address']; ?>" >
 
                     </div>
                     
                     <div class="col-md-12">
                         <label class="labels">Diagnoses</label>
-                        <input type="text" class="form-control" value="<?php echo $row['diagnosis']; ?>" value="">
+                        <input type="text" class="form-control" name="diagnosis" value="<?php echo $row['diagnosis']; ?>" >
 
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Gender</label>
-                        <input type="text" class="form-control" value="<?php echo $row['gender']; ?>" value="">
+                        <input type="text" class="form-control" name="gender" value="<?php echo $row['gender']; ?>" >
 
                     </div>
                     <div class="col-md-6">
                         <label class="labels">treatment</label>
-                        <input type="text" class="form-control"  value="<?php echo $row['treatment']; ?>">
+                        <input type="text" class="form-control" name="treatment"  value="<?php echo $row['treatment']; ?>">
 
                     </div>
                 </div>
@@ -118,7 +118,11 @@
                     <label class="labels" style="font-size: larger;">Medical History</label>
                 </div>
                 <br>
-                <textarea class="ttt"   rows="20" cols="40"><?php echo $row['diagnosis']; ?></textarea>
+                <textarea class="ttt" name="diagnosis"  rows="20" cols="40"><?php echo $row['diagnosis'];
+                date_default_timezone_set("Africa/Cairo");
+                 $date = date('Y-m-d');
+                  echo $date;
+                ?></textarea>
             </div>
         </div>
     </div>
@@ -135,7 +139,28 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
 
     if (isset($_POST["con"])) {
         $firstname = $_POST['firstname'];
-        $sql = "update patient set firstname='$firstname' WHERE patient.uid ='$uid'";
+        $lastname = $_POST['lastname'];
+        $gender = $_POST['gender'];
+        $address = $_POST['address'];
+        $number = $_POST['number'];
+        $diagnosis = $_POST['diagnosis'];
+        $treatment = $_POST['treatment'];
+
+
+
+
+        $sql = "UPDATE patient
+        JOIN appointments ON patient.Pid = appointments.Pid
+        JOIN medications ON appointments.Appid = medications.Appid
+        SET patient.firstname='$firstname',
+            patient.lastname='$lastname',
+            patient.gender='$gender',
+            patient.address='$address',
+            patient.number='$number',
+            medications.diagnosis='$diagnosis',
+            medications.treatment='$treatment'
+        WHERE patient.uid ='$uid'";
+
     } 
 
     $result = mysqli_query($conn, $sql);
