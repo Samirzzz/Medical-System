@@ -75,6 +75,8 @@
                $_SESSION["address"] = $patientRow['address']; 
                $_SESSION["number"] = $patientRow['number']; 
                echo "Patient in";
+               header("Location: pindex.php");
+
            }
        } elseif ($row['type'] === 'doctor') {
            $doctorInfoSql = "SELECT * FROM dr WHERE uid = " . $row['uid'];
@@ -88,9 +90,9 @@
                $_SESSION["education"] = $doctorRow['educ']; 
                echo "Doctor in";
            }
+
        }
 
-       header("Location: admin.php");
    } else {
        echo "<script>document.getElementById('login-error').innerHTML = 'Invalid email or password.';</script>";
     }
