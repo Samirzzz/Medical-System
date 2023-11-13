@@ -13,6 +13,7 @@
 <body>
 <?php include_once 'includes/db.php';
    session_start();
+   
    ?>
 <section class="header">
         <div class="logo">

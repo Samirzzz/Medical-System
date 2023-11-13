@@ -12,9 +12,6 @@
         <style>
       body {
         background-image: url('test.jpg');
-        background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
       }
       #login-error{
         text-align:left;
@@ -93,7 +90,7 @@
            }
        }
 
-       header("Location: home.php");
+       header("Location: admin.php");
    } else {
        echo "<script>document.getElementById('login-error').innerHTML = 'Invalid email or password.';</script>";
     }

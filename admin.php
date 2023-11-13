@@ -11,28 +11,32 @@
 </head>
 <?php
 include_once'navigation.php';
+
+
+
+
+
 ?>
 <body class="body">
 
 
 <div class="main--container">
             <div class="section--title">
-                <h3 class="title">Welcome back, Jenny</h3>
-                <select name="date" id="date">
-                    <option value="last7">Last 7 days</option>
-                    <option value="lastmonth">Last month</option>
-                    <option value="lastyear">Last year</option>
-                    <option value="alltime">All time</option>
-                </select>
+                <h3 class="title">Welcome back <?php  echo $_SESSION["firstname"] ?></h3>
+                
             </div>
             <div class="cards">
                 <div class="card card-1">
                     <div class="card--title">
                         <span class="card--icon icon"><i class="ri-shopping-bag-2-line"></i></span>
-                        <span>Sales</span>
+                        <span>Doctors</span>
                     </div>
-                    <h3 class="card--value">$432,576.34 <i class="ri-arrow-up-circle-fill up"></i></h3>
-                    <h5 class="more">4,234 more than usual</h5>
+                    <h3 class="card--value"><?php $sql = "SELECT * from dr";
+                    if ($result = mysqli_query($conn, $sql)) {
+
+                        $rowcount = mysqli_num_rows( $result );
+                    }
+                    echo "$rowcount";    ?> </i></h3>
                     <div class="chart">
                         <canvas id="sales"></canvas>
                     </div>
@@ -40,10 +44,15 @@ include_once'navigation.php';
                 <div class="card card-2">
                     <div class="card--title">
                         <span class="card--icon icon"><i class="ri-gift-line"></i></span>
-                        <span>Orders</span>
+                        <span>Sales</span>
                     </div>
-                    <h3 class="card--value">2,567 <i class="ri-arrow-down-circle-fill down"></i></h3>
-                    <h5 class="less">234 less than usual</h5>
+                    <h3 class="card--value"><?php $sql = $sql = "SELECT Sum(amount) from billing";
+                    if ($result = mysqli_query($conn, $sql)) {
+
+                        $rowsum = mysqli_fetch_assoc( $result );
+                        echo $rowsum['Sum(amount)'];
+                    }
+                        ?> </i></h3>
                     <div class="chart">
                         <canvas id="orders"></canvas>
                     </div>
@@ -51,7 +60,7 @@ include_once'navigation.php';
                 <div class="card card-3">
                     <div class="card--title">
                         <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
-                        <span>Products</span>
+                        <span>Appointments</span>
                     </div>
                     <h3 class="card--value">587 <i class="ri-arrow-up-circle-fill up"></i></h3>
                     <h5 class="more">23 more than usual</h5>
@@ -62,10 +71,14 @@ include_once'navigation.php';
                 <div class="card card-4">
                     <div class="card--title">
                         <span class="card--icon icon"><i class="ri-user-line"></i></span>
-                        <span>Customers</span>
+                        <span>patients</span>
                     </div>
-                    <h3 class="card--value">4,300 <i class="ri-arrow-down-circle-fill down"></i></h3>
-                    <h5 class="less">34 less than usual</h5>
+                    <h3 class="card--value"><?php $sql = "SELECT * from patient";
+                    if ($result = mysqli_query($conn, $sql)) {
+
+                        $rowcount = mysqli_num_rows( $result );
+                    }
+                    echo "$rowcount";    ?> </i></h3>
                     <div class="chart">
                         <canvas id="customers"></canvas>
                     </div>
@@ -106,70 +119,41 @@ include_once'navigation.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
-                        <tr>
-                            <td>MacBook Air AAPL</td>
-                            <td>#231234</td>
-                            <td>$1846</td>
-                            <td>331</td>
-                            <td>12</td>
-                            <td>$337,218.54</td>
-                        </tr>
+                            <?php 
+$sql = "SELECT
+patient.firstname,
+patient.lastname,
+patient.age,
+patient.pid,
+
+patient.number,
+medications.diagnosis,
+medications.treatment
+FROM
+patient
+JOIN
+appointments ON patient.Pid = appointments.Pid
+JOIN
+medications ON appointments.Appid = medications.Appid
+
+";
+$result = $conn->query($sql);
+while ($row = $result->fetch_array()) {
+    echo '<tr>';
+
+    echo '<td>'.$row["firstname"]. '</td>';
+    echo '<td>'.$row["pid"].    '</td>';
+    echo '<td>'.$row["age"].'</td>';
+    echo '<td>'.$row["number"].'</td>';
+    echo '<td>'.$row["diagnosis"].'</td>';
+   echo '</tr>';
+    
+}
+
+
+                             ?>
+                          
+                        
                     </tbody>
                 </table>
             </div>
