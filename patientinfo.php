@@ -89,11 +89,11 @@
 
                     </div>
                     
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <label class="labels">Diagnoses</label>
                         <input type="text" class="form-control" name="diagnosis" value="<?php echo $row['diagnosis']; ?>" >
 
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
@@ -119,9 +119,9 @@
                 </div>
                 <br>
                 <textarea class="ttt" name="diagnosis"  rows="20" cols="40"><?php echo $row['diagnosis'];
-                date_default_timezone_set("Africa/Cairo");
-                 $date = date('Y-m-d');
-                  echo $date;
+                // date_default_timezone_set("Africa/Cairo");
+                //  $date = date('Y-m-d');
+                //   echo $date;
                 ?></textarea>
             </div>
         </div>
