@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <title>VeZeeTa</title>
@@ -17,7 +17,7 @@ include_once'navigation.php';
 
 
 ?>
-<body class="body">
+<body >
 
 
 <div class="main--container">
@@ -114,7 +114,7 @@ include_once'navigation.php';
                             <th>Patient ID</th>
                             <th>Age</th>
                             <th>Mobile Number</th>
-                            <th>Diagnoses</th>
+                            <th>Clinic</th>
                             <th>Next time Appointment</th>
                         </tr>
                     </thead>
@@ -126,15 +126,12 @@ patient.lastname,
 patient.age,
 patient.pid,
 
-patient.number,
-medications.diagnosis,
-medications.treatment
+patient.number
 FROM
 patient
-JOIN
-appointments ON patient.Pid = appointments.Pid
-JOIN
-medications ON appointments.Appid = medications.Appid
+
+-- JOIN
+-- medications ON patient.Pid=medications.Pid  
 
 ";
 $result = $conn->query($sql);
@@ -145,7 +142,7 @@ while ($row = $result->fetch_array()) {
     echo '<td>'.$row["pid"].    '</td>';
     echo '<td>'.$row["age"].'</td>';
     echo '<td>'.$row["number"].'</td>';
-    echo '<td>'.$row["diagnosis"].'</td>';
+    //echo '<td>'.$row["diagnosis"].'</td>';
    echo '</tr>';
     
 }
