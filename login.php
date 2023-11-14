@@ -49,7 +49,6 @@
 </head>
 <header>
 <?php    session_start();
-  include_once'Navbar.php'; 
   include_once "includes/db.php";
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {

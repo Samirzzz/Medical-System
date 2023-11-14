@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -39,6 +38,7 @@
 li {
     padding-top: 10px;
 }
+
 </style>
 
 <body>
@@ -59,10 +59,10 @@ li {
   </form> -->
             </div>
             <div class="dark--theme--btn">
-                <i class="ri-moon-line moon"></i>
-                <i class="ri-sun-line sun"></i>
-            </div>
             <i class="ri-notification-2-line"></i>
+
+            <?php echo date("F j, Y"); ?>
+            </div>
 
         </div>
     </section>
