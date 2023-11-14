@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="adminn.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="adminnav.css">
 </head>
-<body>
+<body >
 <?php include_once 'includes/db.php';
    session_start();
    
@@ -83,7 +83,7 @@
                 <li>
                     <a href="clinic.php">
                         <span class="icon"><i class="ri-settings-3-line"></i></span>
-                        <div class="sidebar--item">clinics</div>
+                        <div class="sidebar--item">Adminprev</div>
                     </a>
                 </li>
             </ul>
