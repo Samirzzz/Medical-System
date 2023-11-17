@@ -1,4 +1,6 @@
 <?php
+$next_pid = isset($_GET['pid']) ? htmlspecialchars($_GET['pid']) : '';
+$next_did = isset($_GET['did']) ? htmlspecialchars($_GET['did']) : '';
 include_once "includes/db.php";
 include"includes/appnavbar.php";
 $errors = array();
@@ -55,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if ($res) {
             echo "Form submitted successfully!";
             // Add the following line to append pid and did to the URL
-            header("location:nextAppointment.php?pid=$a_pid&did=$a_did");
+            header("location:viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -147,13 +149,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="text" placeholder="Enter doctor's name" id="dn" name="doctorname"> -->
     <br>
     <label for="di">doctor's id</label>
-    <input type="text" placeholder="Enter doctor's id" id="di" name="doctorid">
+    <input type="text" placeholder="Enter doctor's id" id="di" name="doctorid" value="<?php echo $next_did ; ?>">
     <br>
     <label for="pi">patient's id</label>
-    <input type="text" placeholder="Enter patient's id" id="pi" name="patientid">
-    <br>
-    <br>
-    <label for="ci">clinic's id</label>
+    <input type="text" placeholder="Enter patient's id" id="pi" name="patientid" value="<?php echo $next_pid ; ?>">
+     <br>
+    <label for="cid">clinic's id</label>
     <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid">
     <br>
     <label for="s">Status</label>
@@ -162,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="p">price</label>
     <input type="text" placeholder="Enter the price" id="p" name="price">
     <br>
-    <input type="submit" id="submit" name="submit" value="submit + next appointment">
+    <input type="submit" id="submit" name="submit" value="submit">
    </form>
    <script>
     function validateForm() {

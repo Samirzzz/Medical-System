@@ -15,6 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_date = htmlspecialchars($_POST['date']);
     $a_time = htmlspecialchars($_POST['time']);
     $a_status = htmlspecialchars($_POST['status']);
+    $a_price = htmlspecialchars($_POST['price']);
+    $a_did =htmlspecialchars($_POST['doctorid']);
+    $a_cid =htmlspecialchars($_POST['clinicid']);
+    $a_pid =htmlspecialchars($_POST['patientid']);
+
 
     // Validation for required fields
     if (empty($a_date)) {
@@ -27,7 +32,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     if (empty($a_status)) {
         $errors[] = "Status is required";
-    } else {
+    } 
+    if (empty($a_price)) {
+        $errors[] = "price is required";
+    } 
+    if (empty($a_did)) {
+        $errors[] = "doctor id is required";
+    }
+    if (empty($a_cid)) {
+        $errors[] = "clinic id is required";
+    }  
+    if (empty($a_pid)) {
+        $errors[] = "patient id is required";
+    } 
+
+    
+    
+    
+    else {
         // Date validation
         $currentDate = date("Y-m-d");
         $maxAllowedDate = date("Y-m-d", strtotime("+45 days")); // 1.5 months ahead
@@ -39,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     if (count($errors) === 0) {
         // Update the appointment using an SQL UPDATE statement with a WHERE clause
-        $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status' WHERE Appid = $appointmentId";
+        $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status' , price ='$a_price',Did ='$a_did',Cid ='$a_cid',Pid ='$a_pid' WHERE Appid = $appointmentId";
         $res = mysqli_query($conn, $sql);
 
         if ($res) {
@@ -133,6 +155,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <br>
     <label for="s">Status</label>
     <input type="text" placeholder="Enter status" id="s" name="status" value="<?php echo $appointment['status']; ?>">
+    <br>
+    <label for="p">price</label>
+    <input type="text" placeholder="Enter price" id="p" name="price" value="<?php echo $appointment['price']; ?>">
+    <br>
+    <label for="did">doctor id</label>
+    <input type="text" placeholder="Enter doctor id" id="did" name="doctorid" value="<?php echo $appointment['Did']; ?>">
+    <br>
+    <label for="pid">patient id</label>
+    <input type="text" placeholder="Enter patient id" id="pid" name="patientid" value="<?php echo $appointment['Pid']; ?>">
+    <br>
+    <label for="cid">clinic id</label>
+    <input type="text" placeholder="Enter clinic id " id="cid" name="clinicid" value="<?php echo $appointment['Cid']; ?>">
     <br>
     <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
     <input type="submit" id="submit" name="submit">
