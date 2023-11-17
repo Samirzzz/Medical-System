@@ -43,29 +43,49 @@
         echo '<div class="container"><div class="row">';
 
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="panel panel-default userlist">
-                        <div class="panel-heading">
-                        <h3 class="username">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</h3>  
-                        <h3 class="page-header small">' . $row['specialization'] . '</h3>  
-                        </div>
-                        <div class="panel-body text-center">
-                            <div class="userprofile">
-                                <div class="userpic"> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="userpicimg"> </div>
-                                <p>Education: '. $row['educ'] .'</p>
-
-                            </div>
-                            <div class="info">
-                            <strong>Information</strong><br>
-                            <p><i class="fa fa-map-marker"></i> New Cairo</p>
-                            <p><i class="fa fa-phone"></i> ' . $row['number'] . '</p>
-                            <p><i class="fa fa-money"></i> : 800</p>
-                            </div>
-
-                        </div>
-                        <div class="panel-footer"> <a href="#" class="btn btn-link btn-reserve">Reserve Appointment</a> </div>
+             echo '
+             <div id="profilesection">
+             <div class="docprofbox">
+             <img src=".\images\default.jpg" alt="image" class="drimg">
+             <div class="pannelhead">
+             <h3 class="username" style="margin-left:60px;">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</h3>
+             <h3 class="page-header small" style="margin-left:60px;">' . $row['specialization'] . '</h3>  
+             </div>
+             <p>Education: '. $row['educ'] .'</p>
+             <strong>Information</strong><br>
+             <p><i class="fa fa-map-marker"></i> New Cairo</p>
+             <p><i class="fa fa-phone"></i> ' . $row['number'] . '</p>
+             <p><i class="fa fa-money"></i> : 800</p>
+             <div class="panel-footer"> <a href="#" class="btn btn-link btn-reserve">Reserve Appointment</a> </div>
                     </div>
-                </div>';
+             </div>
+             
+             
+
+';
+            // echo '<div class="col-lg-3 col-md-4 col-sm-6">
+            //         <div class="panel panel-default userlist">
+            //             <div class="panel-heading">
+            //             <h3 class="username">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</h3>  
+            //             <h3 class="page-header small">' . $row['specialization'] . '</h3>  
+            //             </div>
+            //             <div class="panel-body text-center">
+            //                 <div class="userprofile">
+            //                     <div class="userpic"> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="userpicimg"> </div>
+            //                    
+
+            //                 </div>
+            //                 <div class="info">
+            //                 <strong>Information</strong><br>
+            //                 <p><i class="fa fa-map-marker"></i> New Cairo</p>
+            //                 <p><i class="fa fa-phone"></i> ' . $row['number'] . '</p>
+            //                 <p><i class="fa fa-money"></i> : 800</p>
+            //                 </div>
+
+            //             </div>
+            //             <div class="panel-footer"> <a href="#" class="btn btn-link btn-reserve">Reserve Appointment</a> </div>
+            //         </div>
+            //     </div>';
         }
 
         echo '</div></div>';

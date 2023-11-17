@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="adminn.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -22,7 +22,7 @@
 
 .profile-box img {
     width: 80px;
-    height: 80px;
+    height: 40px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -72,6 +72,9 @@ li {
                 <img src="dr.jpg" alt="Profile Image">
                 <span><?php echo $_SESSION["firstname"]; ?></span>
             </div>
+
+
+
             <ul class="sidebar--items">
                 <li>
                     <a href="pindex.php" class="active">
