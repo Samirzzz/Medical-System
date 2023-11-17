@@ -32,8 +32,10 @@ $result = mysqli_query($conn,$sql);
                 echo "<td>" . $row['date'] . "</td>";
                 echo "<td>" . $row['time'] . "</td>";
                 echo "<td>" . $row['status'] . "</td>";
-            
                 echo "<td><a href='editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
+                echo "<td>" . $row['Cid'] . "</td>";
+            
+                
                 echo "</tr>";
             }
         } else {

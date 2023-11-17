@@ -7,6 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_date = htmlspecialchars($_POST['date']);
     $a_time = htmlspecialchars($_POST['time']);
     $a_status = htmlspecialchars($_POST['status']);
+    $a_price = htmlspecialchars($_POST['price']);
+    $a_did =htmlspecialchars($_POST['doctorid']);
+    $a_cid =htmlspecialchars($_POST['clinicid']);
+    $a_pid =htmlspecialchars($_POST['patientid']);
+   
 
     // Validation for required fields
     if (empty($a_date)) {
@@ -20,19 +25,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     if (empty($a_status)) {
         $errors[] = "Status is required";
     }
+    if (empty($a_price)) {
+        $errors[] = "price is required";
+    }
+    if (empty($a_did)) {
+        $errors[] = "doctor id is required";
+    }
+    if (empty($a_cid)) {
+        $errors[] = "clinic id is required";
+    }
+    if (empty($a_pid)) {
+        $errors[] = "patient id is required";
+    }
 
     // Date validation
     $currentDate = date("Y-m-d");
     $maxAllowedDate = date("Y-m-d", strtotime("+45 days")); // 1.5 months ahead
 
-    if ($a_date < $currentDate || $a_date > $maxAllowedDate) {
+    if ($a_date < $currentDate || $a_date > $maxAllowedDate  )  {
         $errors[] = "Date must be between today and 1.5 months ahead.";
     }
 
     if (count($errors) === 0) {
         // Process form data here
 
-        $sql = "INSERT INTO appointments (date, time, status, pid, did, cid) VALUES ('$a_date', '$a_time', '$a_status', '40', '430', '540')";
+        $sql = "INSERT INTO appointments (date, time, status, pid, did, cid,price) VALUES ('$a_date', '$a_time', '$a_status', '$a_pid', '$a_did', '$a_cid','$a_price')";
         $res = mysqli_query($conn, $sql);
 
         if ($res) {
@@ -124,10 +141,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="t">Time</label>
     <input type="text" placeholder="Enter the time" id="t" name="time">
     <br>
+    <!-- <label for="dn">Status</label>
+    <input type="text" placeholder="Enter doctor's name" id="dn" name="doctorname"> -->
+    <br>
+    <label for="di">doctor's id</label>
+    <input type="text" placeholder="Enter doctor's id" id="di" name="doctorid">
+    <br>
+    <label for="pi">patient's id</label>
+    <input type="text" placeholder="Enter patient's id" id="pi" name="patientid">
+    <br>
+    <br>
+    <label for="ci">clinic's id</label>
+    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid">
+    <br>
     <label for="s">Status</label>
     <input type="text" placeholder="Enter status" id="s" name="status">
     <br>
-    <input type="submit" id="submit" name="submit">
+    <label for="p">price</label>
+    <input type="text" placeholder="Enter the price" id="p" name="price">
+    <br>
+    <input type="submit" id="submit" name="submit" value="submit + next appointment">
    </form>
    <script>
     function validateForm() {
