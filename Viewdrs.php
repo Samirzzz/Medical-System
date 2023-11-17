@@ -4,7 +4,7 @@
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="Viewdrs.css">
+    <link rel="stylesheet" href="viewdrs.css">
 </head>
 <style>
       body {
@@ -12,7 +12,7 @@
         }
 
         .btn-reserve {
-            font-size: 16px;
+            font-size: 13px;
             background-color: red;
             color: white;
             padding: 10px 20px;
@@ -23,6 +23,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 20px;
         }
 
         .btn-reserve:hover {
@@ -48,21 +49,32 @@
              <div class="docprofbox">
              <img src=".\images\default.jpg" alt="image" class="drimg">
              <div class="pannelhead">
-             <h3 class="username" style="margin-left:60px;">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</h3>
-             <h3 class="page-header small" style="margin-left:60px;">' . $row['specialization'] . '</h3>  
+             <form method="post" action="Docprofileview.php">
+             <button type="submit" name="selectdocbutt" class="username" style="margin-left:40px;">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</button>
+             </form>
+             <h3 class="page-header small" style="margin-left:40px;font-weight: bold;">' . $row['specialization'] . '</h3>  
              </div>
              <p>Education: '. $row['educ'] .'</p>
              <strong>Information</strong><br>
              <p><i class="fa fa-map-marker"></i> New Cairo</p>
              <p><i class="fa fa-phone"></i> ' . $row['number'] . '</p>
              <p><i class="fa fa-money"></i> : 800</p>
-             <div class="panel-footer"> <a href="#" class="btn btn-link btn-reserve">Reserve Appointment</a> </div>
+             <div class="panel-footer">
+              <a href="#" class="btn btn-link btn-reserve">Reserve Appointment</a> 
+             <a style=" background-color: green;" class="btn btn-link btn-reserve">Doctor Details </a> 
+             </div>
                     </div>
              </div>
              
              
 
 ';
+
+if (isset($_POST['selectdocbutt']))
+ {
+$firstname=$_POST[$row['firstname']];
+
+  }
             // echo '<div class="col-lg-3 col-md-4 col-sm-6">
             //         <div class="panel panel-default userlist">
             //             <div class="panel-heading">
@@ -87,10 +99,9 @@
             //         </div>
             //     </div>';
         }
-
-        echo '</div></div>';
     }
-    ?>
+
+?>
 
 </body>
 
