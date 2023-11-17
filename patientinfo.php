@@ -117,13 +117,15 @@
                                 $resultPid = mysqli_query($conn, $sqlPid);       
                                 if ($rowPid = mysqli_fetch_array($resultPid)) {
                                     $pid = $rowPid['Pid'];               
-                                $sqlDiagnosis = "SELECT diagnosis FROM medications WHERE Pid = '$pid'";
+                                $sqlDiagnosis = "SELECT diagnosis,date FROM medications WHERE Pid = '$pid'";
                                 $resultDiagnosis = mysqli_query($conn, $sqlDiagnosis);
                                 
                                 
                                 while ($row = mysqli_fetch_array($resultDiagnosis)) {
                                     echo '<tr>';
                                     echo '<td>' . $row["diagnosis"] . '</td>';
+                                    echo '<td>' . $row["date"] . '</td>';
+
                                     echo '</tr>';
                                 }
                             }

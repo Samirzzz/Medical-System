@@ -30,6 +30,9 @@ include_once'navigation.php';
                                     <select class="form-control" id="exampleFormControlSelect1" name="type">
                                         
                                         <option>clinic</option>
+                                        <option>doctors</option>
+                                        <option>patients</option>
+
 
                                         
                                     </select>
