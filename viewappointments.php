@@ -1,5 +1,6 @@
 <?php
 include_once("includes/db.php");
+include_once'navigation.php';
 $sql = "SELECT * FROM appointments";
 $result = mysqli_query($conn,$sql);
 
@@ -7,9 +8,7 @@ $result = mysqli_query($conn,$sql);
 <html>
 <head>
     <title>Appointments</title>
-    <?php
-  include "includes/appnavbar.php";
-  ?>
+ 
 </head>
 <body>
     <h1>Appointments</h1>
@@ -42,25 +41,43 @@ $result = mysqli_query($conn,$sql);
             echo "No appointments found.";
         }
         ?>
+            <?php
+  include "includes/appnavbar.php";
+  ?>
     </table>
 
- 
+
     <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    table, th, td {
-        border: 1px solid #ccc;
-    }
-    th, td {
-        padding: 10px;
-        text-align: left;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
-</style>
+        /* body {
+            
+            padding-left: 60px; Adjust this value based on your navigation bar height
+            margin-left: 20px;
+        } */
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-left: 350px; /* Add some margin to separate the table from the navigation bar */
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .crud-bar{
+            width: 80%;
+            
+            margin-left: 350px;
+        }
+    </style>
 
 </body>
 </html>

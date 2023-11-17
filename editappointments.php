@@ -1,6 +1,7 @@
 <?php
 include_once "includes/db.php";
 include "includes/appnavbar.php";
+include_once'navigation.php';
 $errors = array();
 if (isset($_GET['Appid'])) {
     $appointmentId = $_GET['Appid'];

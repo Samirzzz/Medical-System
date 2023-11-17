@@ -1,6 +1,7 @@
 <?php
 include_once "includes/db.php";
 include"includes/appnavbar.php";
+include_once'navigation.php';
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
