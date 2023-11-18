@@ -15,7 +15,7 @@ include_once '../includes/pnavigation.php';
 ?>
 <style>
 .target-vs-sales--container {
-    background-image: url('mask.jpg');
+    background-image: url('../public/mask.jpg');
     background-size: cover;
     background-position: center;
     padding: 20px;
