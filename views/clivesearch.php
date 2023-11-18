@@ -53,8 +53,7 @@ if (isset($_POST["query"])) {
                            echo '</div>';
                            echo '<div class="button mt-2 d-flex flex-row align-items-center">';
                            
-                           echo '<button type="submit"  name="deletee"  class="btn btn-sm btn-outline-primary w-100">Delete</button>';
-                           echo "<a href='deleteclinic.php?id=" . $row['cid'] . " '><button Delete</button></a> ";
+                           echo '<button type="submit" name="deletee" class="btn btn-sm btn-outline-primary w-100"><a href=".\deleteclinic.php?cid=' . $row["cid"] . '">Delete</a></button>';
                            echo  '</form>';
                            echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close">Close</button>';
            
