@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../public/css/adminnav.css">
 </head>
 <body >
-<?php include_once '../includes/db.php';
+<?php include_once 'includes/db.php';
    session_start();
     ?>
 <section class="header">

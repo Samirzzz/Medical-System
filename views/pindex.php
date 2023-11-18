@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="../public/css/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <title>VeZeeTa</title>
 </head>
 <?php
-include_once 'pnavigation.php';
+include_once '../includes/pnavigation.php';
 ?>
 <style>
 .target-vs-sales--container {
-    background-image: url('mask.jpg');
+    background-image: url('../public/mask.jpg');
     background-size: cover;
     background-position: center;
     padding: 20px;
@@ -192,7 +192,7 @@ body {
     <script src="assets/js/tarsale.js"></script>
     <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
    </footer>
 </body>

@@ -4,7 +4,7 @@
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/viewdrs.css">
+    <link rel="stylesheet" href="../public/css/viewdrs.css">
 </head>
 <style>
       body {
@@ -34,10 +34,10 @@
 <body>
 
     <?php  
-    include_once 'pnavigation.php'; 
-    include_once "./includes/db.php";
+    include_once '../includes/pnavigation.php'; 
+    include_once "../includes/db.php";
 
-    $sql = "SELECT firstname, lastname, specialization, educ, number FROM dr";
+    $sql = "SELECT firstname, lastname, specialization, educ,did, number FROM dr";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -47,11 +47,9 @@
              echo '
              <div id="profilesection">
              <div class="docprofbox">
-             <img src=".\images\default.jpg" alt="image" class="drimg">
+             <img src="..\public\images\default.jpg" alt="image" class="drimg">
              <div class="pannelhead">
-             <form method="post" action="Docprofileview.php">
-             <button type="submit" name="selectdocbutt" class="username" style="margin-left:40px;">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</button>
-             </form>
+             <a class="username" href="Docprofileview.php?Did=' . $row["did"] .  '">' ."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</a>
              <h3 class="page-header small" style="margin-left:40px;font-weight: bold;">' . $row['specialization'] . '</h3>  
              </div>
              <p>Education: '. $row['educ'] .'</p>
@@ -107,7 +105,7 @@ $firstname=$_POST[$row['firstname']];
 
 <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
 </footer>
 
