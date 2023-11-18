@@ -1,3 +1,5 @@
+<?php include_once '..\includes\db.php';
+ session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +13,7 @@
 <link rel="stylesheet" href="../public/css/adminnavv.css">
 </head>
 <body >
-<?php include_once '..\includes\db.php';
-   session_start();
-    ?>
+
 <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>
