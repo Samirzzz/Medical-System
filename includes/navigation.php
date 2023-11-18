@@ -8,10 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="adminnav.css">
+<link rel="stylesheet" href="../public/css/adminnav.css">
 </head>
 <body >
-<?php include_once 'includes/db.php';
+<?php 
+include_once '../includes/db.php';
    session_start();
    
    ?>

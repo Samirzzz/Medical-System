@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/Docprofileview_style.css">
+    <link rel="stylesheet" href="../public/css/Docprofileview_style.css">
     <title>doctor details</title>
 </head>
 <body>
 <?php 
-    include_once 'pnavigation.php'; 
-    include_once "./includes/db.php";
+    include_once '../includes/pnavigation.php'; 
+    include_once "../includes/db.php";
 
     if (isset($_GET['Did'])) {
         $Did = $_GET['Did'];

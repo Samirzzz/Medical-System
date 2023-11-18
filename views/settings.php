@@ -1,5 +1,5 @@
 <?php
-include_once 'pnavigation.php';
+include_once '../includes/pnavigation.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -151,7 +151,7 @@ include_once 'pnavigation.php';
 </body>
 <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
 </footer>
 <script>

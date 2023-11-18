@@ -4,7 +4,7 @@
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/viewdrs.css">
+    <link rel="stylesheet" href="../public/css/viewdrs.css">
 </head>
 <style>
       body {
@@ -34,8 +34,8 @@
 <body>
 
     <?php  
-    include_once 'pnavigation.php'; 
-    include_once "./includes/db.php";
+    include_once '../includes/pnavigation.php'; 
+    include_once "../includes/db.php";
 
     $sql = "SELECT firstname, lastname, specialization, educ,did, number FROM dr";
     $result = mysqli_query($conn, $sql);
@@ -47,7 +47,7 @@
              echo '
              <div id="profilesection">
              <div class="docprofbox">
-             <img src=".\images\default.jpg" alt="image" class="drimg">
+             <img src="..\public\images\default.jpg" alt="image" class="drimg">
              <div class="pannelhead">
              <a class="username" href="Docprofileview.php?Did=' . $row["did"] .  '">' ."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</a>
              <h3 class="page-header small" style="margin-left:40px;font-weight: bold;">' . $row['specialization'] . '</h3>  
@@ -105,7 +105,7 @@ $firstname=$_POST[$row['firstname']];
 
 <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
 </footer>
 
