@@ -37,7 +37,7 @@
     include_once 'pnavigation.php'; 
     include_once "./includes/db.php";
 
-    $sql = "SELECT firstname, lastname, specialization, educ, number FROM dr";
+    $sql = "SELECT firstname, lastname, specialization, educ,did, number FROM dr";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -49,9 +49,7 @@
              <div class="docprofbox">
              <img src=".\images\default.jpg" alt="image" class="drimg">
              <div class="pannelhead">
-             <form method="post" action="Docprofileview.php">
-             <button type="submit" name="selectdocbutt" class="username" style="margin-left:40px;">'."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</button>
-             </form>
+             <a class="username" href="Docprofileview.php?Did=' . $row["did"] .  '">' ."Dr. " . $row['firstname'] . ' ' . $row['lastname'] . '</a>
              <h3 class="page-header small" style="margin-left:40px;font-weight: bold;">' . $row['specialization'] . '</h3>  
              </div>
              <p>Education: '. $row['educ'] .'</p>
