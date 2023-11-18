@@ -2,7 +2,7 @@
 $db_server = 'localhost'; // Change "local host :80" to "localhost"
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'tabiby';
+$db_name = 'tabibi2';
 
 $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 

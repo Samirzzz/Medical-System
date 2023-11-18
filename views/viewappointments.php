@@ -1,6 +1,6 @@
 <?php
-include_once("includes/db.php");
-include_once'navigation.php';
+include_once("../includes/db.php");
+include_once'../includes/navigation.php';
 $sql = "SELECT * FROM appointments";
 $result = mysqli_query($conn,$sql);
 
@@ -31,7 +31,7 @@ $result = mysqli_query($conn,$sql);
                 echo "<td>" . $row['date'] . "</td>";
                 echo "<td>" . $row['time'] . "</td>";
                 echo "<td>" . $row['status'] . "</td>";
-                echo "<td><a href='editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
+                echo "<td><a href='./editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='./deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
                 echo "<td>" . $row['Cid'] . "</td>";
             
                 
@@ -42,7 +42,7 @@ $result = mysqli_query($conn,$sql);
         }
         ?>
             <?php
-  include "includes/appnavbar.php";
+  include "../includes/appnavbar.php";
   ?>
     </table>
 
