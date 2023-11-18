@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/animations.css">  
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../public/css/animations.css">  
+    <link rel="stylesheet" href="../public/css/index.css">
+    <link rel="stylesheet" href="../public/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Poppins:wght@300;600&family=Righteous&family=Rubik:ital@1&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             animation: transitionIn-Y-bottom 0.5s;
         }
         body {
-            background-image: url('dr.jpg');
+            background-image: url('../public/images/dr.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
