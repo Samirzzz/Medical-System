@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="css/clive.css">
+<link rel="stylesheet" href="..\public\css/clive.css">
 <?php
-include("includes/db.php");
+include("..\includes\db.php");
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];

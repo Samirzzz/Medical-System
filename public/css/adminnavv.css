@@ -2,7 +2,7 @@
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
 
 body {
-	background:  #ccfff2;
+	background:  rgb(221, 221, 221);
 	font-size: 12px;
 }
 #wrap {
