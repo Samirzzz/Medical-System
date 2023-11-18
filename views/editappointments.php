@@ -1,7 +1,8 @@
 <?php
-include_once "../includes/navigation.php";
+// include_once ("../includes/navigation.php");
 include "../includes/appnavbar.php";
-
+include_once("../includes/db.php");
+// include "../includes/db.php";
 $errors = array();
 if (isset($_GET['Appid'])) {
     $appointmentId = $_GET['Appid'];
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
         if ($res) {
             echo "Form submitted successfully!";
-            header("location:viewappointments.php");
+            header("location:../views/viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($db);
         }
@@ -170,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="text" placeholder="Enter clinic id " id="cid" name="clinicid" value="<?php echo $appointment['Cid']; ?>">
     <br>
     <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
-    <input type="submit" id="submit" name="submit">
+    <input type="submit" id="submit" name="submit"  >
    </form>
    <script>
     function validateForm() {
@@ -188,8 +189,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if (selectedDate < currentDate || selectedDate > maxAllowedDate) {
             alert("Date must be between today and 1.5 months ahead.");
             return false;
-        }
+        } 
+        // clickViewButton();
+        //     return true;
     }
 </script>
+
 </body>
 </html>
