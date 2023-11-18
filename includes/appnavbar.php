@@ -8,8 +8,8 @@
         }
 
         .crud-bar {
-            background-color: #333;
-            color: #fff;
+            background-color: white;
+            color: white;
             padding: 10px;
         }
 

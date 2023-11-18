@@ -1,7 +1,7 @@
 <?php
-include_once("../includes/db.php");
-include"../includes/appnavbar.php";
-// include_once'../includes/navigation.php';
+
+
+include_once'../includes/navigation.php';
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -134,6 +134,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         input[type="submit"]:hover {
             background-color: #555;
         }
+        .crud-bar {
+            background-color:white;
+            color: white;
+            padding: 10px;
+            margin-left :900px;
+            width :10%;
+        }
     </style>
 </head>
 <body>
@@ -165,6 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <br>
     <input type="submit" id="submit" name="submit" value="submit + next appointment">
    </form>
+   <?php include"../includes/appnavbar.php";?>
    <script>
     function validateForm() {
         var dateInput = document.getElementById("d");
