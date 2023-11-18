@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="clive.css">
+<link rel="stylesheet" href="css/clive.css">
 <?php
 include("includes/db.php");
 
@@ -53,7 +53,8 @@ if (isset($_POST["query"])) {
                            echo '</div>';
                            echo '<div class="button mt-2 d-flex flex-row align-items-center">';
                            
-                           echo '<button type="submit" name="deletee" class="btn btn-sm btn-outline-primary w-100">Delete</button>';
+                           echo '<button type="submit"  name="deletee"  class="btn btn-sm btn-outline-primary w-100">Delete</button>';
+                           echo "<a href='deleteclinic.php?id=" . $row['cid'] . " '><button Delete</button></a> ";
                            echo  '</form>';
                            echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close">Close</button>';
            
@@ -69,14 +70,14 @@ if (isset($_POST["query"])) {
                    } else {
                        echo "No results found.";
                    }
-                   if (isset($_GET['cid'])) {
-                    $cid = $_GET['cid'];
-                    if (isset($_POST["deletee"])) {
+                //    if (isset($_GET['cid'])) {
+                //     $cid = $_GET['cid'];
+                //     if (isset($_POST["deletee"])) {
                 
-                    $sql = "DELETE FROM clinic WHERE cid = '$cid'";
-                    $conn->query($sql);
-                    }
-                } 
+                //     $sql = "DELETE FROM clinic WHERE cid = '$cid'";
+                //     $conn->query($sql);
+                //     }
+                // } 
     }
                  elseif ($usertype == 'patients') {
                     $sql = "SELECT user_acc.uid, user_acc.email, patient.firstname, patient.lastname,patient.pid 
