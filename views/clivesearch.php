@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="..\public\css/clive.css">
+<link rel="stylesheet" href="..\public\css\clive.css">
 <?php
 include("..\includes\db.php");
 
