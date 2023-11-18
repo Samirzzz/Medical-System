@@ -1,5 +1,5 @@
 <?php
-include_once("includes/db.php");
+include_once("../includes/db.php");
 
 // Define the date format conversion function
 function convertDateToEvoFormat($date)
@@ -43,17 +43,17 @@ $eventsJson = json_encode($events);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <link rel="stylesheet" href="evo/evo-calendar.midnight-blue.min.css">
-    <link rel="stylesheet" href="evo/evo-calendar.min.css">
-    <link rel="stylesheet" href="evo/evo-calendar.orange-coral.min.css">
-    <link rel="stylesheet" href="evo/evo-calendar.royal-navy.min.css">
+    <link rel="stylesheet" href="../evo/evo-calendar.midnight-blue.min.css">
+    <link rel="stylesheet" href="../evo/evo-calendar.min.css">
+    <link rel="stylesheet" href="../evo/evo-calendar.orange-coral.min.css">
+    <link rel="stylesheet" href="../evo/evo-calendar.royal-navy.min.css">
 </head>
 <body>
 <div class="hero">
     <div id="calendar"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-<script src="evo/evo-calendar.min.js"></script>
+<script src="../evo/evo-calendar.min.js"></script>
 <script>
     
   $(document).ready(function() {
@@ -100,7 +100,7 @@ $eventsJson = json_encode($events);
 </style>
 <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
    </footer>
 </html>

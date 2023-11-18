@@ -28,9 +28,9 @@
 </head>
 <body>
     <div class="crud-bar">
-        <a class="button" href="addevent.php">Add</a>
+        <a class="button" href="./addevent.php">Add</a>
         <!-- <a class="button" href="editappointments.php">edit</a> -->
-        <a class="button" href="viewappointments.php">view</a>
+        <a class="button" href="./viewappointments.php">view</a>
         <!-- <a class="button" href="#">Delete</a> -->
     </div>
 </body>

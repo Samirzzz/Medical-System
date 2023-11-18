@@ -1,7 +1,7 @@
 <?php
-include_once "includes/db.php";
-include"includes/appnavbar.php";
-include_once'navigation.php';
+include_once "../includes/db.php";
+include"../includes/appnavbar.php";
+include_once'../includes/navigation.php';
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if ($res) {
             echo "Form submitted successfully!";
             // Add the following line to append pid and did to the URL
-            header("location:nextAppointment.php?pid=$a_pid&did=$a_did");
+            header("location:views/nextAppointment.php?pid=$a_pid&did=$a_did");
         } else {
             echo "Error: " . mysqli_error($conn);
         }

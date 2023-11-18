@@ -1,7 +1,7 @@
 <?php
-include_once "includes/db.php";
-include "includes/appnavbar.php";
-include_once'navigation.php';
+include_once "../includes/navigation.php";
+include "../includes/appnavbar.php";
+
 $errors = array();
 if (isset($_GET['Appid'])) {
     $appointmentId = $_GET['Appid'];
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     if (count($errors) === 0) {
         // Update the appointment using an SQL UPDATE statement with a WHERE clause
-        $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status' , price ='$a_price',Did ='$a_did',Cid ='$a_cid',Pid ='$a_pid' WHERE Appid = $appointmentId";
+        $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status'  ,Did ='$a_did',Cid ='$a_cid',Pid ='$a_pid',price ='$a_price' WHERE Appid = $appointmentId";
         $res = mysqli_query($conn, $sql);
 
         if ($res) {
