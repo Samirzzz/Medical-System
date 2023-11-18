@@ -54,9 +54,7 @@ li {
         <div class="header--items">
 
             <div id="wrap">
-                <!-- <form action="" autocomplete="on">
-  <input id="search" name="search" type="text" placeholder="Patient Name"><input id="search_submit" value="Rechercher" type="submit">
-  </form> -->
+
             </div>
             <div class="dark--theme--btn">
             <i class="ri-notification-2-line"></i>
