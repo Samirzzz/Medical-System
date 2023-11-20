@@ -11,7 +11,8 @@
     include_once '../includes/pnavigation.php'; 
     include_once "../includes/db.php";
 
-    if (isset($_GET['Did'])) {
+    if (isset($_GET['Did']))
+     {
         $Did = $_GET['Did'];
         $sql = "SELECT
         dr.firstname,
@@ -20,33 +21,40 @@
         from dr
         WHERE dr.did ='$Did'";
     }
+
 $doctorInfoResult = mysqli_query($conn, $sql);
            if ($doctorRow = mysqli_fetch_array($doctorInfoResult)) 
            {
             $firstname = $doctorRow['firstname']; 
             $lastname = $doctorRow['lastname']; 
-            $specialization= $doctorRow['specialization']; 
+            // $specialization= $doctorRow['specialization']; 
               $Number= $doctorRow['number']; 
-             $education= $doctorRow['educ']; 
+            //  $education= $doctorRow['educ']; 
            }
            echo'
+         
            <div class="box">
-<img src=".\images\default.jpg" alt="image" class="drimg">
-<div class="info">
-   <p>Education: '. $firstname .'</p>
-    <h1>name </h1>
-    <h1>specialization</h1>
-    <h1>Number </h1> 
-</div>
-</div>
-         '  
+   <div class="imgbox"> 
+                     <img src="../public/images/default.jpg" alt="image" class="drimg"> 
+                       <h1 class="doctitle"> DR '  .$firstname .$lastname. '</h1>
+            <h1 class="doctitle">specialization</h1>
+                   <div class="info">
+           <p>Education: '. $firstname .'</p>
+          <h1>Number </h1> 
+              </div>
+ 
+         
+
+          </div> 
+          </div> 
+         ' 
            
           
 
 ?>
 
 <!-- <div class="box">
-<img src=".\images\default.jpg" alt="image" class="drimg">
+<img src="..\public\images\default.jpg" alt="image" class="imgbox">
 <div class="info">
     <h1>name </h1>
     <h1>specialization</h1>

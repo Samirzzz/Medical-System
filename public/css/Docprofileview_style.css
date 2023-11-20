@@ -1,15 +1,46 @@
 .box
-{ margin-left: 450px;
-    height: 700px;
+{ display: inline;
+    position: relative;
+     margin-left: 400px;
+    height: 900px;
     width: 900px;
- border: 3px solid greenyellow;
+ border: 3px solid rgb(3, 190, 87);
+}
+.imgbox
+{
+    
+margin-left: 500px;;
+top: 50%;
+background-color:burlywood;
+height: 140px;
+width: 140px;
+padding-top: 50px;
+padding-left: 150px;
+width: 900px;
+height: 350px;
+
+
+}
+.info
+{ 
+    padding-top: 50px;
+    padding-left: 150px;
+    color: white;
+    background-color:whitesmoke;
+    width: 900px;
+height: 350px;
+}
+.doctitle
+{
+    margin-left: 60px;
+    margin-top: 20px;
+    color: white;
 }
 .drimg
 {
-height: 170px;
-width: 170px;
-}
-.info
-{
-    margin-top: 20px;
+    padding-top: 50px;
+    padding-left: 150px;
+    
+    height: 300px;
+    width: 200px; 
 }
