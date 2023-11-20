@@ -67,12 +67,6 @@
              
 
 ';
-
-if (isset($_POST['selectdocbutt']))
- {
-$firstname=$_POST[$row['firstname']];
-
-  }
             // echo '<div class="col-lg-3 col-md-4 col-sm-6">
             //         <div class="panel panel-default userlist">
             //             <div class="panel-heading">
