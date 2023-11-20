@@ -101,11 +101,11 @@
                 <div class="col-md-12">
                     <label class="labels" style="font-size: larger;">Medical History</label>
                     <div id="d1">
-        <input type="button" value="Create new" style="width:200px" name="t" id="t" onclick="create();">    
+        <input type="button" value="Create new" style="width:200px" name="t" id="t"   onclick="create();">    
 
     </div>
     <div>
-    <table class="table mt-3">
+    <table class="table mt-3" style="margin-left: -40px;">
                         <thead>
                             <tr>
                                 <th>Diagnosis</th>
@@ -191,6 +191,7 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
     //  else {
     //     echo "Invalid input";
     // }
+
 }
 
 ?>
@@ -233,7 +234,6 @@ function createNewInput() {
     var newSub = document.createElement("input");
     newSub.type = "submit";
     newSub.name = "s_1";
-
     newForm.appendChild(newInput);
     newForm.appendChild(document.createElement("br"));
     newForm.appendChild(newSub);
@@ -244,6 +244,7 @@ function createNewInput() {
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     if (isset($_GET['uid'])) {
         $uid = $_GET['uid'];
 
@@ -264,6 +265,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
 ?>
 
     </script>
