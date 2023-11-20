@@ -31,8 +31,11 @@
     </style>
 </head>
 <header>
-<?php  include_once'Navbar.php';
-include_once "includes/db.php";
+<?php  
+
+include_once '..\includes\db.php';
+
+
 
      
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -273,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
 </footer>
 </html>

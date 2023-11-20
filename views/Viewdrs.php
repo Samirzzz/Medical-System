@@ -34,8 +34,8 @@
 <body>
 
     <?php  
-    include_once '../includes/pnavigation.php'; 
     include_once "../includes/db.php";
+    include_once '../includes/pnavigation.php'; 
 
     $sql = "SELECT firstname, lastname, specialization, educ,did, number FROM dr";
     $result = mysqli_query($conn, $sql);
