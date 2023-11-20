@@ -1,19 +1,19 @@
+<?php include_once '..\includes\db.php';
+ session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="..\public\css/adminn.css">
+    <link rel="stylesheet" href="../public/css/adminn.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="../public/css/adminnavv.css">
 </head>
 <body >
-<?php include_once '..\includes\db.php';
-   session_start();
-    ?>
+
 <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>

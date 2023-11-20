@@ -8,8 +8,8 @@
         }
 
         .crud-bar {
-            background-color: #333;
-            color: #fff;
+            background-color: white;
+            color: white;
             padding: 10px;
         }
 
@@ -30,8 +30,16 @@
     <div class="crud-bar">
         <a class="button" href="./addevent.php">Add</a>
         <!-- <a class="button" href="editappointments.php">edit</a> -->
-        <a class="button" href="./viewappointments.php">view</a>
+        <a class="button"id="viewButton" href="./viewappointments.php">view</a>
         <!-- <a class="button" href="#">Delete</a> -->
     </div>
 </body>
+<script>
+    function clickViewButton() {
+        var viewButton = document.getElementById("viewButton");
+        if (viewButton) {
+            viewButton.click();
+        }
+    }
+</script>
 </html>

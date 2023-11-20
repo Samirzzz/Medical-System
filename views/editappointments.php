@@ -1,13 +1,13 @@
 <?php
-include_once "../includes/navigation.php";
-include "../includes/appnavbar.php";
+include_once("../includes/navigation.php");
 
+// include_once("../includes/db.php");
+
+// include "../includes/db.php";
 $errors = array();
 if (isset($_GET['Appid'])) {
     $appointmentId = $_GET['Appid'];
 }
-
-
 $sql = "SELECT * FROM appointments WHERE Appid = $appointmentId";
 $result = mysqli_query($conn, $sql);
 $appointment = mysqli_fetch_assoc($result);
@@ -60,14 +60,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         }
     }
 
-    if (count($errors) === 0) {
+    if (count($errors) === 0) 
+    {
         // Update the appointment using an SQL UPDATE statement with a WHERE clause
         $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status'  ,Did ='$a_did',Cid ='$a_cid',Pid ='$a_pid',price ='$a_price' WHERE Appid = $appointmentId";
         $res = mysqli_query($conn, $sql);
 
         if ($res) {
             echo "Form submitted successfully!";
-            header("location:viewappointments.php");
+            header("location:../views/viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($db);
         }
@@ -144,12 +145,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         input[type="submit"]:hover {
             background-color: #555;
         }
+        .crud-bar {
+            background-color:white;
+            color: white;
+            padding: 10px;
+            margin-left :900px;
+            width :10%;
+        }
     </style>
 </head>
 <body>
    <form action="" method="post" autocomplete="off" onsubmit="return validateForm();">
     <label for="d">Date</label>
-    <input type="date" placeholder="Choose the date" id="d" name="date" value="<?php echo $appointment['date']; ?>">
+    <input type="date" placeholder="Choose the date" id="d" name="date" value="<?php echo Date($appointment['date']); ?>">
     <br>
     <label for="t">Time</label>
     <input type="text" placeholder="Enter the time" id="t" name="time" value="<?php echo $appointment['time']; ?>">
@@ -170,8 +178,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="text" placeholder="Enter clinic id " id="cid" name="clinicid" value="<?php echo $appointment['Cid']; ?>">
     <br>
     <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
-    <input type="submit" id="submit" name="submit">
+    <input type="submit" id="submit" name="submit"  >
    </form>
+   <?php include"../includes/appnavbar.php";?>
    <script>
     function validateForm() {
         var dateInput = document.getElementById("d");
@@ -188,8 +197,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if (selectedDate < currentDate || selectedDate > maxAllowedDate) {
             alert("Date must be between today and 1.5 months ahead.");
             return false;
-        }
+        } 
+        // clickViewButton();
+        //     return true;
     }
 </script>
+
 </body>
 </html>

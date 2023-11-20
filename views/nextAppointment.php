@@ -1,8 +1,8 @@
 <?php
 $next_pid = isset($_GET['pid']) ? htmlspecialchars($_GET['pid']) : '';
 $next_did = isset($_GET['did']) ? htmlspecialchars($_GET['did']) : '';
-include_once "includes/db.php";
-include"includes/appnavbar.php";
+include_once "../includes/navigation.php";
+
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if ($res) {
             echo "Form submitted successfully!";
             // Add the following line to append pid and did to the URL
-            header("location:viewappointments.php");
+            header("location:./viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -135,6 +135,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         input[type="submit"]:hover {
             background-color: #555;
         }
+        .crud-bar {
+            background-color:white;
+            color: white;
+            padding: 10px;
+            margin-left :900px;
+            width :10%;
+        }
     </style>
 </head>
 <body>
@@ -165,6 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <br>
     <input type="submit" id="submit" name="submit" value="submit">
    </form>
+   <?php include"../includes/appnavbar.php";?>
    <script>
     function validateForm() {
         var dateInput = document.getElementById("d");
