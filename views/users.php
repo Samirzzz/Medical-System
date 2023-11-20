@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/users.css">
+    <link rel="stylesheet" href="..\public\css/user.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
 </head>
 <body>
 <?php
-include_once'navigation.php';
+include_once'..\includes\navigation.php';
 ?>
 
 <section class="vh-100 bg-image"
@@ -49,7 +49,7 @@ include_once'navigation.php';
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="pass" class="form-control form-control-lg" />
+                  <input type="password" id="pass" name="pass" class="form-control form-control-lg" />
                   <label class="form-label" for="pass">Password</label>
                 </div>
 
@@ -63,7 +63,7 @@ include_once'navigation.php';
                   <input type="radio" id="userType" />
                   <label class="form-label" for="userType">Patient</label>
                 </div>
-                <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Save</button>
+                <button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
                 </div>
             
 
@@ -137,9 +137,7 @@ include_once'navigation.php';
     return false;
   }
 
-  // Form validation passed
-  alert("Form submitted successfully!");
-  return true;
+
 }
     </script>
     <?php 

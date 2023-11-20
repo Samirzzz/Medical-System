@@ -1,13 +1,12 @@
 <?php
-include_once "includes/db.php";
-include "includes/appnavbar.php";
-include_once'navigation.php';
+include_once("../includes/navigation.php");
+include_once ("./Appointments.php");
+$appointment1 = new Appointments($conn);
 $errors = array();
+
 if (isset($_GET['Appid'])) {
     $appointmentId = $_GET['Appid'];
 }
-
-
 $sql = "SELECT * FROM appointments WHERE Appid = $appointmentId";
 $result = mysqli_query($conn, $sql);
 $appointment = mysqli_fetch_assoc($result);
@@ -21,53 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_cid =htmlspecialchars($_POST['clinicid']);
     $a_pid =htmlspecialchars($_POST['patientid']);
 
+    $errors = $appointment1->validateAppointment($a_date, $a_time, $a_status,$a_price,$a_did, $a_cid, $a_pid);
 
-    // Validation for required fields
-    if (empty($a_date)) {
-        $errors[] = "Date is required";
-    }
 
-    if (empty($a_time)) {
-        $errors[] = "Time is required";
-    }
-
-    if (empty($a_status)) {
-        $errors[] = "Status is required";
-    } 
-    if (empty($a_price)) {
-        $errors[] = "price is required";
-    } 
-    if (empty($a_did)) {
-        $errors[] = "doctor id is required";
-    }
-    if (empty($a_cid)) {
-        $errors[] = "clinic id is required";
-    }  
-    if (empty($a_pid)) {
-        $errors[] = "patient id is required";
-    } 
-
-    
-    
-    
-    else {
-        // Date validation
-        $currentDate = date("Y-m-d");
-        $maxAllowedDate = date("Y-m-d", strtotime("+45 days")); // 1.5 months ahead
-
-        if ($a_date < $currentDate || $a_date > $maxAllowedDate) {
-            $errors[] = "Date must be between today and 1.5 months ahead.";
-        }
-    }
-
-    if (count($errors) === 0) {
-        // Update the appointment using an SQL UPDATE statement with a WHERE clause
-        $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status' , price ='$a_price',Did ='$a_did',Cid ='$a_cid',Pid ='$a_pid' WHERE Appid = $appointmentId";
-        $res = mysqli_query($conn, $sql);
-
-        if ($res) {
+    if (count($errors) === 0) 
+    {
+  if ($appointment1->updateAppointment($appointmentId,$a_date, $a_time, $a_status,$a_price,$a_did, $a_cid, $a_pid)) {
             echo "Form submitted successfully!";
-            header("location:viewappointments.php");
+            header("location:../views/viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($db);
         }
@@ -86,70 +46,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/addevent.css">
     <title>Update Appointment</title>
     <style>
-        /* Style for the overall form container */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-        }
-
-        form {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 20px;
-            width: 300px;
-            margin: 0 auto;
-            margin-top: 50px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Style for form labels */
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* Style for input fields */
-        input[type="text"],
-        input[type="date"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        input[type="submit"] {
-            border-color: #333;
-            outline: none;
-        }
-
-        /* Style for form submit button */
-        input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #555;
-        }
+   
     </style>
 </head>
 <body>
    <form action="" method="post" autocomplete="off" onsubmit="return validateForm();">
     <label for="d">Date</label>
-    <input type="date" placeholder="Choose the date" id="d" name="date" value="<?php echo $appointment['date']; ?>">
+    <input type="date" placeholder="Choose the date" id="d" name="date" value="<?php echo Date($appointment['date']); ?>">
     <br>
     <label for="t">Time</label>
     <input type="text" placeholder="Enter the time" id="t" name="time" value="<?php echo $appointment['time']; ?>">
@@ -170,8 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="text" placeholder="Enter clinic id " id="cid" name="clinicid" value="<?php echo $appointment['Cid']; ?>">
     <br>
     <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
-    <input type="submit" id="submit" name="submit">
+    <input type="submit" id="submit" name="submit"  >
    </form>
+   <?php include"../includes/appnavbar.php";?>
    <script>
     function validateForm() {
         var dateInput = document.getElementById("d");
@@ -188,8 +95,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         if (selectedDate < currentDate || selectedDate > maxAllowedDate) {
             alert("Date must be between today and 1.5 months ahead.");
             return false;
-        }
+        } 
+        // clickViewButton();
+        //     return true;
     }
 </script>
+
 </body>
 </html>

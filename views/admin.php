@@ -10,7 +10,7 @@
     <title>VeZeeTa</title>
 </head>
 <?php
-include_once'.includes/navigation.php';
+include_once'..\includes\navigation.php';
 
 
 

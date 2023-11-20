@@ -1,16 +1,21 @@
 <?php
-include_once "includes/db.php";
+include_once "..\includes\db.php";
 if (isset($_GET['cid'])) {
     $cid = $_GET['cid'];
-
+    $drsql = "DELETE FROM dr WHERE cid = $cid";
+    if ($conn->query($drsql) === TRUE) {
+        header("location:clinic.php");
+    } else {
+        echo "Error deleting clinic: " . $conn->error;
+    }
     
     $sql = "DELETE FROM clinic WHERE cid = $cid";
     if ($conn->query($sql) === TRUE) {
-        echo "Appointment deleted successfully.";
         header("location:clinic.php");
     } else {
-        echo "Error deleting appointment: " . $conn->error;
+        echo "Error deleting clinic: " . $conn->error;
     }
+   
 } else {
     echo "Invalid appointment ID.";
 }

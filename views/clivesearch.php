@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="css/clive.css">
+<link rel="stylesheet" href="..\public\css\clive.css">
 <?php
-include("includes/db.php");
+include("..\includes\db.php");
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];
@@ -53,8 +53,7 @@ if (isset($_POST["query"])) {
                            echo '</div>';
                            echo '<div class="button mt-2 d-flex flex-row align-items-center">';
                            
-                           echo '<button type="submit"  name="deletee"  class="btn btn-sm btn-outline-primary w-100">Delete</button>';
-                           echo "<a href='deleteclinic.php?id=" . $row['cid'] . " '><button Delete</button></a> ";
+                           echo '<button type="submit" name="deletee" class="btn btn-sm btn-outline-primary w-100"><a href=".\deleteclinic.php?cid=' . $row["cid"] . '">Delete</a></button>';
                            echo  '</form>';
                            echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close">Close</button>';
            
@@ -113,8 +112,8 @@ if (isset($_POST["query"])) {
                                        echo '<span>' . $row["lastname"] . '</span>';
                                        echo '<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">';
                                        echo '<div class="d-flex flex-column">';
-                                       echo '<span class="articles">Doctors</span>';
-                                       echo '<span class="number1">38</span>';
+                                       echo '<span class="articles">Patient Mail</span>';
+                                       echo '<span class="number1">'.$row['email'].'</span>';
                                        echo '</div>';
                                       
                                        echo '<div class="d-flex flex-column">';
@@ -123,7 +122,7 @@ if (isset($_POST["query"])) {
                                        echo '</div>';
                                        echo '<div class="button mt-2 d-flex flex-row align-items-center">';
                                        
-                                       echo '<button type="submit" name="delete" class="btn btn-sm btn-outline-primary w-100">Delete</button>';
+                                       echo '<button type="submit" name="deletee" class="btn btn-sm btn-outline-primary w-100"><a href=".\deletepatients.php?uid=' . $row["uid"] . '">Delete</a></button>';
                                        echo  '</form>';
                                        echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close">Close</button>';
                        
@@ -175,8 +174,8 @@ if (isset($_POST["query"])) {
                                     echo '<span>' . $row["lastname"] . '</span>';
                                     echo '<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">';
                                     echo '<div class="d-flex flex-column">';
-                                    echo '<span class="articles">Doctors</span>';
-                                    echo '<span class="number1">38</span>';
+                                    echo '<span class="articles">Doctor Mail</span>';
+                                    echo '<span class="number1">'.$row['email'].'</span>';
                                     echo '</div>';
                                    
                                     echo '<div class="d-flex flex-column">';
@@ -185,7 +184,7 @@ if (isset($_POST["query"])) {
                                     echo '</div>';
                                     echo '<div class="button mt-2 d-flex flex-row align-items-center">';
                                     
-                                    echo '<button type="submit" name="delete" class="btn btn-sm btn-outline-primary w-100">Delete</button>';
+                                    echo '<button type="submit" name="deletee" class="btn btn-sm btn-outline-primary w-100"><a href=".\deletedr.php?uid=' . $row["uid"] . '">Delete</a></button>';
                                     echo  '</form>';
                                     echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close">Close</button>';
                     

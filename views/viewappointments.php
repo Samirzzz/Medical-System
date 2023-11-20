@@ -1,9 +1,8 @@
 <?php
-include_once("includes/db.php");
-include_once'navigation.php';
-$sql = "SELECT * FROM appointments";
-$result = mysqli_query($conn,$sql);
-
+// include_once("../includes/db.php");
+include_once('../includes/navigation.php');
+include_once('./Appointments.php');
+$appointment = new Appointments($conn);
 ?>
 <html>
 <head>
@@ -23,26 +22,10 @@ $result = mysqli_query($conn,$sql);
             
         </tr>
         <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['Appid'] . "</td>";
-
-                echo "<td>" . $row['date'] . "</td>";
-                echo "<td>" . $row['time'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td><a href='editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
-                echo "<td>" . $row['Cid'] . "</td>";
-            
-                
-                echo "</tr>";
-            }
-        } else {
-            echo "No appointments found.";
-        }
+$appointment->viewAppointments();
         ?>
             <?php
-  include "includes/appnavbar.php";
+  include "../includes/appnavbar.php";
   ?>
     </table>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/adminn.css">
+    <link rel="stylesheet" href="css/adminn.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -54,9 +54,7 @@ li {
         <div class="header--items">
 
             <div id="wrap">
-                <!-- <form action="" autocomplete="on">
-  <input id="search" name="search" type="text" placeholder="Patient Name"><input id="search_submit" value="Rechercher" type="submit">
-  </form> -->
+
             </div>
             <div class="dark--theme--btn">
             <i class="ri-notification-2-line"></i>

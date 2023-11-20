@@ -1,21 +1,19 @@
+<?php include_once '..\includes\db.php';
+ session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/adminn.css">
+    <link rel="stylesheet" href="../public/css/adminn.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="../public/css/adminnav.css">
+<link rel="stylesheet" href="../public/css/adminnavv.css">
 </head>
 <body >
-<?php 
-include_once '../includes/db.php';
-   session_start();
-   
-   ?>
+
 <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>
@@ -28,16 +26,7 @@ include_once '../includes/db.php';
   <input id="search" name="search" type="text" placeholder="Patient Name"><input id="search_submit" value="Rechercher" type="submit">
   </form> -->
 </div>
-            <div class="dark--theme--btn">
-                <i class="ri-moon-line moon"></i>
-                <i class="ri-sun-line sun"></i>
-            </div>
-            <i class="ri-notification-2-line"></i>
-            <i class="ri-wechat-2-line chat"></i>
-            <div class="profile">
-                <img src="assets/images/profile.jpg" alt=""> <!--el pp-->
-            </div>
-        </div>
+            
     </section>
     <section class="main">
         <div class="sidebar">
@@ -106,4 +95,6 @@ include_once '../includes/db.php';
 
 
 </body>
+<script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>65343c473a66a377bb977904,652ed8af9f61ca3c0661b0df</script>
+
 </html>

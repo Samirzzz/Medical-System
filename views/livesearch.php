@@ -43,7 +43,7 @@
 </style>
 
 <?php
-include("includes/db.php");
+include("..\includes\db.php");
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];

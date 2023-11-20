@@ -3,14 +3,18 @@
 <head>
     <title>CRUD Bar Example</title>
     <style>
-        body {
+      body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .crud-bar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
+            background-color: white;
+            color: white;
+            padding: 5px;
+            width: 390px;
+            display: flex;
         }
 
         .button {
@@ -18,7 +22,7 @@
             background-color: #007bff;
             color: #fff;
             padding: 8px 16px;
-            margin-right: 10px;
+            margin-right: 55px;
         }
 
         .button:hover {
@@ -28,10 +32,18 @@
 </head>
 <body>
     <div class="crud-bar">
-        <a class="button" href="addevent.php">Add</a>
+        <a class="button" href="./addevent.php">Add Appointment</a>
         <!-- <a class="button" href="editappointments.php">edit</a> -->
-        <a class="button" href="viewappointments.php">view</a>
+        <a class="button"id="viewButton" href="./viewappointments.php">view Appointments</a>
         <!-- <a class="button" href="#">Delete</a> -->
     </div>
 </body>
+<script>
+    function clickViewButton() {
+        var viewButton = document.getElementById("viewButton");
+        if (viewButton) {
+            viewButton.click();
+        }
+    }
+</script>
 </html>
