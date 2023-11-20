@@ -23,7 +23,9 @@ if($row=mysqli_fetch_array($result)){
 
 
 }
-
+function getallpatients(){
+    
+}
 
 
 
@@ -32,9 +34,7 @@ if($row=mysqli_fetch_array($result)){
 
 
 }
-class dr{
 
-}
 class clinic{
 
 }

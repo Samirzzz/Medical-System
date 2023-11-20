@@ -29,7 +29,6 @@ include_once'..\includes\navigation.php';
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                     <select class="form-control" id="exampleFormControlSelect1" name="type">
                                         <option>patient</option>
-                                        <option>admin</option>
 
                                         
                                     </select>

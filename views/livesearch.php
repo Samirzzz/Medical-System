@@ -53,17 +53,8 @@ if (isset($_POST["query"])) {
                 FROM patient 
                 JOIN user_acc ON user_acc.uid = patient.uid 
                 WHERE email LIKE '%$search%'";
-    } elseif ($usertype == 'admin') {
-        $sql = "SELECT user_acc.uid, user_acc.email, dr.firstname, dr.lastname 
-                FROM dr 
-                JOIN user_acc ON user_acc.uid = dr.uid  
-                WHERE email LIKE '%$search%'";
-    }
-    elseif ($usertype == 'clinic') {
-        $sql = "SELECT clinic.cname,clinic.cid,clinic.cloc,clinic.cnumber   
-                FROM clinic 
-                WHERE cname LIKE '%$search%'";
-    }
+    } 
+    
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
