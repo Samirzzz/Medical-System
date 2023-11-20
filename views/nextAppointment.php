@@ -1,8 +1,11 @@
 <?php
 $next_pid = isset($_GET['pid']) ? htmlspecialchars($_GET['pid']) : '';
 $next_did = isset($_GET['did']) ? htmlspecialchars($_GET['did']) : '';
-include_once "../includes/navigation.php";
+include_once ("../includes/navigation.php");
+include_once ("./Appointments.php");
 
+
+$appointment = new Appointments($conn);
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -15,55 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_pid =htmlspecialchars($_POST['patientid']);
    
 
-    // Validation for required fields
-    if (empty($a_date)) {
-        $errors[] = "Date is required";
-    }
+$errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price,$a_did, $a_cid, $a_pid);
 
-    if (empty($a_time)) {
-        $errors[] = "Time is required";
-    }
-
-    if (empty($a_status)) {
-        $errors[] = "Status is required";
-    }
-    if (empty($a_price)) {
-        $errors[] = "price is required";
-    }
-    if (empty($a_did)) {
-        $errors[] = "doctor id is required";
-    }
-    if (empty($a_cid)) {
-        $errors[] = "clinic id is required";
-    }
-    if (empty($a_pid)) {
-        $errors[] = "patient id is required";
-    }
-
-    // Date validation
-    $currentDate = date("Y-m-d");
-    $maxAllowedDate = date("Y-m-d", strtotime("+45 days")); // 1.5 months ahead
-
-    if ($a_date < $currentDate || $a_date > $maxAllowedDate  )  {
-        $errors[] = "Date must be between today and 1.5 months ahead.";
-    }
-
-    if (count($errors) === 0) {
-        // Process form data here
-
-        $sql = "INSERT INTO appointments (date, time, status, pid, did, cid,price) VALUES ('$a_date', '$a_time', '$a_status', '$a_pid', '$a_did', '$a_cid','$a_price')";
-        $res = mysqli_query($conn, $sql);
-
-        if ($res) {
+    if (count($errors) == 0) {
+        if ($appointment->addAppointment($a_date, $a_time, $a_status,$a_price, $a_did, $a_cid, $a_pid)) {
             echo "Form submitted successfully!";
-            // Add the following line to append pid and did to the URL
             header("location:./viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($conn);
         }
         
     } else {
-        // Display validation errors
         echo "Validations :<br>";
         foreach ($errors as $error) {
             echo $error . "<br>";
@@ -77,72 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/addevent.css">
     <title>Appointment Form</title>
-    <style>
-        /* Style for the overall form container */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-        }
-
-        form {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 20px;
-            width: 300px;
-            margin: 0 auto;
-            margin-top: 50px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Style for form labels */
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* Style for input fields */
-        input[type="text"],
-        input[type="date"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        input[type="submit"] {
-            border-color: #333;
-            outline: none;
-        }
-
-        /* Style for form submit button */
-        input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #555;
-        }
-        .crud-bar {
-            background-color:white;
-            color: white;
-            padding: 10px;
-            margin-left :900px;
-            width :10%;
-        }
-    </style>
+   
 </head>
 <body>
    <form action="" method="post" autocomplete="off" onsubmit="return validateForm();">
