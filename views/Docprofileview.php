@@ -20,7 +20,8 @@
         $sql = "SELECT
         dr.firstname,
         dr.lastname,
-        dr.number
+        dr.number,
+        dr.specialization
         from dr
         WHERE dr.did ='$Did'";
     }
