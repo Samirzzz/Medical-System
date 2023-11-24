@@ -1,64 +1,57 @@
 <style>
-#search-bar {
-    display: flex;
-    margin-top: 20px;
-}
+    #search-bar {
+        display: flex;
+        margin-top: 20px;
+    }
 
-#search-bar select {
-    margin-right: 10px;
-    padding: 5px;
-}
+    #search-bar select {
+        margin-right: 10px;
+        padding: 5px;
+    }
 
-#search-bar input[type="text"] {
-    padding: 5px;
-    flex: 1;
-}
+    #search-bar input[type="text"] {
+        padding: 5px;
+        flex: 1;
+    }
 
-#search-results {
-    margin-top: 10px;
-}
+    #search-results {
+        margin-top: 10px;
+    }
 
-#search-results table {
-    width: 198%;
-    border-collapse: collapse;
-}
+    #search-results table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-#search-results table th, #search-results table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
+    #search-results table th,
+    #search-results table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
 
-#search-results table th {
-    background-color: #f5f5f5;
-}
+    #search-results table th {
+        background-color: #f5f5f5;
+    }
 
-#search-results a {
-    text-decoration: none;
-    color: black;
-    display: block;
-}
-
-
+    #search-results a {
+        text-decoration: none;
+        color: black;
+        display: block;
+    }
 </style>
 
 <?php
-include("..\includes\db.php");
+include("../includes/db.php");
+include(".\classes.php");
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];
     $search = $_POST["query"];
-    if ($usertype == 'patient') {
-        $sql = "SELECT user_acc.uid, user_acc.email, patient.firstname, patient.lastname 
-                FROM patient 
-                JOIN user_acc ON user_acc.uid = patient.uid 
-                WHERE email LIKE '%$search%'";
-    } 
-    
-    $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        echo '<div id="search-result">';
+    $viewpatients = Patient::patientSearch($search);
+    if (!empty($viewpatients)) {
+        echo '<div id="search-results">';
         echo '<table>';
         echo '<tr>';
         echo '<th>ID</th>';
@@ -66,13 +59,12 @@ if (isset($_POST["query"])) {
         echo '<th>First Name</th>';
         echo '<th>Last Name</th>';
         echo '</tr>';
-        while ($row = $result->fetch_array()) {
+        foreach ($viewpatients as $pat) {
             echo '<tr>';
-            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["uid"] . '</a>'.'</td>';
-            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["email"] . '</a>'.'</td>';
-            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["firstname"] . '</a>'.'</td>';
-            echo '<td>'.'<a href="patientinfo.php?uid=' . $row["uid"] . '">' . $row["lastname"] . '</a>'.'</td>';
-
+            echo '<td><a href="patientinfo.php?uid=' . $pat->uid . '">' . $pat->pid . '</a></td>';
+            echo '<td><a href="patientinfo.php?uid=' . $pat->uid . '">' . $pat->email . '</a></td>';
+            echo '<td><a href="patientinfo.php?uid=' . $pat->uid . '">' . $pat->firstname . '</a></td>';
+            echo '<td><a href="patientinfo.php?uid=' . $pat->uid . '">' . $pat->lastname . '</a></td>';
             echo '</tr>';
         }
         echo '</table>';

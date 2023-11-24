@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../public/css/docprofilestyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/Docprofileview_style.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@600&family=Poppins:wght@300;600&family=Righteous&family=Rubik:ital@1&display=swap');
+</style>
     <title>doctor details</title>
 </head>
 <body>
@@ -17,7 +20,8 @@
         $sql = "SELECT
         dr.firstname,
         dr.lastname,
-        dr.number
+        dr.number,
+        dr.specialization
         from dr
         WHERE dr.did ='$Did'";
     }
@@ -27,25 +31,18 @@ $doctorInfoResult = mysqli_query($conn, $sql);
            {
             $firstname = $doctorRow['firstname']; 
             $lastname = $doctorRow['lastname']; 
-            // $specialization= $doctorRow['specialization']; 
+            $specialization= $doctorRow['specialization']; 
               $Number= $doctorRow['number']; 
             //  $education= $doctorRow['educ']; 
            }
-           echo'
-         
+           echo
+           '  
+              
            <div class="box">
-   <div class="imgbox"> 
-                     <img src="../public/images/default.jpg" alt="image" class="drimg"> 
-                       <h1 class="doctitle"> DR '  .$firstname .$lastname. '</h1>
-            <h1 class="doctitle">specialization</h1>
-                   <div class="info">
-           <p>Education: '. $firstname .'</p>
-          <h1>Number </h1> 
-              </div>
- 
-         
-
-          </div> 
+          <img src="../public/images/default.jpg" alt="image" class="drimg">
+           <h1 class="doctitle"> DR '  .$firstname .$lastname. '</h1>
+           <p class="info ">this is the doctor number : '
+           .$Number.'  and eductaion : </p>
           </div> 
          ' 
            

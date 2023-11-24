@@ -58,9 +58,9 @@ include_once'..\includes\navigation.php';
                   <label class="form-label" for="confpass">Confirm password</label>
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="radio" name="type" id="userType" />
-                  <label class="form-label" for="userType">Admin</label><br>
-                  <input type="radio" id="userType" />
+                  <input type="radio" name="type" id="userType" value="doctor"/>
+                  <class="form-label" for="userType">Doctor</label><br>
+                  <input type="radio" name="type" id="userType" value="patient" />
                   <label class="form-label" for="userType">Patient</label>
                 </div>
                 <button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
@@ -142,13 +142,12 @@ include_once'..\includes\navigation.php';
     </script>
     <?php 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $firstname = htmlspecialchars($_POST["firstname"]);
+  $lastname = htmlspecialchars($_POST["lastname"]);
   $email = htmlspecialchars($_POST["email"]);
-    $firstname = htmlspecialchars($_POST["firstname"]);
-    $lastname = htmlspecialchars($_POST["lastname"]);
 
     $pass = htmlspecialchars($_POST["pass"]);
     $type = htmlspecialchars($_POST["type"]);
-    $name = htmlspecialchars($_POST["name"]);
 
     $sql_user_acc = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$pass', '$type')";
     $result_user_acc = mysqli_query($conn, $sql_user_acc);
