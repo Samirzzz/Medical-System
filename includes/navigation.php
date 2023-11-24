@@ -45,7 +45,7 @@
                 </li>
                 <li>
                     <div class="dropdown">
-                    <a  href="#">
+                    <a href="#">
                         <span class="icon"><i class="ri-user-line"></i></span>
                         <div class="sidebar--item">Users</div>
                     </a>
@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="logout.php">
                         <span class="icon"><i class="ri-logout-box-r-line"></i></span>
                         <div class="sidebar--item">Logout</div>
                     </a>
