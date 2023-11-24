@@ -47,58 +47,38 @@
         }
     </script>
 </head>
-<header>
-<?php    session_start();
-  include_once "../includes/db.php";
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
+{
+	include_once "../views/classes.php";
+    $email=$_POST["email"];
+	$pass=$_POST["password"];
+	$UserObject=user::login($email,$pass);
+    if ($UserObject)
+	{	
+		session_start();
+        $_SESSION["type"] = $UserObject->type;
+        $_SESSION["email"] = $UserObject->email;
+        $_SESSION["ID"] = $UserObject->id;
+        if ($UserObject instanceof Patient) {
+            $_SESSION["Pid"] = $user->id;
+            $_SESSION["firstname"] = $user->firstname;
+            header("Location:../views/pindex.php");
+            exit();
+        } elseif ($UserObject instanceof Dr) {
+            $_SESSION["Did"] = $user->id;
+            $_SESSION["firstname"] = $user->firstname;
+            header("Location: dindex.php"); 
+            exit();
+        }
+    } else {
+        $loginError = "Invalid login credentials.";
+    }		
+	}
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $email = $_POST["email"];
-   $pass = $_POST["password"];
-   $sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
-   $result = mysqli_query($conn, $sql);
 
-   if ($row = mysqli_fetch_array($result)) {
-       $_SESSION["type"] = $row['type'];
-       $_SESSION["email"] = $row['email'];
-       $_SESSION["ID"] = $row['uid'];
-       
-       if ($row['type'] === 'patient') {
-           $patientInfoSql = "SELECT * FROM patient WHERE uid = " . $row['uid']; 
-           $patientInfoResult = mysqli_query($conn, $patientInfoSql);
-           if ($patientRow = mysqli_fetch_array($patientInfoResult)) {
-               $_SESSION["Pid"] = $row[0];
-               $_SESSION["firstname"] = $patientRow['firstname']; 
-               $_SESSION["lastname"] = $patientRow['lastname']; 
-               $_SESSION["age"] = $patientRow['age']; 
-               $_SESSION["gender"] = $patientRow['gender']; 
-               $_SESSION["address"] = $patientRow['address']; 
-               $_SESSION["number"] = $patientRow['number']; 
-               echo "Patient in";
-               header("Location: pindex.php");
 
-           }
-       } elseif ($row['type'] === 'doctor') {
-           $doctorInfoSql = "SELECT * FROM dr WHERE uid = " . $row['uid'];
-           $doctorInfoResult = mysqli_query($conn, $doctorInfoSql);
-           if ($doctorRow = mysqli_fetch_array($doctorInfoResult)) {
-               $_SESSION["Did"] = $row[0];
-               $_SESSION["firstname"] = $doctorRow['firstname']; 
-               $_SESSION["lastname"] = $doctorRow['lastname']; 
-               $_SESSION["specialization"] = $doctorRow['specialization']; 
-               $_SESSION["number"] = $doctorRow['number']; 
-               $_SESSION["education"] = $doctorRow['educ']; 
-               echo "Doctor in";
-           }
-
-       }
-
-   } else {
-       echo "<script>document.getElementById('login-error').innerHTML = 'Invalid email or password.';</script>";
-    }
-}  
-   ?>
-
-</header>
+?>
 <body>
     <div id="cont">
             <div id="frm">
@@ -116,7 +96,7 @@
                         <input class="login-field" type="password" name="password" placeholder="Password" id="password" required>
                         <div id="pass-err"> </div>
                         <br>
-                        <div id="login-error" style="color: red;"></div>
+                        <div id="login-error" style="color: red;"><?php if (isset($loginError)) echo $loginError; ?></div>
                         <input type="submit" name="submit" id="sb" class="login-field">
                     </div>
                     <div id="sgu">

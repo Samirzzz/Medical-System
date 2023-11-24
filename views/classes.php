@@ -22,6 +22,49 @@ if($row=mysqli_fetch_array($result)){
 
 
 }
+static function login($email, $pass) {
+	$sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
+	$result = mysqli_query($GLOBALS['conn'], $sql);
+
+	if ($row = mysqli_fetch_array($result)) {
+		$user = new User($row['uid']);
+		$user->type = $row['type'];
+		$user->email = $row['email'];
+
+		if ($row['type'] == 'patient') {
+			$patientInfoSql = "SELECT * FROM patient WHERE uid = " . $row['uid'];
+			$patientInfoResult = mysqli_query($GLOBALS['conn'], $patientInfoSql);
+
+			if ($patientRow = mysqli_fetch_array($patientInfoResult)) {
+				$patient = new Patient($row['uid']);
+				$patient->pid = $patientRow['Pid'];
+				$patient->firstname = $patientRow['firstname'];
+				$patient->lastname = $patientRow['lastname'];
+				$patient->number = $patientRow['number'];
+			}
+			
+			return $patient; 
+		} elseif ($row['type'] == 'doctor') {
+			$doctorInfoSql = "SELECT * FROM dr WHERE uid = " . $row['uid'];
+			$doctorInfoResult = mysqli_query($GLOBALS['conn'], $doctorInfoSql);
+
+			if ($doctorRow = mysqli_fetch_array($doctorInfoResult)) {
+				$doctor = new Dr($row['uid']);
+				$doctor->did = $doctorRow['did'];
+				$doctor->firstname = $doctorRow['firstname'];
+				$doctor->lastname = $doctorRow['lastname'];
+				$doctor->number = $doctorRow['number'];
+				$doctor->educ = $doctorRow['educ'];
+				$doctor->specialization = $doctorRow['specialization'];
+			}
+
+			return $doctor; 
+		}
+	}
+
+	return NULL;
+}
+
 }
 class Clinic{
 	public $cid;
@@ -123,7 +166,20 @@ static function drsearch($value)  {
 
 	}
 	
+	public static function getAlldoctors()
+	{
+		$sql = "SELECT * FROM dr";
+		$doctors = mysqli_query($GLOBALS['conn'], $sql);
 	
+		$result = array();
+	
+		while ($row = mysqli_fetch_assoc($doctors)) {
+			$myObj = new Dr($row[0]);
+			$result[] = $myObj;
+		}
+	
+		return $result;
+	}
 
 
 
@@ -180,6 +236,22 @@ class Patient extends user{
 		return $patient;
 
 	}
+
+	public static function getAllPatients()
+{
+    $sql = "SELECT * FROM patient";
+    $patients = mysqli_query($GLOBALS['conn'], $sql);
+
+    $result = array();
+
+    while ($row = mysqli_fetch_assoc($patients)) {
+        $myObj = new Patient($row[0]);
+        $result[] = $myObj;
+    }
+
+    return $result;
+}
+
 	
 	
 
