@@ -1,6 +1,6 @@
 <?php
 // include_once("../includes/db.php");
-include_once('../includes/navigation.php');
+include_once('../includes/clinicNav.php');
 include_once ("./classes.php");
 $appointment = new Appointments($conn);
 ?>
@@ -24,9 +24,7 @@ $appointment = new Appointments($conn);
         <?php
 $appointment->viewAppointments();
         ?>
-            <?php
-  include "../includes/appnavbar.php";
-  ?>
+
     </table>
 
 

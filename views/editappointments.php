@@ -1,5 +1,5 @@
 <?php
-include_once("../includes/navigation.php");
+include_once("../includes/clinicNav.php");
 include_once ("./classes.php");
 $appointment1 = new Appointments($conn);
 $errors = array();
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
     <input type="submit" id="submit" name="submit"  >
    </form>
-   <?php include"../includes/appnavbar.php";?>
+   
    <script>
     function validateForm() {
         var dateInput = document.getElementById("d");

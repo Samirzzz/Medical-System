@@ -1,7 +1,7 @@
 <?php
 $next_pid = isset($_GET['pid']) ? htmlspecialchars($_GET['pid']) : '';
 $next_did = isset($_GET['did']) ? htmlspecialchars($_GET['did']) : '';
-include_once ("../includes/navigation.php");
+include_once ("../includes/clinicNav.php");
 include_once ("./classes.php");
 
 
@@ -74,7 +74,7 @@ $errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price
     <br>
     <input type="submit" id="submit" name="submit" value="submit">
    </form>
-   <?php include"../includes/appnavbar.php";?>
+ 
    <script>
     function validateForm() {
         var dateInput = document.getElementById("d");
