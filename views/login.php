@@ -61,13 +61,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
         $_SESSION["email"] = $UserObject->email;
         $_SESSION["ID"] = $UserObject->id;
         if ($UserObject instanceof Patient) {
-            $_SESSION["Pid"] = $user->id;
-            $_SESSION["firstname"] = $user->firstname;
+            $_SESSION["Pid"] = $UserObject->id;
+            $_SESSION["firstname"] = $UserObject->firstname;
+            $_SESSION["lastname"] = $UserObject->lastname;
+            $_SESSION["age"] = $UserObject->age;
+            $_SESSION["address"] = $UserObject->address;
+            $_SESSION["gender"] = $UserObject->gender;
+            $_SESSION["number"] = $UserObject->number;
+
+
             header("Location:../views/pindex.php");
             exit();
         } elseif ($UserObject instanceof Dr) {
-            $_SESSION["Did"] = $user->id;
-            $_SESSION["firstname"] = $user->firstname;
+            $_SESSION["Did"] = $UserObject->id;
+            $_SESSION["firstname"] = $UserObject->firstname;
+            $_SESSION["lastname"] = $UserObject->lastname;
+            $_SESSION["specialization"] = $UserObject->specialization;
+            $_SESSION["number"] = $UserObject->number;
+            $_SESSION["educ"] = $UserObject->educ;
+            $_SESSION["Cid"] = $UserObject->Cid;
+
             header("Location: dindex.php"); 
             exit();
         }

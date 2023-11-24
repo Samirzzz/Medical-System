@@ -12,7 +12,6 @@ if (!empty($doctors)) {
         echo '
         <div id="profilesection">
             <div class="docprofbox">
-                <img src="..\public\images\default.jpg" alt="image" class="drimg">
                 <div class="pannelhead">
                     <a class="username" href="Docprofileview.php?Did=' . $doctor->did . '">' ."Dr. " . $doctor->firstname . ' ' . $doctor->lastname . '</a>
                     <h3 class="page-header small" style="margin-left:40px;font-weight: bold;">' . $doctor->specialization . '</h3>  
