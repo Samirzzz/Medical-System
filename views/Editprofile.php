@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <?php
-    include_once 'pnavigation.php';
-    include_once "includes/db.php";
+ include_once "../includes/pnavigation.php";
+ include_once "../includes/db.php";
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $Fname = htmlspecialchars($_POST['firstname']);
@@ -160,7 +160,7 @@ body {
 </body>
 <footer>
     <?php
-    include_once "./includes/footer.php";
+    include_once "../includes/footer.php";
     ?>
 </footer>
 
