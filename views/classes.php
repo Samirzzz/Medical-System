@@ -166,20 +166,30 @@ static function drsearch($value)  {
 
 	}
 	
-	public static function getAlldoctors()
-	{
-		$sql = "SELECT * FROM dr";
-		$doctors = mysqli_query($GLOBALS['conn'], $sql);
-	
-		$result = array();
-	
-		while ($row = mysqli_fetch_assoc($doctors)) {
-			$myObj = new Dr($row[0]);
-			$result[] = $myObj;
-		}
-	
-		return $result;
-	}
+
+ static function getAlldoctors()
+{
+    $sql = "SELECT * FROM dr";
+    $doctors = mysqli_query($GLOBALS['conn'], $sql);
+
+    $result = array();
+
+    while ($row = mysqli_fetch_assoc($doctors))
+	 {
+        $myObj = new Dr($row['uid']);
+        $myObj->did = $row['Did'];
+        $myObj->firstname = $row['firstname'];
+        $myObj->lastname = $row['lastname'];
+        $myObj->number = $row['number'];
+        $myObj->educ = $row['educ'];
+        $myObj->specialization = $row['specialization'];
+
+        $result[] = $myObj;
+    }
+
+    return $result;
+}
+
 
 
 
