@@ -3,6 +3,7 @@
 class Appointments
 {
     private $conn;
+    public $date, $time, $status, $price, $doctorId, $clinicId, $patientId;
 
     public function __construct($conn)
     {
@@ -55,6 +56,14 @@ class Appointments
         $res = mysqli_query($this->conn, $sql);
 
         if ($res) {
+            $this->date=$date;
+            $this->time=$time;
+            $this->status=$status;
+            $this->price=$price;
+            $this->doctorId=$doctorId;
+            $this->clinicId=$clinicId;
+            $this->patientId=$patientId;
+            
             return true;
         } else {
             return false;
@@ -65,6 +74,13 @@ class Appointments
         $res = mysqli_query($this->conn, $sql);
 
         if ($res) {
+            $this->date=$a_date;
+            $this->time=$a_time;
+            $this->status=$a_status;
+            $this->price=$a_price;
+            $this->doctorId=$a_did;
+            $this->clinicId=$a_cid;
+            $this->patientId=$a_pid;
             return true;
         } else {
             return false;
@@ -74,6 +90,7 @@ class Appointments
         $sql = "DELETE FROM appointments WHERE Appid = $appid";
         $res = mysqli_query($this->conn, $sql);
         if ($res) {
+            
             return true;
         } else {
             return false;
