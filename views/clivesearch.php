@@ -30,7 +30,7 @@ if (isset($_POST["query"])) {
                          
                            
                            echo '<tr>';
-                           echo '<td><a  id="pop' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cid . '</a></td>';
+                           echo '<td><a  id="pop' .  $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cid . '</a></td>';
                            echo '<td><a  id="pop1' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cname . '</a></td>';
                            echo '<td><a  id="pop2' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cloc . '</a></td>';
                            echo '<td><a  id="pop3' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cnumber . '</a></td>';
@@ -209,6 +209,26 @@ if (isset($_POST["query"])) {
 <script>
     $(document).ready(function () {
         <?php
+        
+        foreach ($viewclinics as $pat) {
+            echo '$("#pop' . $pat->cid . ', #pop1' . $pat->cid . ', #pop2' . $pat->cid . ', #pop3' . $pat->cid . '").click(function () {';
+            echo '$("#plink' . $pat->cid . '").show();';
+            echo '});';
+
+            echo '$("#close' . $pat->cid . '").click(function (e) {';
+            echo 'e.preventDefault();';
+            echo '$("#plink' . $pat->cid . '").hide();';
+            echo '});';
+        }
+       
+        ?>
+    });
+    
+</script>
+<script>
+    $(document).ready(function () {
+        <?php
+        
         foreach ($viewpatients as $pat) {
             echo '$("#pop' . $pat->uid . ', #pop1' . $pat->uid . ', #pop2' . $pat->uid . ', #pop3' . $pat->uid . '").click(function () {';
             echo '$("#plink' . $pat->uid . '").show();';
@@ -219,9 +239,10 @@ if (isset($_POST["query"])) {
             echo '$("#plink' . $pat->uid . '").hide();';
             echo '});';
         }
+       
         ?>
     });
+    
 </script>
-
 
 </html>
