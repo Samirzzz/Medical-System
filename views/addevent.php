@@ -1,6 +1,6 @@
 <?php
 include_once('../includes/navigation.php');
-include_once ('Appointments.php');
+include_once ('classes.php');
 $errors = array();
 $appointment = new Appointments($conn);
 
