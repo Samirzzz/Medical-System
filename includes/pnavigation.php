@@ -22,7 +22,7 @@
 
 .profile-box img {
     width: 80px;
-    height: 40px;
+    height: 80px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -38,6 +38,9 @@
 li {
     padding-top: 10px;
 }
+.uppercase-text {
+        text-transform: uppercase;
+    }
 
 </style>
 
@@ -68,7 +71,7 @@ li {
         <div class="sidebar">
             <div class="profile-box">
                 <img src="../public/images/dr.jpg" alt="Profile Image">
-                <span><?php echo $_SESSION["firstname"]; ?></span>
+                <span class="uppercase-text"><?php echo strtoupper($_SESSION["firstname"]); ?></span>
             </div>
 
 

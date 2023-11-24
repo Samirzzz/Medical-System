@@ -14,114 +14,134 @@
 include_once '../includes/pnavigation.php';
 ?>
 <style>
-.target-vs-sales--container {
-    background-image: url('../public/mask.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
-}
+    .target-vs-sales--container {
+        background-image: url('../public/mask.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 20px;
+    }
 
-.sales--value {
-    display: block;
-    text-align: center;
-    padding: 20px;
-}
+    .sales--value {
+        display: block;
+        text-align: center;
+        padding: 20px;
+    }
 
-.sales--value h3,
-.sales--value p {
-    margin: 0;
-}
+    .sales--value h3,
+    .sales--value p {
+        margin: 0;
+        color: #008000; 
+    }
 
-.sales--value h3 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
+    .sales--value h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #008000;
+    }
 
-.sales--value p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-}
+    .sales--value p {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        text-align: justify;
+    }
 
-.sales--value form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .sales--value form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.sales--value input {
-    width: 100%;
-    margin-bottom: 10px;
-}
+    .sales--value input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-.target--vs--sales {
-    text-align: center;
-    padding: 20px;
-}
+    .target--vs--sales {
+        text-align: center;
+        padding: 20px;
+    }
 
-.target--vs--sales .section--title {
-    margin-bottom: 20px;
-}
+    .target--vs--sales .section--title {
+        margin-bottom: 20px;
+    }
 
-.target--vs--sales h3 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
+    .target--vs--sales h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #008000; 
+    }
 
-.sales--value {
-    text-align: left;
-    padding: 20px;
-}
+    .sales--value {
+        text-align: left;
+        padding: 20px;
+    }
 
-.sales--value p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-    text-align: justify;
-}
+    .sales--value p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        text-align: justify;
+        color: #008000; 
+    }
 
-.sales--value form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+    .sales--value form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.sales--value input {
-    width: 100%;
-    margin-bottom: 10px;
-}
-.sales--value form {
-    display: flex;
-    flex-direction: row; 
-    align-items: flex-start;
-    gap: 10px;
-}
+    .sales--value input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-.sales--value input {
-    width: 50%; 
-    padding: 10px;
-    box-sizing: border-box; 
-    
-}
+    .sales--value form {
+        display: flex;
+        flex-direction: row; 
+        align-items: flex-start;
+        gap: 10px;
+    }
 
-.sales--value input[type="submit"] {
-    width: 50%; 
-    padding: 10px;
-    background-color: #007bff; 
-    color: #fff; 
-    border: none;
-    cursor: pointer;
-}
-body {
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            
-        }
+    .sales--value input {
+        width: 50%; 
+        padding: 10px;
+        box-sizing: border-box; 
+    }
 
+    .section--title h3 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #008000; 
+    }
+
+    .sales--value input[type="submit"] {
+        width: 50%; 
+        padding: 10px;
+        background-color: #008000; 
+        color: #fff; 
+        border: none;
+        cursor: pointer;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif; 
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main--container {
+        font-family: 'Times New Roman', serif; 
+        color: #333;
+    }
+    .uppercase-text {
+        text-transform: uppercase;
+    }
 </style>
+
 
 <body class="body">
 
@@ -136,7 +156,7 @@ body {
             <div class="section--title">
                 <!-- <h3 class="title">Schedule</h3> -->
                 <div class="sales--value">
-                    <h3>Welcome! <br> <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></h3>
+                    <h3 class="uppercase-text">Welcome! <br> <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></h3>
 
                     <p>Lack knowledge about doctors? No issue, let's go straight to the
 
@@ -145,7 +165,7 @@ body {
                         Track your past and future appointments history.<br>Also find out the expected arrival time of
                         your doctor or medical consultant.<br><br>
                     </p>
-
+            
                     <h3>Channel a Doctor Here</h3>
                     <form action="schedule.php" method="post" style="display: flex">
 
