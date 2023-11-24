@@ -61,7 +61,7 @@ if (isset($_POST["query"])) {
                            
                            echo '<button type="submit" name="deletee" class="btn btn-sm btn-outline-primary w-100"><a href=".\deleteclinic.php?cid=' . $pat->cid . '">Delete</a></button>';
                            echo  '</form>';
-                           echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close">Close</button>';
+                           echo '<button class="btn btn-sm btn-primary w-100 ml-2" id="close'.$pat->cid.'">Close</button>';
            
                            echo '</div>';
                            echo '</div>';
@@ -230,6 +230,25 @@ if (isset($_POST["query"])) {
         <?php
         
         foreach ($viewpatients as $pat) {
+            echo '$("#pop' . $pat->uid . ', #pop1' . $pat->uid . ', #pop2' . $pat->uid . ', #pop3' . $pat->uid . '").click(function () {';
+            echo '$("#plink' . $pat->uid . '").show();';
+            echo '});';
+
+            echo '$("#close' . $pat->uid . '").click(function (e) {';
+            echo 'e.preventDefault();';
+            echo '$("#plink' . $pat->uid . '").hide();';
+            echo '});';
+        }
+       
+        ?>
+    });
+    
+</script>
+<script>
+    $(document).ready(function () {
+        <?php
+        
+        foreach ($viewdrs as $pat) {
             echo '$("#pop' . $pat->uid . ', #pop1' . $pat->uid . ', #pop2' . $pat->uid . ', #pop3' . $pat->uid . '").click(function () {';
             echo '$("#plink' . $pat->uid . '").show();';
             echo '});';

@@ -3,9 +3,8 @@ include_once '..\includes\db.php';
 class user{
     public $email;
 	public $pass;
-	public $type;
 	public $id;
-
+    public $usertype;
 function __construct($id)
 {
 if($id!=""){
@@ -15,7 +14,7 @@ if($row=mysqli_fetch_array($result)){
                 $this->email=$row["email"];
 				$this->pass=$row["pass"];
 				$this->id=$row["uid"];
-				$this->type=$row['type'];
+				$this->usertype=new Usertype($row['usertype_id']);
 }
 
 }
@@ -28,7 +27,6 @@ static function login($email, $pass) {
 
 	if ($row = mysqli_fetch_array($result)) {
 		$user = new User($row['uid']);
-		$user->type = $row['type'];
 		$user->email = $row['email'];
 
 		if ($row['type'] == 'patient') {
@@ -126,7 +124,7 @@ class Dr extends user{
 	public $cid;
 	function __construct($id)
 	{
-    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.type, dr.firstname, dr.lastname,dr.specialization,
+    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.firstname, dr.lastname,dr.specialization,
 	dr.educ,dr.number,dr.uid,dr.cid,dr.did 
 	FROM dr 
 	JOIN user_acc ON user_acc.uid = dr.uid where user_acc.uid=".$id;
@@ -202,7 +200,7 @@ class Patient extends user{
 	
 	function __construct($id)
 	{
-    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.type, patient.firstname, patient.lastname,patient.gender,
+    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, patient.firstname, patient.lastname,patient.gender,
 	patient.address,patient.number,patient.age,patient.uid,patient.pid 
 	FROM patient 
 	JOIN user_acc ON user_acc.uid = patient.uid where user_acc.uid=".$id;
@@ -383,7 +381,82 @@ class Appointments
     }
   
 }
+class Usertype{
+public $utid;
+public $name;
+public $pages;
+
+function __construct($id)
+{
+	if ($id !=""){
+		$sql="select * from usertypes where utid=$id";
+		$result=mysqli_query($GLOBALS['conn'],$sql);
+		if ($row = mysqli_fetch_array($result))	{
+			$this->name=$row["name"];
+			$this->utid=$row["utid"];
+			$sql="select pageid from usertype_pages where usertypeid=$this->utid";
+			$result=mysqli_query($GLOBALS['conn'],$sql);
+			$i=0;
+			while($row1=mysqli_fetch_array($result)){
+				$this->pages[$i]=new Pages($row1[0]);//3amlt array of pages we wsltha fil table el talet bel utid
+				$i++;
+			}
+		}
+	}	
+}
+
+static function getallusertypes() {
+	$sql="select * from usertypes";
+	$result = mysqli_query($GLOBALS['conn'],$sql);
+	$i=0;
+$userarray=array();
+while($row4=mysqli_fetch_array($result)) {
+
+	$userarray[$i++]=new Usertype($row4[0]);
+}	
+return $userarray;
+
+}
 
 
+}
+class Pages{
+	public $pgid;
+	public $name;
+	public $linkaddress;
+	function __construct($id){
+		if ($id !=""){	
+			$sql="select * from pages where pgid=$id";
+			$result2=mysqli_query($GLOBALS['conn'],$sql) ;
+			if ($row2 = mysqli_fetch_array($result2)){
+				$this->name=$row2["name"];
+				$this->linkaddress=$row2["linkaddress"];
+				$this->pgid=$row2["pgid"];
+
+			}
+
+
+		}
+
+
+
+
+	}
+
+static function getallpages(){
+	$sql="select * from pages";
+	$PageDataSet = mysqli_query($GLOBALS['conn'],$sql);		
+	$i=0;
+	$Result=array();
+	while ($row = mysqli_fetch_array($PageDataSet))	{
+		$MyObj= new Pages($row["pgid"]);
+		$Result[$i]=$MyObj;
+		$i++;
+	}
+	return $Result;
+
+}
+
+}
 
 ?>
