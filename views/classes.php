@@ -44,6 +44,7 @@ static function login($email, $pass) {
 			}
 			
 			return $patient; 
+			
 		} elseif ($row['type'] == 'doctor') {
 			$doctorInfoSql = "SELECT * FROM dr WHERE uid = " . $row['uid'];
 			$doctorInfoResult = mysqli_query($GLOBALS['conn'], $doctorInfoSql);
