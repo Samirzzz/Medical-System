@@ -8,22 +8,23 @@
 }
 
 :root {
-    --bg-color-first: #474545;
+    --bg-color-first: #381069;
     --bg-color-second: #e9edf1;
     --bg-color-third: #3bc59a;
 
-    --text-color-first: #fff; /* Updated to white */
-    --text-color-second: #fff; /* Updated to white */
-    --text-color-third: #fff; /* Updated to white */
+    --text-color-first: #fff;
+    --text-color-second: #fff;
+    --text-color-third: #fff;
 
     --hover-text-color: #fff;
 
-    --bg-card-1: #474545;
-    --bg-card-2: #474545;
-    --bg-card-3: #474545;
-    --bg-card-4: #474545;
+    --bg-card-1: #381069;
+    --bg-card-2: #381069;
+    --bg-card-3: #381069;
+    --bg-card-4: #381069;
 
     --more-and-less: #555;
+    --color-replace: #7b12e3; /* Updated color */
 }
 
 /* variables dark mode */
