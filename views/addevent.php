@@ -1,5 +1,5 @@
 <?php
-include_once('../includes/clinicNav.php');
+include_once('../includes/navigation.php');
 include_once ('classes.php');
 $errors = array();
 $appointment = new Appointments($conn);

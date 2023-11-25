@@ -1,6 +1,6 @@
 <?php
 // include_once("../includes/db.php");
-include_once('../includes/clinicNav.php');
+include_once('../includes/navigation.php');
 include_once ("./classes.php");
 $appointment = new Appointments($conn);
 ?>

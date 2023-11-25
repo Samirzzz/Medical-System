@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             $_SESSION["number"] = $UserObject->number;
 
 
-            header("Location:../views/pindex.php");
+            header("Location:pindex.php");
             exit();
         } elseif ($UserObject instanceof Dr) {
             $_SESSION["Did"] = $UserObject->id;
