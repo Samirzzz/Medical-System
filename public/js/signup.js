@@ -19,6 +19,7 @@ var clincfields = document.getElementById("Clinc-fields");
     doctorFields.style.display = "none";
   }
 }
+  
 
 // function toggleclincFileds()
 //  {

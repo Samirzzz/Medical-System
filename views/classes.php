@@ -7,7 +7,8 @@ class user{
     public $usertype;
 function __construct($id)
 {
-if($id!=""){
+if($id!="")
+{
     $sql="select * from user_acc where uid=$id";
     $result = mysqli_query($GLOBALS['conn'],$sql);
 if($row=mysqli_fetch_array($result)){
@@ -21,6 +22,8 @@ if($row=mysqli_fetch_array($result)){
 
 
 }
+static function login($email, $pass)
+ {
 static function login($email, $pass)
  {
 	$sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
@@ -73,6 +76,20 @@ static function login($email, $pass)
 			}
 			
 			return $admin; 
+		elseif ($user->usertype->utid=="3") {
+			$clinicInfoSql = "SELECT * FROM clinic WHERE uid = " . $row['uid'];
+			$clinicInfoResult = mysqli_query($GLOBALS['conn'], $clinicInfoSql);
+
+			if ($clinicRow = mysqli_fetch_array($clinicInfoResult)) {
+				$clinic = new Clinic($row['uid']);
+				$clinic->cid = $clinicRow['cid'];
+				$clinic->cname = $clinicRow['cname'];
+				$clinic->cloc = $clinicRow['cloc'];
+				$clinic->workhrs = $clinicRow['workhrs'];
+				$clinic->cnumber = $clinicRow['cnumber'];
+			}
+
+			return $clinic; 
 		}
 	}
 
@@ -107,6 +124,7 @@ class Admin extends user{
 
 
 class Clinic{
+	public $uid;
 	public $cid;
 	public $cname;
 	public $cloc;
@@ -146,8 +164,20 @@ static function clinicsearch($value)  {
 		return $clinic;
 
 	}
+
 	
-	
+	static function signupClinic($cname,$cloc,$cnumber,$uid) 
+{
+
+	$sql = "INSERT INTO clinic (cname,cloc,cnumber,uid) VALUES ('$cname','$cloc','$cnumber','$uid')";
+	if(mysqli_query($GLOBALS['conn'],$sql))
+			return true;
+		else
+			return false;
+
+
+}
+
 
 
 }
@@ -229,10 +259,18 @@ static function drsearch($value)  {
 
     return $result;
 }
+static function signupDoctor($firstname, $lastname, $number,$educ,$specialization,$uid) 
+{
 
 
+	$sql = "INSERT INTO dr (firstname, lastname, number,educ,specialization,uid,cid) VALUES ('$firstname', '$lastname', '$number','$educ','$specialization','$uid','0')";
+	if(mysqli_query($GLOBALS['conn'],$sql))
+			return true;
+		else
+			return false;
 
 
+}
 
 
 }
@@ -264,13 +302,12 @@ class Patient extends user{
 	             	$this->firstname=$row["firstname"];
 	             	$this->lastname=$row["lastname"];
 	 				$this->uid=$row["uid"];
-
-
 	
 	}
 
-	
+
 }
+
 	static function patientsearch($value)  {
 		$i=0;
 		$patient=array();
@@ -289,28 +326,44 @@ class Patient extends user{
 
 	public static function getAllPatients()
 {
-    $sql = "SELECT * FROM patient";
+	$sql = "SELECT * FROM patient";
     $patients = mysqli_query($GLOBALS['conn'], $sql);
 
     $result = array();
 
-    while ($row = mysqli_fetch_assoc($patients)) {
-        $myObj = new Patient($row[0]);
+    while ($row = mysqli_fetch_assoc($patients))
+	 {
+        $myObj = new Patient($row['uid']);
+        $myObj->did = $row['Pid'];
+        $myObj->firstname = $row['firstname'];
+        $myObj->lastname = $row['lastname'];
+        $myObj->number = $row['number'];
+        $myObj->age = $row['age'];
+        $myObj->address = $row['address'];
+
         $result[] = $myObj;
     }
 
     return $result;
 }
 
-	
-	
-
-
-
-
-
-	
+static function signupPatient($firstname, $lastname, $number,$age,$gender,$address,$uid) {
+	$sql = "INSERT INTO patient (firstname, lastname, number, age, gender, address,uid) VALUES ('$firstname', '$lastname', '$number', '$age', '$gender', '$address','$uid')";
+if(mysqli_query($GLOBALS['conn'],$sql))
+		return true;
+	else
+		return false;
 }
+
+
+
+
+}
+	
+
+	
+	
+
 class Appointments
 {
     private $conn;
