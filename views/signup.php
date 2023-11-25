@@ -21,7 +21,7 @@
     }
 
     .card {
-        max-width: 900px;
+        max-width: 400px;
         margin: 0 auto;
         margin-top: 5vh;
         background-color: rgba(255, 255, 255, 0.9);
@@ -50,13 +50,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $cloc=$_POST['cloc'];
     $cnumber=$_POST['cnumber'];
 
+    if (isset($_FILES["Uimage"])) {
+        $imageFileType = strtolower(pathinfo($_FILES["Uimage"]["name"], PATHINFO_EXTENSION));
+        $newFileName = $email . "." . $imageFileType; 
+        $imageDB= $newFileName;
+        $targetDir = "../public/images/";
+        $targetFile =  $targetDir . $newFileName;
+        $uploadOk = 1;
+
+        if (file_exists($targetFile)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["Uimage"]["tmp_name"], $targetFile)) {
+                echo "The file ". htmlspecialchars(basename($_FILES["Uimage"]["name"])) . " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+    }
+
 
     if ($userType == 'patient') 
     {
        $uid= User::signupUser($email, $password, 4);
     if ($uid !== false) {
 
-       if (Patient::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid)) {
+       if (Patient::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid,$imageDB)) {
         header("Location:../views/login.php");
     } 
 }
@@ -68,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $specialization = $_POST['specialization'];
         $uid= User::signupUser($email, $password, 2); 
     if ($uid !== false) {
-        if (Dr::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid)) {
+        if (Dr::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid,$imageDB)) {
             header("Location:../views/login.php");
         } 
     }
@@ -98,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Registration</h2>
-                <form action="" method="post" onsubmit="return validateForm()">
+                <form action="" enctype="multipart/form-data" method="post" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="Fname">First Name:</label>
                         <input type="text" class="form-control" id="Fname" placeholder="First Name" name="Fname"
@@ -153,6 +177,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password"
                             name="cpassword" required>
                         <div id="cpassword-error" class="error-message text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Image">Upload Image:</label>
+                        <input type="file" class="form-control" id="Uimage" placeholder="Upload Image"
+                            name="Uimage" required>
+                        <div id="Uimage-error" class="error-message text-danger"></div>
                     </div>
 
                     <div class="form-group">

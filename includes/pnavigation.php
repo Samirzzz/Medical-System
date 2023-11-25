@@ -70,7 +70,7 @@ li {
     <section class="main">
         <div class="sidebar">
             <div class="profile-box">
-                <img src="../public/images/dr.jpg" alt="Profile Image">
+                <img src="../public/images/<?php echo $_SESSION['image'];?>" alt="Profile Image">
                 <span class="uppercase-text"><?php echo strtoupper($_SESSION["firstname"]); ?></span>
             </div>
 

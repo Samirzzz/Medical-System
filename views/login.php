@@ -68,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             $_SESSION["address"] = $UserObject->address;
             $_SESSION["gender"] = $UserObject->gender;
             $_SESSION["number"] = $UserObject->number;
+            $_SESSION["image"] = $UserObject->image;
+
 
 
             header("Location:../views/pindex.php");

@@ -25,10 +25,10 @@ if($row=mysqli_fetch_array($result)){
 
 static function login($email, $pass)
  {
-	$sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
+	$sql = "SELECT * FROM user_acc WHERE email='$email'";
 	$result = mysqli_query($GLOBALS['conn'], $sql);
-
-	if ($row = mysqli_fetch_array($result)) {
+	if ($row = mysqli_fetch_array($result)) {		
+		// if (password_verify($pass, $row['pass'])){
 		$user = new User($row['uid']);
 		$user->email = $row['email'];
 		$user->usertype = new Usertype($row['usertype_id']);
@@ -42,6 +42,8 @@ static function login($email, $pass)
 				$patient->firstname = $patientRow['firstname'];
 				$patient->lastname = $patientRow['lastname'];
 				$patient->number = $patientRow['number'];
+				$patient->image = $patientRow['image'];
+
 				
 			}
 			
@@ -59,6 +61,8 @@ static function login($email, $pass)
 				$doctor->number = $doctorRow['number'];
 				$doctor->educ = $doctorRow['educ'];
 				$doctor->specialization = $doctorRow['specialization'];
+				$doctor->image = $doctorRow['image'];
+
 			}
 
 			return $doctor; 
@@ -92,9 +96,10 @@ static function login($email, $pass)
 
 			return $clinic; 
 		}
+	// }
 	}
-
 	return NULL;
+
 }
 static function signupUser($email, $pass, $usertype) 
 {
@@ -204,6 +209,8 @@ class Dr extends user{
 	public $number;
 	public $cid;
 	public $uid;
+	public $image;
+
 	
 	public $did;
 	function __construct($id)
@@ -224,6 +231,8 @@ class Dr extends user{
 	             	$this->number=$row["number"];
 	             	$this->cid=$row["cid"];
 	 				$this->uid=$row["uid"];
+	 				$this->image=$row["image"];
+
 
 
 	
@@ -271,11 +280,11 @@ static function drsearch($value)  {
 
     return $result;
 }
-static function signupDoctor($firstname, $lastname, $number,$educ,$specialization,$uid) 
+static function signupDoctor($firstname, $lastname, $number,$educ,$specialization,$uid,$image) 
 {
 
 
-	$sql = "INSERT INTO dr (firstname, lastname, number,educ,specialization,uid,cid) VALUES ('$firstname', '$lastname', '$number','$educ','$specialization','$uid','0')";
+	$sql = "INSERT INTO dr (firstname, lastname, number,educ,specialization,uid,cid,image) VALUES ('$firstname', '$lastname', '$number','$educ','$specialization','$uid','0','$image')";
 	if(mysqli_query($GLOBALS['conn'],$sql))
 			return true;
 		else
@@ -298,6 +307,8 @@ class Patient extends user{
 	public $number;
 	public $uid;
 	public $pid;
+	public $image;
+
 
 	
 	function __construct($id)
@@ -314,6 +325,7 @@ class Patient extends user{
 	             	$this->firstname=$row["firstname"];
 	             	$this->lastname=$row["lastname"];
 	 				$this->uid=$row["uid"];
+					$this->image=$row['image'];
 	
 	}
 
@@ -359,8 +371,8 @@ class Patient extends user{
     return $result;
 }
 
-static function signupPatient($firstname, $lastname, $number,$age,$gender,$address,$uid) {
-	$sql = "INSERT INTO patient (firstname, lastname, number, age, gender, address,uid) VALUES ('$firstname', '$lastname', '$number', '$age', '$gender', '$address','$uid')";
+static function signupPatient($firstname, $lastname, $number,$age,$gender,$address,$uid,$image) {
+	$sql = "INSERT INTO patient (firstname, lastname, number, age, gender, address,uid,image) VALUES ('$firstname', '$lastname', '$number', '$age', '$gender', '$address','$uid','$image')";
 if(mysqli_query($GLOBALS['conn'],$sql))
 		return true;
 	else

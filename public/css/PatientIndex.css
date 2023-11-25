@@ -1,0 +1,126 @@
+.target-vs-sales--container {
+    background-image: url('../public/mask.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+.sales--value {
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+.sales--value h3,
+.sales--value p {
+    margin: 0;
+    color: #008000; 
+}
+
+.sales--value h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #008000;
+}
+
+.sales--value p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.sales--value form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sales--value input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.target--vs--sales {
+    text-align: center;
+    padding: 20px;
+}
+
+.target--vs--sales .section--title {
+    margin-bottom: 20px;
+}
+
+.target--vs--sales h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #008000; 
+}
+
+.sales--value {
+    text-align: left;
+    padding: 20px;
+}
+
+.sales--value p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    text-align: justify;
+    color: #008000; 
+}
+
+.sales--value form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sales--value input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.sales--value form {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.sales--value input {
+    width: 50%; 
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.section--title h3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #008000; 
+}
+
+.sales--value input[type="submit"] {
+    width: 50%; 
+    padding: 10px;
+    background-color: #008000; 
+    color: #fff; 
+    border: none;
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Arial', sans-serif; 
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.main--container {
+    font-family: 'Times New Roman', serif; 
+    color: #333;
+}
+.uppercase-text {
+    text-transform: uppercase;
+}
