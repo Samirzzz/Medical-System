@@ -22,8 +22,7 @@ if($row=mysqli_fetch_array($result)){
 
 
 }
-static function login($email, $pass)
- {
+
 static function login($email, $pass)
  {
 	$sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
@@ -76,6 +75,8 @@ static function login($email, $pass)
 			}
 			
 			return $admin; 
+		}
+
 		elseif ($user->usertype->utid=="3") {
 			$clinicInfoSql = "SELECT * FROM clinic WHERE uid = " . $row['uid'];
 			$clinicInfoResult = mysqli_query($GLOBALS['conn'], $clinicInfoSql);
@@ -94,6 +95,17 @@ static function login($email, $pass)
 	}
 
 	return NULL;
+}
+static function signupUser($email, $pass, $usertype) 
+{
+    // $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO user_acc (email, pass, usertype_id) VALUES ('$email', '$pass', '$usertype')";
+    
+    if(mysqli_query($GLOBALS['conn'], $sql)) {
+        return mysqli_insert_id($GLOBALS['conn']);
+    } else {
+        return false;
+    }
 }
 
 }
