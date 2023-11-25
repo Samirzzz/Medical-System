@@ -21,7 +21,8 @@ if($row=mysqli_fetch_array($result)){
 
 
 }
-static function login($email, $pass) {
+static function login($email, $pass)
+ {
 	$sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
 	$result = mysqli_query($GLOBALS['conn'], $sql);
 
@@ -60,12 +61,51 @@ static function login($email, $pass) {
 
 			return $doctor; 
 		}
+		elseif ($user->usertype->utid=="1") {
+			$doctorInfoSql = "SELECT * FROM admin WHERE uid = " . $row['uid'];
+			$doctorInfoResult = mysqli_query($GLOBALS['conn'], $doctorInfoSql);
+		
+			if ($doctorRow = mysqli_fetch_array($doctorInfoResult)) {
+				$admin = new Admin($row['uid']);
+				$admin->aid = $doctorRow['aid'];
+				$admin->name = $doctorRow['name'];
+				
+			}
+			
+			return $admin; 
+		}
 	}
 
 	return NULL;
 }
 
 }
+
+class Admin extends user{
+	public $aid;
+	public $name;
+	public $uid;
+	function __construct($id)
+	{
+    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, admin.name, admin.uid,admin.aid
+	FROM admin 
+	JOIN user_acc ON user_acc.uid = admin.uid where user_acc.uid=".$id;
+			$result = mysqli_query($GLOBALS['conn'],$sql);
+	        if($row=mysqli_fetch_array($result)){
+				parent::__construct($row["uid"]);
+				$this->aid=$row["aid"];
+
+	             	$this->name=$row["name"];
+	             	
+
+
+	
+	}
+	}
+
+}
+
+
 class Clinic{
 	public $cid;
 	public $cname;
@@ -120,10 +160,10 @@ class Dr extends user{
 	public $specialization;
 	public $educ;
 	public $number;
-	public $uid;
-	public $did;
-
 	public $cid;
+	public $uid;
+	
+	public $did;
 	function __construct($id)
 	{
     $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.firstname, dr.lastname,dr.specialization,
@@ -436,6 +476,10 @@ class Pages{
 	public $pgid;
 	public $name;
 	public $linkaddress;
+	public $icons;
+	public $class;
+
+
 	function __construct($id){
 		if ($id !=""){	
 			$sql="select * from pages where pgid=$id";
@@ -444,6 +488,10 @@ class Pages{
 				$this->name=$row2["name"];
 				$this->linkaddress=$row2["linkaddress"];
 				$this->pgid=$row2["pgid"];
+				$this->icons=$row2["icons"];
+				$this->class=$row2["class"];
+
+
 
 			}
 

@@ -79,9 +79,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             $_SESSION["specialization"] = $UserObject->specialization;
             $_SESSION["number"] = $UserObject->number;
             $_SESSION["educ"] = $UserObject->educ;
-            $_SESSION["Cid"] = $UserObject->Cid;
+            $_SESSION["Cid"] = $UserObject->cid;
 
-            header("Location: dindex.php"); 
+            header("Location: admin.php"); 
+            exit();
+        }
+        elseif ($UserObject instanceof Admin) {
+            $_SESSION["aid"] = $UserObject->id;
+            $_SESSION["name"] = $UserObject->name;
+          
+
+            header("Location: admin.php"); 
             exit();
         }
     } else {
