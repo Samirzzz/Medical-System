@@ -11,7 +11,7 @@
     <title>VeZeeTa</title>
 </head>
 <?php
-include_once '../includes/pnavigation.php';
+include_once '../includes/navigation.php';
 ?>
 <style>
     .target-vs-sales--container {

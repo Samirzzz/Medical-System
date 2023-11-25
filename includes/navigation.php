@@ -6,95 +6,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../public/css/adminn.css">
+    <link rel="stylesheet" href="../public/css/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="../public/css/adminnavv.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
+<style>
+.profile-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.profile-box img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-box span {
+    font-weight: 600;
+}
+
+.sidebar--items {
+    margin-top: 22px;
+}
+
+li {
+    padding-top: 10px;
+}
+.uppercase-text {
+        text-transform: uppercase;
+    }
+
+</style>
 <body >
 
-<section class="header">
+    <?php
+    include_once("classes.php");
+include_once("classes.php");
+if (!empty($_SESSION['ID'])) {
+    $UserObject = new user($_SESSION["ID"]);
+
+?>
+ <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>
             <h2><span>Ta</span>BeeBy.</h2>
         </div>
-        <div class="header--items">
+        <div class="header--items"> 
+        <div class="dark--theme--btn">
+            <i class="ri-notification-2-line"></i>
 
-        <div id="wrap">
-  <!-- <form action="" autocomplete="on">
-  <input id="search" name="search" type="text" placeholder="Patient Name"><input id="search_submit" value="Rechercher" type="submit">
-  </form> -->
-</div>
-            
+            <?php echo date("F j, Y"); ?>
+            </div>
+ 
     </section>
+    
     <section class="main">
         <div class="sidebar">
             <ul class="sidebar--items">
-                <li>
-                    <a href="admin.php" class="active">
-                        <span class="icon"><i class="ri-bar-chart-line"></i></span>
-                        <div class="sidebar--item">Overview</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="viewappointments.php">
-                        <span class="icon"><i class="ri-empathize-line"></i></span>
-                        <div class="sidebar--item">Appointments</div>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                    <a href="#">
-                        <span class="icon"><i class="ri-user-line"></i></span>
-                        <div class="sidebar--item">Users</div>
-                    </a>
-                    <div class="dropdown-options">
-                        
-                         <a href="patients.php">Patients</a>
-                   <a href="users.php">AddUsers</a>
-    
-  </div>
-  </div>
+        <div class="profile-box">
+                <img src="../public/images/dr.jpg" alt="Profile Image">
+                <span >  <?php echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  '. $_SESSION["email"]); ?></span>
+            </div>
+<?php
+    for($i=0;$i<count($UserObject->usertype->pages);$i++){
+        
+        echo '
+       
 
-                </li>
+
+
+
                 <li>
-                    <a href="calendar.php">
-                        <span class="icon"><i class="ri-calendar-line"></i></span>
-                        <div class="sidebar--item">Calender</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="drprofile.php">
-                        <span class="icon"><i class="ri-profile-line"></i></span>
-                        <div class="sidebar--item">Profile</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="clinic.php">
-                        <span class="icon"><i class="ri-settings-3-line"></i></span>
-                        <div class="sidebar--item">Adminprev</div>
-                    </a>
-                </li>
-            </ul>
-            <ul class="sidebar--bottom--items">
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="ri-question-line"></i></span>
-                        <div class="sidebar--item">Help</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="logout.php">
-                        <span class="icon"><i class="ri-logout-box-r-line"></i></span>
-                        <div class="sidebar--item">Logout</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                <a class="'.$UserObject->usertype->pages[$i]->class.'"  href="'.$UserObject->usertype->pages[$i]->linkaddress.'">
+                    <span class="icon">'.$UserObject->usertype->pages[$i]->icons.'</i></span>
+                    <div class="sidebar--item">'.$UserObject->usertype->pages[$i]->name.'</div>
+                </a>
+            </li>
+              
+            ';
+        }
+        
+        
+        
+    }
+    
+    ?>
+    </div>
+
+
 
 
 </body>
-<script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>65343c473a66a377bb977904,652ed8af9f61ca3c0661b0df</script>
+<!-- <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>65343c473a66a377bb977904,652ed8af9f61ca3c0661b0df</script> -->
 
-</html>
+</html> 

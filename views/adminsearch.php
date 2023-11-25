@@ -14,7 +14,7 @@
 <body>
     
 <?php
-include_once'..\includes\adminnavigation.php';
+include_once'..\includes\navigation.php';
 ?>
     
     <div class="container">
