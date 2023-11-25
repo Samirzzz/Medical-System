@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
     if ($UserObject)
 	{	
 		session_start();
-        $_SESSION["type"] = $UserObject->type;
+        $_SESSION["type"] = $UserObject->usertype->name;
         $_SESSION["email"] = $UserObject->email;
         $_SESSION["ID"] = $UserObject->id;
         if ($UserObject instanceof Patient) {

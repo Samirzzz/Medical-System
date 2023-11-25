@@ -28,8 +28,8 @@ static function login($email, $pass) {
 	if ($row = mysqli_fetch_array($result)) {
 		$user = new User($row['uid']);
 		$user->email = $row['email'];
-
-		if ($row['type'] == 'patient') {
+		$user->usertype = new Usertype($row['usertype_id']);
+		if ($user->usertype->utid == "4") {
 			$patientInfoSql = "SELECT * FROM patient WHERE uid = " . $row['uid'];
 			$patientInfoResult = mysqli_query($GLOBALS['conn'], $patientInfoSql);
 
@@ -39,11 +39,12 @@ static function login($email, $pass) {
 				$patient->firstname = $patientRow['firstname'];
 				$patient->lastname = $patientRow['lastname'];
 				$patient->number = $patientRow['number'];
+				
 			}
 			
 			return $patient; 
 			
-		} elseif ($row['type'] == 'doctor') {
+		} elseif ($user->usertype->utid=="2") {
 			$doctorInfoSql = "SELECT * FROM dr WHERE uid = " . $row['uid'];
 			$doctorInfoResult = mysqli_query($GLOBALS['conn'], $doctorInfoSql);
 
