@@ -22,7 +22,7 @@
         }
 
         .card {
-            max-width: 400px;
+            max-width: 900px;
             margin: 0 auto;
             margin-top: 5vh;
             background-color: rgba(255, 255, 255, 0.9);
@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $education = $_POST["education"];
     $sql="INSERT INTO dr (firstname,lastname,specialization,number,educ,uid) VALUES ('$Fname','$Lname','$specialization','$phone','$education','$uid')";
     $resss=mysqli_query($conn,$sql);
+   
     if($resss)
     {
        header("location:login.php");
@@ -85,6 +86,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       echo "Error inserting data into the patient table: " . mysqli_error($conn);
   }
       
+  }
+  elseif($userType=="clinc")
+  {
+    $phone = $_POST["number"];
+    $password = $_POST["password"];
+    $Clincaddresss = $_POST["Clinc-addresss"];
+    $ClincName = $_POST["Clinc-Name"];
+    $sql="INSERT INTO clinc (cname,Clincaddresss,cnumber) VALUES ('$ClincName','$Clincaddresss','$phone')";
+    $resss=mysqli_query($conn,$sql);
+   
   }
   else {
     echo "Error inserting data into the patient table: " . mysqli_error($conn);
@@ -153,9 +164,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="form-group">
                     <label for="userType">User Type:</label>
-                    <select class="form-control" id="userType" name="userType" onchange="toggleDoctorFields()">
+                    <select class="form-control" id="userType" name="userType" onchange="toggleDoctorFields()"  onchange="toggleclincFileds()">
                         <option value="patient">Patient</option>
                         <option value="doctor">Doctor</option>
+                        <option value="Clinc">Clinc</option>
                     </select>
                 </div>
                 <div class="form-group" id="doctor-fields" style="display: none;">
@@ -164,6 +176,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <br>
                     <label for="education">Education:</label>
                     <input type="text" class="form-control" id="education" placeholder="Education" name="education">
+                </div>
+                <div class="form-group" id="Clinc-fields" style="display: none;">
+                    <label for="Clinc-addresss">Clinc Address:</label>
+                    <input type="text" class="form-control" id="Clinc-addresss" placeholder="Clinc-addresss" name="Clinc-addresss">
+                    <br>
+                    <label for="clinc-name">Name:</label>
+                    <input type="text" class="form-control" id="Clinc-Name" placeholder="Clinc-name" name="Clinc-name">
+                    <br>
+                    <label for="clinc-number">Number:</label>
+                    <input type="text" class="form-control" id="Clinc-Number" placeholder="Clinc-Number" name="Clinc-Number">
                 </div>
                 <div class="form-group">
                     <div class="form-check">

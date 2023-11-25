@@ -1,13 +1,39 @@
-function toggleDoctorFields() {
+function toggleDoctorFields() 
+{
   var doctorFields = document.getElementById("doctor-fields");
   var userTypeSelect = document.getElementById("userType");
-
-  if (userTypeSelect.value === "doctor") {
+var clincfields = document.getElementById("Clinc-fields");
+  if (userTypeSelect.value === "doctor") 
+  {
       doctorFields.style.display = "block";
-  } else {
-      doctorFields.style.display = "none";
+      clincfields.style.display = "none";
+  } 
+  else if(userTypeSelect.value === "Clinc")
+   {
+    doctorFields.style.display = "none";
+    clincfields.style.display = "block";
+  }
+  else
+  {
+    clincfields.style.display = "none";
+    doctorFields.style.display = "none";
   }
 }
+
+// function toggleclincFileds()
+//  {
+  
+//     var userTypeSelect = document.getElementById("userType");
+  
+//     if 
+//      {
+//         clincfields.style.display = "block";
+//      } 
+//     else 
+//     {
+       
+//     }
+//   }
 
 function validateForm() {
   // Reset error messages
