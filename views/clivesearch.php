@@ -6,6 +6,8 @@
 </style>
 <?php
 include("..\includes\db.php");
+parent::__construct($row["uid"]);
+
 include(".\classes.php");
 
 if (isset($_POST["query"])) {

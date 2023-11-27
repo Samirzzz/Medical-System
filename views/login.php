@@ -94,6 +94,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             header("Location: admin.php"); 
             exit();
         }
+        elseif ($UserObject instanceof Clinic) {
+            $_SESSION["cid"] = $UserObject->id;
+            $_SESSION["cname"] = $UserObject->cname;
+            $_SESSION["cloc"] = $UserObject->cloc;
+            $_SESSION["workhrs"] = $UserObject->workhrs;
+            $_SESSION["cnumber"] = $UserObject->cnumber;
+
+          
+
+            header("Location: admin.php"); 
+            exit();
+        }
     } else {
         $loginError = "Invalid login credentials.";
     }		

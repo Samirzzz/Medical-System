@@ -22,7 +22,7 @@ include_once'..\includes\navigation.php';
 
 <div class="main--container">
             <div class="section--title">
-                <h3 class="title">Welcome back <?php  echo $_SESSION["firstname"] ?></h3>
+                <h3 class="title">Welcome back <?php  echo $_SESSION["email"] ?></h3>
                 
             </div>
             <div class="cards">

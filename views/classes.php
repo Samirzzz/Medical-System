@@ -26,6 +26,8 @@ if($row=mysqli_fetch_array($result)){
 static function login($email, $pass)
  {
 	$sql = "SELECT * FROM user_acc WHERE email='$email'";
+	$sql = "SELECT * FROM user_acc WHERE email='$email'";
+
 	$result = mysqli_query($GLOBALS['conn'], $sql);
 	if ($row = mysqli_fetch_array($result)) {		
 		// if (password_verify($pass, $row['pass'])){
@@ -140,8 +142,7 @@ class Admin extends user{
 }
 
 
-class Clinic{
-	public $uid;
+class Clinic extends user{
 	public $cid;
 	public $cname;
 	public $cloc;
@@ -150,10 +151,14 @@ class Clinic{
 	function __construct($id)
 {
 if($id!=""){
-    $sql="select clinic.cname, clinic.cid, clinic.cloc, clinic.cnumber,clinic.workhrs 
-	 from clinic where cid='$id'";
+	$sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, clinic.cname, clinic.uid,clinic.cid,
+	clinic.cnumber,clinic.workhrs
+	FROM clinic 
+	JOIN user_acc ON user_acc.uid = clinic.uid where user_acc.uid=".$id;
     $result = mysqli_query($GLOBALS['conn'],$sql);
 if($row=mysqli_fetch_array($result)){
+	parent::__construct($row["uid"]);
+
                 $this->cid=$row["cid"];
 				$this->cname=$row["cname"];
 				$this->workhrs=$row["workhrs"];

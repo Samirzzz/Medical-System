@@ -1,7 +1,7 @@
 <?php
 $next_pid = isset($_GET['pid']) ? htmlspecialchars($_GET['pid']) : '';
 $next_did = isset($_GET['did']) ? htmlspecialchars($_GET['did']) : '';
-include_once ("../includes/clinicNav.php");
+include_once'..\includes\navigation.php';
 include_once ("./classes.php");
 
 
