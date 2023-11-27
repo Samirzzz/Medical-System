@@ -51,6 +51,8 @@ static function login($email, $pass)
 				$patient->number = $patientRow['number'];
 				$patient->number = $patientRow['number'];
 				$patient->image = $user->image;
+				$patient->uid = $user->id;
+
 
 
 				
