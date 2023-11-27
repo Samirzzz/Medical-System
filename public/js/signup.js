@@ -2,19 +2,23 @@ function toggleDoctorFields()
 {
   var doctorFields = document.getElementById("doctor-fields");
   var userTypeSelect = document.getElementById("userType");
+  var allfields=document.getElementById("fields");
 var clincfields = document.getElementById("Clinc-fields");
   if (userTypeSelect.value === "doctor") 
   {
       doctorFields.style.display = "block";
       clincfields.style.display = "none";
+      allfields.style.display="block";
   } 
   else if(userTypeSelect.value === "Clinc")
    {
+    allfields.style.display = "none";
     doctorFields.style.display = "none";
     clincfields.style.display = "block";
   }
   else
   {
+    allfields.style.display="block";
     clincfields.style.display = "none";
     doctorFields.style.display = "none";
   }

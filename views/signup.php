@@ -123,6 +123,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             <div class="card-body">
                 <h2 class="card-title">Registration</h2>
                 <form action="" enctype="multipart/form-data" method="post" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="userType">User Type:</label>
+                    <select class="form-control" id="userType" name="userType" onchange="toggleDoctorFields()"  onchange="toggleclincFileds()">
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="Clinc">Clinc</option>
+                    </select>
+                </div>
+                <div class="form-group" id="doctor-fields" style="display: none;">
+                    <label for="specialization">Specialization:</label>
+                    <input type="text" class="form-control" id="specialization" placeholder="Specialization" name="specialization">
+                    <br>
+                    <label for="education">Education:</label>
+                    <input type="text" class="form-control" id="education" placeholder="Education" name="education">
+                </div>
+                <div class="form-group" id="Clinc-fields" style="display: none;">
+                    <label for="Clinc-addresss">Clinc Address:</label>
+                    <input type="text" class="form-control" id="Clinc-addresss" placeholder="Clinc-addresss" name="cloc">
+                    <br>
+                    <label for="clinc-name">Name:</label>
+                    <input type="text" class="form-control" id="Clinc-Name" placeholder="Clinc-name" name="cname">
+                    <br>
+                    <label for="clinc-number">Number:</label>
+                    <input type="text" class="form-control" id="Clinc-Number" placeholder="Clinc-Number" name="cnumber">
+                </div>
+                <div id="fields" style="display:block;">
                     <div class="form-group">
                         <label for="Fname">First Name:</label>
                         <input type="text" class="form-control" id="Fname" placeholder="First Name" name="Fname"
@@ -185,31 +211,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <div id="Uimage-error" class="error-message text-danger"></div>
                     </div>
 
-                    <div class="form-group">
-                    <label for="userType">User Type:</label>
-                    <select class="form-control" id="userType" name="userType" onchange="toggleDoctorFields()"  onchange="toggleclincFileds()">
-                        <option value="patient">Patient</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="Clinc">Clinc</option>
-                    </select>
-                </div>
-                <div class="form-group" id="doctor-fields" style="display: none;">
-                    <label for="specialization">Specialization:</label>
-                    <input type="text" class="form-control" id="specialization" placeholder="Specialization" name="specialization">
-                    <br>
-                    <label for="education">Education:</label>
-                    <input type="text" class="form-control" id="education" placeholder="Education" name="education">
-                </div>
-                <div class="form-group" id="Clinc-fields" style="display: none;">
-                    <label for="Clinc-addresss">Clinc Address:</label>
-                    <input type="text" class="form-control" id="Clinc-addresss" placeholder="Clinc-addresss" name="cloc">
-                    <br>
-                    <label for="clinc-name">Name:</label>
-                    <input type="text" class="form-control" id="Clinc-Name" placeholder="Clinc-name" name="cname">
-                    <br>
-                    <label for="clinc-number">Number:</label>
-                    <input type="text" class="form-control" id="Clinc-Number" placeholder="Clinc-Number" name="cnumber">
-                </div>
+                   </div>
 
                     <div class="form-group">
                         <div class="form-check">
