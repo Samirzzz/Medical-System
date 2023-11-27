@@ -60,6 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
         $_SESSION["type"] = $UserObject->usertype->name;
         $_SESSION["email"] = $UserObject->email;
         $_SESSION["ID"] = $UserObject->id;
+        $_SESSION["image"] = $UserObject->image;
+
         if ($UserObject instanceof Patient) {
             $_SESSION["Pid"] = $UserObject->id;
             $_SESSION["firstname"] = $UserObject->firstname;
@@ -68,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             $_SESSION["address"] = $UserObject->address;
             $_SESSION["gender"] = $UserObject->gender;
             $_SESSION["number"] = $UserObject->number;
-            $_SESSION["image"] = $UserObject->image;
 
 
 
