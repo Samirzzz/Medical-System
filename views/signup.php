@@ -77,10 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     if ($userType == 'patient') 
     {
-       $uid= User::signupUser($email, $password, 4);
+       $uid= User::signupUser($email, $password, 4,$imageDB);
     if ($uid !== false) {
 
-       if (Patient::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid,$imageDB)) {
+       if (Patient::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid)) {
         header("Location:../views/login.php");
     } 
 }
@@ -90,9 +90,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     {
         $educ = $_POST['education'];
         $specialization = $_POST['specialization'];
-        $uid= User::signupUser($email, $password, 2); 
+        $uid= User::signupUser($email, $password, 2,$imageDB); 
     if ($uid !== false) {
-        if (Dr::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid,$imageDB)) {
+        if (Dr::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid)) {
             header("Location:../views/login.php");
         } 
     }
@@ -131,13 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <option value="Clinc">Clinc</option>
                     </select>
                 </div>
-                <div class="form-group" id="doctor-fields" style="display: none;">
-                    <label for="specialization">Specialization:</label>
-                    <input type="text" class="form-control" id="specialization" placeholder="Specialization" name="specialization">
-                    <br>
-                    <label for="education">Education:</label>
-                    <input type="text" class="form-control" id="education" placeholder="Education" name="education">
-                </div>
+                
                 <div class="form-group" id="Clinc-fields" style="display: none;">
                     <label for="Clinc-addresss">Clinc Address:</label>
                     <input type="text" class="form-control" id="Clinc-addresss" placeholder="Clinc-addresss" name="cloc">
@@ -186,6 +180,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             required>
                         <div id="address-error" class="error-message text-danger"></div>
                     </div>
+                    <div class="form-group" id="doctor-fields" style="display: none;">
+                    <label for="specialization">Specialization:</label>
+                    <input type="text" class="form-control" id="specialization" placeholder="Specialization" name="specialization">
+                    <br>
+                    <label for="education">Education:</label>
+                    <input type="text" class="form-control" id="education" placeholder="Education" name="education">
+                </div>
                     <div class="form-group">
                         <label for="phone">Phone Number:</label>
                         <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="number"

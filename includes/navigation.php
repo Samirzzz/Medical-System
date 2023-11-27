@@ -1,5 +1,12 @@
 <?php include_once '..\includes\db.php';
- session_start();?>
+ session_start();
+ 
+ include_once("classes.php");
+ include_once("classes.php");
+ if (!empty($_SESSION['ID'])) {
+     $UserObject = new user($_SESSION["ID"]);
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,13 +54,6 @@ li {
 </style>
 <body >
 
-    <?php
-    include_once("classes.php");
-include_once("classes.php");
-if (!empty($_SESSION['ID'])) {
-    $UserObject = new user($_SESSION["ID"]);
-
-?>
  <section class="header">
         <div class="logo">
             <i class="ri-menu-line menu"></i>
@@ -72,7 +72,7 @@ if (!empty($_SESSION['ID'])) {
         <div class="sidebar">
             <ul class="sidebar--items">
         <div class="profile-box">
-                <img src="../public/images/dr.jpg" alt="Profile Image">
+                <img src="../public/images/<?php echo $_SESSION['image'];?>" alt="Profile Image">
                 <span >  <?php echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  '. $_SESSION["email"]); ?></span>
             </div>
 <?php
