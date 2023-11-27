@@ -94,6 +94,7 @@ static function login($email, $pass)
 				$clinic->cloc = $clinicRow['cloc'];
 				$clinic->workhrs = $clinicRow['workhrs'];
 				$clinic->cnumber = $clinicRow['cnumber'];
+				$clinic->uid = $clinicRow['uid'];
 			}
 
 			return $clinic; 
@@ -148,6 +149,7 @@ class Clinic extends user{
 	public $cloc;
 	public $workhrs;
 	public $cnumber;
+	public $uid;
 	function __construct($id)
 {
 if($id!=""){
@@ -164,12 +166,17 @@ if($row=mysqli_fetch_array($result)){
 				$this->workhrs=$row["workhrs"];
 				$this->cnumber=$row['cnumber'];
 				$this->cloc=$row['cloc'];
+				$this->uid=$row['uid'];
 
 }
 
 }
 
 
+
+}
+public function getcid(){
+	return $this->cid;
 }
 static function clinicsearch($value)  {
 
@@ -393,13 +400,15 @@ if(mysqli_query($GLOBALS['conn'],$sql))
 	
 	
 
-class Appointments
+class Appointments extends Clinic
 {
     private $conn;
     public $date, $time, $status, $price, $doctorId, $clinicId, $patientId;
+	
 
     public function __construct($conn)
     {
+		session_start();
         $this->conn = $conn;
     }
 
@@ -442,9 +451,22 @@ class Appointments
 
         return $errors;
     }
+	public function getClinicID() {
+        return $this->clinicId;
+    }
+
+    public function setClinicID() {
+     
+        $this->clinicId = $_SESSION["cid"];
+    }
+	public function getClinicName() {
+        return $_SESSION["cname"];
+    }
+
 
     public function addAppointment($date, $time, $status, $price, $doctorId, $clinicId, $patientId)
     {
+		$this->setClinicID();
         $sql = "INSERT INTO appointments (date, time, status, pid, did, cid, price) VALUES ('$date', '$time', '$status', '$patientId', '$doctorId', '$clinicId', '$price')";
         $res = mysqli_query($this->conn, $sql);
 

@@ -6,6 +6,7 @@ include_once ("./classes.php");
 
 
 $appointment = new Appointments($conn);
+$appointment->setClinicID();
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -64,10 +65,14 @@ $errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price
     <input type="text" placeholder="Enter patient's id" id="pi" name="patientid" value="<?php echo $next_pid ; ?>">
      <br>
     <label for="cid">clinic's id</label>
-    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid">
+    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid"value = "<?php echo $appointment->getClinicID() ."           ". "( ".$appointment->getClinicName()." )"  ;?>">
     <br>
     <label for="s">Status</label>
-    <input type="text" placeholder="Enter status" id="s" name="status">
+<select id="s" name="status">
+    <option value="available">Available</option>
+    <option value="reserved">reserved</option>
+</select>
+    <br>
     <br>
     <label for="p">price</label>
     <input type="text" placeholder="Enter the price" id="p" name="price">

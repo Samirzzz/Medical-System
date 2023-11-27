@@ -95,7 +95,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             exit();
         }
         elseif ($UserObject instanceof Clinic) {
-            $_SESSION["cid"] = $UserObject->id;
+
+             $clinicCid = getClinicCid($uid);
+            $_SESSION["Cid"] = $clinicCid;
             $_SESSION["cname"] = $UserObject->cname;
             $_SESSION["cloc"] = $UserObject->cloc;
             $_SESSION["workhrs"] = $UserObject->workhrs;
@@ -108,8 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
         }
     } else {
         $loginError = "Invalid login credentials.";
-    }		
+    }	
+
 	}
+    
 
 
 

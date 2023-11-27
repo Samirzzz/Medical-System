@@ -3,6 +3,9 @@ include_once('../includes/navigation.php');
 include_once ('classes.php');
 $errors = array();
 $appointment = new Appointments($conn);
+$appointment->setClinicID();
+echo ("-----------------------aloooo" . $appointment->getClinicID());
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_date = htmlspecialchars($_POST['date']);
@@ -10,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_status = htmlspecialchars($_POST['status']);
     $a_price = htmlspecialchars($_POST['price']);
     $a_did =htmlspecialchars($_POST['doctorid']);
-    $a_cid =htmlspecialchars($_POST['clinicid']);
+    $a_cid = $appointment->getClinicID();
     $a_pid =htmlspecialchars($_POST['patientid']);
-   
+   echo ("----------------------------" . $a_cid);
     $errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price, $a_did, $a_cid, $a_pid);
 
     if (count($errors) === 0) {
@@ -61,12 +64,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="pi">patient's id</label>
     <input type="text" placeholder="Enter patient's id" id="pi" name="patientid">
     <br>
+    <?php 
+   echo ("--------------------alooooo" . $appointment->getClinicID());
+    ?>
     <br>
     <label for="ci">clinic's id</label>
-    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid">
+    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid" value = "<?php echo $appointment->getClinicID() ."           ". "( ".$appointment->getClinicName()." )"  ;?>">
+   
     <br>
     <label for="s">Status</label>
-    <input type="text" placeholder="Enter status" id="s" name="status">
+<select id="s" name="status">
+    <option value="available">Available</option>
+    <option value="reserved">reserved</option>
+</select>
+    <br>
     <br>
     <label for="p">price</label>
     <input type="text" placeholder="Enter the price" id="p" name="price">
