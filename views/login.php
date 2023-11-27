@@ -97,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
         }
         elseif ($UserObject instanceof Clinic) {
 
-             $clinicCid = getClinicCid($uid);
             $_SESSION["Cid"] = $clinicCid;
             $_SESSION["cname"] = $UserObject->cname;
             $_SESSION["cloc"] = $UserObject->cloc;

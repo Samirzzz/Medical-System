@@ -164,7 +164,7 @@ class Clinic extends user{
 {
 if($id!=""){
 	$sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, clinic.cname, clinic.uid,clinic.cid,
-	clinic.cnumber,clinic.workhrs
+	clinic.cnumber,clinic.workhrs,clinic.cloc
 	FROM clinic 
 	JOIN user_acc ON user_acc.uid = clinic.uid where user_acc.uid=".$id;
     $result = mysqli_query($GLOBALS['conn'],$sql);
@@ -419,7 +419,6 @@ class Appointments extends Clinic
 
     public function __construct($conn)
     {
-		session_start();
         $this->conn = $conn;
     }
 
@@ -462,13 +461,29 @@ class Appointments extends Clinic
 
         return $errors;
     }
-	public function getClinicID() {
-        return $this->clinicId;
+	public function getClinicID($id ) {
+        // return $_SESSION["ID"];
+		$sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, clinic.cname, clinic.uid,clinic.cid,
+		clinic.cnumber,clinic.workhrs,clinic.cloc
+		FROM clinic 
+		JOIN user_acc ON user_acc.uid = clinic.uid where user_acc.uid=".$id;
+		$result = mysqli_query($GLOBALS['conn'],$sql);
+		if($row=mysqli_fetch_array($result)){
+			parent::__construct($row["uid"]);
+		
+						$CID=$row["cid"];
+
+		}
+		return $CID;
+
     }
 
     public function setClinicID() {
      
-        $this->clinicId = $_SESSION["cid"];
+        // $this->clinicId = $_SESSION["cid"];
+		
+
+
     }
 	public function getClinicName() {
         return $_SESSION["cname"];
