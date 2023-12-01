@@ -17,7 +17,6 @@ if($row=mysqli_fetch_array($result)){
                 $this->email=$row["email"];
 				$this->pass=$row["pass"];
 				$this->id=$row["uid"];
-				$this->image=$row["image"];
 
 				$this->usertype=new Usertype($row['usertype_id']);
 }
@@ -104,7 +103,6 @@ static function login($email, $pass)
 				$clinic->cloc = $clinicRow['cloc'];
 				$clinic->workhrs = $clinicRow['workhrs'];
 				$clinic->cnumber = $clinicRow['cnumber'];
-				$clinic->uid = $clinicRow['uid'];
 			}
 
 			return $clinic; 
@@ -141,12 +139,7 @@ class Admin extends user{
 	        if($row=mysqli_fetch_array($result)){
 				parent::__construct($row["uid"]);
 				$this->aid=$row["aid"];
-
-	             	$this->name=$row["name"];
-	             	
-
-
-	
+	            $this->name=$row["name"];
 	}
 	}
 
@@ -176,7 +169,6 @@ if($row=mysqli_fetch_array($result)){
 				$this->workhrs=$row["workhrs"];
 				$this->cnumber=$row['cnumber'];
 				$this->cloc=$row['cloc'];
-				$this->uid=$row['uid'];
 
 }
 
@@ -192,13 +184,14 @@ static function clinicsearch($value)  {
 
 	$i=0;
 		$clinic=array();
-		$sql = "SELECT clinic.cname, clinic.cid, clinic.cloc, clinic.cnumber,clinic.workhrs   
-                FROM clinic 
-                WHERE cname LIKE '%$value%'";
+		$sql = "SELECT user_acc.uid, user_acc.email, clinic.cid,clinic.cname, clinic.cloc ,clinic.workhrs,clinic.cnumber
+                            FROM clinic 
+                            JOIN user_acc ON user_acc.uid = clinic.uid  
+                            WHERE email LIKE '%$value%'";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 
 		while($row=mysqli_fetch_array($result)) {
-			$clinic[$i++]=new Clinic($row['cid']);
+			$clinic[$i++]=new Clinic($row[0]);
 		}	
 		return $clinic;
 
@@ -231,7 +224,6 @@ class Dr extends user{
 	public $number;
 	public $cid;
 	public $uid;
-	public $image;
 
 	
 	public $did;
@@ -253,7 +245,6 @@ class Dr extends user{
 	             	$this->number=$row["number"];
 	             	$this->cid=$row["cid"];
 	 				$this->uid=$row["uid"];
-	 				$this->image=$row["image"];
 
 
 
@@ -348,7 +339,6 @@ class Patient extends user{
 	             	$this->firstname=$row["firstname"];
 	             	$this->lastname=$row["lastname"];
 	 				$this->uid=$row["uid"];
-					$this->image=$row['image'];
 	
 	}
 
@@ -381,7 +371,7 @@ class Patient extends user{
     while ($row = mysqli_fetch_assoc($patients))
 	 {
         $myObj = new Patient($row['uid']);
-        $myObj->did = $row['Pid'];
+        $myObj->pid = $row['Pid'];
         $myObj->firstname = $row['firstname'];
         $myObj->lastname = $row['lastname'];
         $myObj->number = $row['number'];

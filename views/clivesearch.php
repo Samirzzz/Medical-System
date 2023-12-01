@@ -6,7 +6,6 @@
 </style>
 <?php
 include("..\includes\db.php");
-parent::__construct($row["uid"]);
 
 include(".\classes.php");
 
@@ -23,8 +22,8 @@ if (isset($_POST["query"])) {
                        echo '<table>';
                        echo '<tr>';
                        echo '<th>ID</th>';
+                       echo '<th>Email</th>';
                        echo '<th>Name</th>';
-                       echo '<th>Location</th>';
                        echo '<th>Number</th>';
                        echo '</tr>';
                        
@@ -33,8 +32,9 @@ if (isset($_POST["query"])) {
                            
                            echo '<tr>';
                            echo '<td><a  id="pop' .  $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cid . '</a></td>';
+                           echo '<td><a  id="pop2' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->email . '</a></td>';
+                           
                            echo '<td><a  id="pop1' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cname . '</a></td>';
-                           echo '<td><a  id="pop2' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cloc . '</a></td>';
                            echo '<td><a  id="pop3' . $pat->cid . '" href="#plink' . $pat->cid . '">' . $pat->cnumber . '</a></td>';
                            echo '</tr>';
                            
@@ -45,7 +45,7 @@ if (isset($_POST["query"])) {
                            echo '<div class="d-flex align-items-center">';
                            echo '<div class="ml-3 w-100">';
                            echo '<h4 class="mb-0 mt-0">' . $pat->cname . '</h4>';
-                           echo '<span>' . $pat->cloc . '</span>';
+                           echo '<span>' . $pat->email . '</span>';
                            echo '<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">';
                            echo '<div class="d-flex flex-column">';
                            echo '<span class="articles">Doctors</span>';
@@ -211,7 +211,6 @@ if (isset($_POST["query"])) {
 <script>
     $(document).ready(function () {
         <?php
-        
         foreach ($viewclinics as $pat) {
             echo '$("#pop' . $pat->cid . ', #pop1' . $pat->cid . ', #pop2' . $pat->cid . ', #pop3' . $pat->cid . '").click(function () {';
             echo '$("#plink' . $pat->cid . '").show();';
@@ -222,10 +221,8 @@ if (isset($_POST["query"])) {
             echo '$("#plink' . $pat->cid . '").hide();';
             echo '});';
         }
-       
         ?>
     });
-    
 </script>
 <script>
     $(document).ready(function () {
