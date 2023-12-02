@@ -437,9 +437,9 @@ class Appointments extends Clinic
         if (empty($clinicId)) {
             $errors[] = "Clinic ID is required";
         }
-        if (empty($patientId)) {
-            $errors[] = "Patient ID is required";
-        }
+        // if (empty($patientId)) {
+        //     $errors[] = "Patient ID is required";
+        // }
 
         // Date validation
         $currentDate = date("Y-m-d");
@@ -451,7 +451,7 @@ class Appointments extends Clinic
 
         return $errors;
     }
-	public function getClinicID($id ) {
+	public function getClinicID($id) {
         // return $_SESSION["ID"];
 		$sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, clinic.cname, clinic.uid,clinic.cid,
 		clinic.cnumber,clinic.workhrs,clinic.cloc
@@ -468,22 +468,31 @@ class Appointments extends Clinic
 
     }
 
-    public function setClinicID() {
-     
-        // $this->clinicId = $_SESSION["cid"];
-		
 
-
-    }
 	public function getClinicName() {
         return $_SESSION["cname"];
     }
+	
+	public function getClinicDrs($cid)
+	{
+		$sql = "select firstname , lastname , Did  from dr where Cid = '$cid' ";
+		$res = mysqli_query($this->conn,$sql);
+		$doctors = [];
+		while($row=mysqli_fetch_array($res)){
+        $doctors [] = [
+			'did' => $row['Did'],
+			'firstname'=>$row['firstname'],
+			'lastname'=>$row['lastname'],
+		];} 
+		return $doctors;
+	}
+	
 
 
     public function addAppointment($date, $time, $status, $price, $doctorId, $clinicId, $patientId)
     {
-		$this->setClinicID();
-        $sql = "INSERT INTO appointments (date, time, status, pid, did, cid, price) VALUES ('$date', '$time', '$status', '$patientId', '$doctorId', '$clinicId', '$price')";
+		
+        $sql = "INSERT INTO appointments (date, time, status, pid, did, cid, price) VALUES ('$date', '$time', '$status', NULL , '$doctorId', '$clinicId', '$price')";
         $res = mysqli_query($this->conn, $sql);
 
         if ($res) {
@@ -540,7 +549,13 @@ class Appointments extends Clinic
             echo "<td>" . $row['time'] . "</td>";
             echo "<td>" . $row['status'] . "</td>";
             echo "<td><a href='./editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='./deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
-            echo "<td>" . $row['Cid'] . "</td>";
+			$sql2 = "Select cname from clinic WHERE Cid = '{$row['Cid']}'";
+			$res2=mysqli_query($this->conn,$sql2);
+			if ($res2->num_rows>0){
+				$clincirow = $res2->fetch_assoc();
+				echo "<td>" . $clincirow['cname'] . "</td>";
+			}
+           
         
             
             echo "</tr>";

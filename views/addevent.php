@@ -3,8 +3,11 @@ include_once('../includes/navigation.php');
 include_once ('classes.php');
 $errors = array();
 $appointment = new Appointments($conn);
-$appointment->setClinicID();
-echo ("-----------------------aloooo" . $appointment->getClinicID($_SESSION["ID"]));
+$clinic_id = $appointment->getClinicID($_SESSION["ID"]);
+echo( "clinic id is ---------- ".$clinic_id);
+// echo ("-----------------------aloooo" . $appointment->getClinicID($_SESSION["ID"]));
+$doctors = $appointment->getClinicDrs($clinic_id);
+
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -15,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_did =htmlspecialchars($_POST['doctorid']);
     $a_cid = $appointment->getClinicID($_SESSION["ID"]);
     $a_pid =htmlspecialchars($_POST['patientid']);
-   echo ("----------------------------" . $a_cid);
-    $errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price, $a_did, $a_cid, $a_pid);
+//    echo ("----------------------------" . $a_cid);
+    $errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price, $a_did, $a_cid, NULL);
 
     if (count($errors) === 0) {
       
@@ -58,19 +61,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <!-- <label for="dn">Status</label>
     <input type="text" placeholder="Enter doctor's name" id="dn" name="doctorname"> -->
     <br>
-    <label for="di">doctor's id</label>
-    <input type="text" placeholder="Enter doctor's id" id="di" name="doctorid">
+
+    <!-- <label for="pi">patient's id</label>
+    <input type="text" placeholder="Enter patient's id" id="pi" name="patientid"> -->
     <br>
-    <label for="pi">patient's id</label>
-    <input type="text" placeholder="Enter patient's id" id="pi" name="patientid">
+    <label for="di">doctor</label>
+     <select id="di" name="doctorid">
+        <?php foreach ($doctors as $doctor) { ?>
+            <option value="<?php echo $doctor['did']; ?>">
+                <?php echo $doctor['firstname'] . ' ' . $doctor['lastname']; ?>
+            </option>
+        <?php } ?>
+    </select>
     <br>
-    <?php 
-   echo ("--------------------alooooo" . $appointment->getClinicID($_SESSION["ID"]));
-    ?>
+    <br>
     <br>
     <label for="ci">clinic's id</label>
-    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid" value = "<?php echo $appointment->getClinicID($_SESSION["ID"]) ."           ". "( ".$appointment->getClinicName()." )"  ;?>">
-   
+    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid" value = "<?php echo $clinic_id ."           ". "( ".$appointment->getClinicName()." )"  ;?>">
     <br>
     <label for="s">Status</label>
 <select id="s" name="status">
@@ -82,8 +89,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="p">price</label>
     <input type="text" placeholder="Enter the price" id="p" name="price">
     <br>
+  
     <input type="submit" id="submit" name="submit" value="submit + next appointment">
    </form>
+
+   <?php 
+   echo ("clinic id is ---------- ".$clinic_id);
+    ?>
 
    <script>
     function validateForm() {

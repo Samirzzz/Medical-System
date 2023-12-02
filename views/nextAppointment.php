@@ -1,12 +1,13 @@
 <?php
 $next_pid = isset($_GET['pid']) ? htmlspecialchars($_GET['pid']) : '';
 $next_did = isset($_GET['did']) ? htmlspecialchars($_GET['did']) : '';
-include_once'..\includes\navigation.php';
+
+include_once('..\includes\navigation.php');
 include_once ("./classes.php");
 
 
 $appointment = new Appointments($conn);
-$appointment->setClinicID();
+$clinic_id = $appointment->getClinicID($_SESSION["ID"]);
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
@@ -15,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_status = htmlspecialchars($_POST['status']);
     $a_price = htmlspecialchars($_POST['price']);
     $a_did =htmlspecialchars($_POST['doctorid']);
-    $a_cid =htmlspecialchars($_POST['clinicid']);
+    $a_cid =$clinic_id;
     $a_pid =htmlspecialchars($_POST['patientid']);
    
 
@@ -64,8 +65,8 @@ $errors = $appointment->validateAppointment($a_date, $a_time, $a_status,$a_price
     <label for="pi">patient's id</label>
     <input type="text" placeholder="Enter patient's id" id="pi" name="patientid" value="<?php echo $next_pid ; ?>">
      <br>
-    <label for="cid">clinic's id</label>
-    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid"value = "<?php echo $appointment->getClinicID() ."           ". "( ".$appointment->getClinicName()." )"  ;?>">
+     <label for="ci">clinic's id</label>
+    <input type="text" placeholder="Enter clinic's id" id="ci" name="clinicid" value = "<?php echo $clinic_id ."           ". "( ".$appointment->getClinicName()." )"  ;?>">
     <br>
     <label for="s">Status</label>
 <select id="s" name="status">
