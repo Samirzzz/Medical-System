@@ -17,7 +17,7 @@ if($row=mysqli_fetch_array($result)){
                 $this->email=$row["email"];
 				$this->pass=$row["pass"];
 				$this->id=$row["uid"];
-
+				$this->image=$row["image"];
 				$this->usertype=new Usertype($row['usertype_id']);
 }
 
@@ -115,8 +115,7 @@ static function login($email, $pass)
 static function signupUser($email, $pass, $usertype,$image) 
 {
     // $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user_acc (email, pass, usertype_id) VALUES ('$email', '$pass', '$usertype')";
-    
+	$sql = "INSERT INTO user_acc (email, pass, usertype_id,image) VALUES ('$email', '$pass', '$usertype','$image')";    
     if(mysqli_query($GLOBALS['conn'], $sql)) {
         return mysqli_insert_id($GLOBALS['conn']);
     } else {
@@ -224,6 +223,7 @@ class Dr extends user{
 	public $number;
 	public $cid;
 	public $uid;
+	public $image;
 
 	
 	public $did;
@@ -245,6 +245,8 @@ class Dr extends user{
 	             	$this->number=$row["number"];
 	             	$this->cid=$row["cid"];
 	 				$this->uid=$row["uid"];
+	 				$this->uid=$row["image"];
+
 
 
 
@@ -339,6 +341,8 @@ class Patient extends user{
 	             	$this->firstname=$row["firstname"];
 	             	$this->lastname=$row["lastname"];
 	 				$this->uid=$row["uid"];
+					 $this->image=$row['image'];
+
 	
 	}
 
