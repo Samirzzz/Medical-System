@@ -115,7 +115,7 @@ static function login($email, $pass)
 static function signupUser($email, $pass, $usertype,$image) 
 {
     // $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user_acc (email, pass, usertype_id,image) VALUES ('$email', '$pass', '$usertype','$image')";
+    $sql = "INSERT INTO user_acc (email, pass, usertype_id) VALUES ('$email', '$pass', '$usertype')";
     
     if(mysqli_query($GLOBALS['conn'], $sql)) {
         return mysqli_insert_id($GLOBALS['conn']);
@@ -557,7 +557,7 @@ class Appointments extends Clinic
 			}
            
         
-            
+        
             echo "</tr>";
         }
     } else {
@@ -566,6 +566,19 @@ class Appointments extends Clinic
 
 
     }
+
+	public function bookingOptions(){
+		$sql = "select specialization from dr ";
+		$res = mysqli_query($this->conn,$sql);
+        $spec=[];
+		while ($row = $res->fetch_assoc())
+		{
+$spec[]=[
+	'specialization'=>[$row['specialization']]
+]
+		;}
+	return $spec;
+	}
   
 }
 class Usertype{
