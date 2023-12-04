@@ -329,7 +329,7 @@ class Patient extends user{
 	
 	function __construct($id)
 	{
-    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, patient.firstname, patient.lastname,patient.gender,
+    $sql = "SELECT user_acc.uid,user_acc.image, user_acc.email,user_acc.usertype_id, patient.firstname, patient.lastname,patient.gender,
 	patient.address,patient.number,patient.age,patient.uid,patient.pid 
 	FROM patient 
 	JOIN user_acc ON user_acc.uid = patient.uid where user_acc.uid=".$id;
