@@ -1,0 +1,37 @@
+body {
+    background: linear-gradient(-45deg, #ffffff, #74efff, rgb(0, 47, 255));
+    background-size: 400% 400%;
+    animation: gradient-bg 20s ease infinite;
+    align-content: center;
+}
+
+@keyframes gradient-bg {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.container
+{
+    padding-top: 80px;
+    text-align: center;
+    align-content: center;
+     margin-top: 150px;
+    margin-left: 500px; 
+    border: 3px solid black;
+    border-radius: 30px;
+height: 200px;
+width: 500px;
+background-color: white;
+position: relative;
+}
+.mail
+{
+    border-radius: 6px;
+}
