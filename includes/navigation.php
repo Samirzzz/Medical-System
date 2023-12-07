@@ -1,8 +1,16 @@
-<?php include_once '..\includes\db.php';
+<?php 
+include_once '..\includes\db.php';
  session_start();
- 
- include_once("classes.php");
- include_once("classes.php");
+
+ require_once '../app/Model/User.php';
+ require_once '../app/Model/Patient.php';
+//  require_once '../app/Model/Doctor.php';
+// require_once '../app/Model/Clinic.php';
+// require_once '../app/Model/Admin.php';
+
+
+
+
  if (!empty($_SESSION['ID'])) {
      $UserObject = new user($_SESSION["ID"]);
 

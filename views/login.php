@@ -48,15 +48,19 @@
     </script>
 </head>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
-{
-	include_once "../views/classes.php";
-    $email=$_POST["email"];
-	$pass=$_POST["password"];
-	$UserObject=user::login($email,$pass);
-    if ($UserObject)
-	{	
-		session_start();
+require_once '../app/Model/User.php';
+require_once '../app/Model/UserType.php';
+require_once '../app/Model/Pages.php';
+require_once '../app/controller/UserController.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    $email = $_POST["email"];
+    $pass = $_POST["password"];
+    $UserObject = UserController::login($email, $pass);
+
+    if ($UserObject) {
+        session_start();
         $_SESSION["type"] = $UserObject->usertype->name;
         $_SESSION["email"] = $UserObject->email;
         $_SESSION["ID"] = $UserObject->id;
@@ -71,9 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             $_SESSION["gender"] = $UserObject->gender;
             $_SESSION["number"] = $UserObject->number;
 
-
-
-            header("Location:pindex.php");
+            header("Location: pindex.php");
             exit();
         } elseif ($UserObject instanceof Dr) {
             $_SESSION["Did"] = $UserObject->id;
@@ -84,40 +86,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
             $_SESSION["educ"] = $UserObject->educ;
             $_SESSION["Cid"] = $UserObject->cid;
 
-            header("Location: admin.php"); 
+            header("Location: admin.php");
             exit();
-        }
-        elseif ($UserObject instanceof Admin) {
+        } elseif ($UserObject instanceof Admin) {
             $_SESSION["aid"] = $UserObject->id;
             $_SESSION["name"] = $UserObject->name;
-          
 
-            header("Location: admin.php"); 
+            header("Location: admin.php");
             exit();
-        }
-        elseif ($UserObject instanceof Clinic) {
-
-            $_SESSION["Cid"] = $clinicCid;
+        } elseif ($UserObject instanceof Clinic) {
+            $_SESSION["Cid"] = $clinicCid; 
             $_SESSION["cname"] = $UserObject->cname;
             $_SESSION["cloc"] = $UserObject->cloc;
             $_SESSION["workhrs"] = $UserObject->workhrs;
             $_SESSION["cnumber"] = $UserObject->cnumber;
 
-          
-
-            header("Location: admin.php"); 
+            header("Location: admin.php");
             exit();
         }
     } else {
         $loginError = "Invalid login credentials.";
-    }	
-
-	}
-    
-
-
-
+    }
+}
 ?>
+
 <body>
     <div id="cont">
             <div id="frm">
