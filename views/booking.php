@@ -7,8 +7,7 @@ if(isset($_GET['specialization'])){
 };
     $spec =$appointmentcntrl->bookingOptions();
     ?>
-$spec =$appointmentcntrl->bookingOptions();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
