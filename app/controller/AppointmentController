@@ -204,17 +204,26 @@ public function viewAppointments(){
 
 
 public function bookingOptions(){
-    $sql = "select specialization from dr ";
-    $res = mysqli_query($this->conn,$sql);
-    $spec=[];
-    while ($row = $res->fetch_assoc())
-    {
-$spec[]=[
-'specialization'=>[$row['specialization']]
-]
-    ;}
-return $spec;
+    $sql = "SELECT specialization FROM dr";
+    $res = mysqli_query($this->conn, $sql);
+    $spec = [];
+
+    while ($row = $res->fetch_assoc()) {
+        $spec[] = $row['specialization'];
+    }
+
+    // Remove duplicates
+    $spec = array_unique($spec);
+
+    // Convert to the desired format
+    $spec = array_map(function ($specialization) {
+        return ['specialization' => $specialization];
+    }, $spec);
+
+    return $spec;
 }
+
+
 
 public function displayErrors($err){
     foreach ($err as $errors)
@@ -223,10 +232,54 @@ public function displayErrors($err){
     }
 }
 
+public function getSpecializationAppointments($specialization){
+
+    $sql = "SELECT
+        a.Appid, a.date, a.time, a.price, a.Did, a.Cid,
+        d.firstname, d.lastname, d.specialization,
+        c.cname
+    FROM
+        appointments a
+    JOIN
+        dr d ON a.Did = d.Did
+    JOIN
+        clinic c ON a.Cid = c.Cid
+    WHERE
+        d.specialization = '$specialization'";
+
+
+    $result = mysqli_query($this->conn,$sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['date'] . "</td>";   
+            echo "<td>" . $row['firstname'] . " " . $row['lastname'] . "</td>"; 
+            echo "<td>" . $row['specialization'] . "</td>"; 
+            echo "<td>" . $row['time'] . "</td>";      
+            echo "<td>" . $row['price'] . "</td>";     
+            echo "<td>" . $row['cname'] . "</td>";
+            echo "<td><a href='./booking.php?Appid=" . $row['Appid'] . "'>Book Now </a></td>";
+            echo "</tr>";
+        }
+    } else {
+        echo  "<div class='no-appointments-found'><h1>NO APPOINTMENTS FOUND!</h1></div>";
+        
+    }
+    
+
+
+
+
+
+
+}    
+
+
+
+
 
 }
 
-
-
-
 ?>
+
