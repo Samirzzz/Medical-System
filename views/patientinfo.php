@@ -113,11 +113,11 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sqlPid = "SELECT Pid FROM patient WHERE uid = '$uid'";
+                                $sqlPid = "SELECT Pid,uid FROM patient WHERE uid = '$uid'";
                                 $resultPid = mysqli_query($conn, $sqlPid);       
                                 if ($rowPid = mysqli_fetch_array($resultPid)) {
-                                    $pid = $rowPid['Pid'];               
-                                $sqlDiagnosis = "SELECT diagnosis,date FROM medications WHERE Pid = '$pid'";
+                                    $uid = $rowPid['uid'];               
+                                $sqlDiagnosis = "SELECT diagnosis,date,uid FROM medications WHERE uid = '$uid'";
                                 $resultDiagnosis = mysqli_query($conn, $sqlDiagnosis);
                                 
                                 
@@ -251,13 +251,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["s_1"])) {
             $diagnosis = htmlspecialchars($_POST["input_1"]); 
 
-            $sqlPid = "SELECT Pid FROM patient WHERE uid = '$uid'";
+            $sqlPid = "SELECT Pid,uid FROM patient WHERE uid = '$uid'";
             $resultPid = mysqli_query($conn, $sqlPid);
 
             if ($rowPid = mysqli_fetch_array($resultPid)) {
-                $pid = $rowPid['Pid'];
+                $uid = $rowPid['uid'];
 
-                $sql2 = "INSERT INTO medications (diagnosis, Pid) VALUES ('$diagnosis', '$pid')";
+                $sql2 = "INSERT INTO medications (diagnosis, uid) VALUES ('$diagnosis', '$uid')";
                 $result = mysqli_query($conn, $sql2);
 
                 
