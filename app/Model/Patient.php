@@ -32,6 +32,8 @@ class Patient extends user{
 	             	$this->lastname=$row["lastname"];
 	 				$this->uid=$row["uid"];
 					 $this->image=$row['image'];
+					 $this->address=$row['address'];
+
 
 	
 	}

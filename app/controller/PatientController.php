@@ -50,6 +50,21 @@ if(mysqli_query($GLOBALS['conn'],$sql))
 	else
 		return false;
 }
+
+static function editPatient($firstname, $lastname, $number,$gender,$address,$uid)
+{
+	$sql = "UPDATE patient Set firstname='$firstname', lastname='$lastname', number='$number', age='$age', gender='$gender', address='$address' WHERE uid='$uid'";
+	$result = mysqli_query($GLOBALS['conn'], $sql);
+        if($result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+}
 }
 
 ?>

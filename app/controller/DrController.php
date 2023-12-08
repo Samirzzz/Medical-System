@@ -56,6 +56,19 @@ class DrController
     
     
     }
-    
+    static function editDoctor($firstname, $lastname, $number,$educ,$specialization,$uid)
+{
+	$sql = "UPDATE dr Set firstname='$firstname', lastname='$lastname', number='$number', educ='$educ', specialization='$specialization' WHERE uid='$uid'";
+	$result = mysqli_query($GLOBALS['conn'], $sql);
+        if($result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+}
 }
 ?>

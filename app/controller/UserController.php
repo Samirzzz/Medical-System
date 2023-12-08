@@ -100,5 +100,17 @@ class UserController {
             return false;
         }
     }
+    public static function editUser($email, $image, $id)
+    {
+        $sql = "UPDATE user_acc SET email='$email', image='$image' WHERE uid=$id";
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+    
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }
 ?>
