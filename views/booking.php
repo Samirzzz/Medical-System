@@ -1,10 +1,7 @@
 <?php
 include_once '..\includes\navigation.php';
-require_once '../app\controller\AppointmentController';
+require_once '../app\controller\AppointmentController.php';
 $appointmentcntrl =new AppointmentController($conn);
-if(isset($_GET['specialization'])){
-    $specUrl=$_GET['specialization'];
-};
 $spec =$appointmentcntrl->bookingOptions();
 ?>
 <!DOCTYPE html>
@@ -33,8 +30,11 @@ $spec =$appointmentcntrl->bookingOptions();
 
     <!-- <input type="submit" value = "search"onclick="updateFormAndSubmit(event)"> -->
     <div id='searching'>
-<?php if( $specUrl != "")
-{
+<?php
+$specUrl = null;
+
+if (isset($_GET['specialization'])) {
+    $specUrl = $_GET['specialization'];
     echo "<h3>" . "searching for : " . $specUrl . " " . "<h3>";
 }
 
