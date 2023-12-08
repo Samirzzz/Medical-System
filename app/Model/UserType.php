@@ -20,7 +20,7 @@ class Usertype{
                 $result=mysqli_query($GLOBALS['conn'],$sql);
                 $i=0;
                 while($row1=mysqli_fetch_array($result)){
-                    $this->pages[$i]=new Pages($row1[0]);//3amlt array of pages we wsltha fil table el talet bel utid
+                    $this->pages[$i]=new Pages($row1[0]);
                     $i++;
                 }
             }

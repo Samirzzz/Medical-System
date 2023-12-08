@@ -4,7 +4,7 @@ require_once '../app/Model/Patient.php';
 
 
 class UserController {
-    static function login($email, $pass)
+    public static function login($email, $pass)
     {
        $sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
    

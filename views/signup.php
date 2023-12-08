@@ -33,7 +33,18 @@
 <?php  
 
 include_once '..\includes\db.php';
-include "../views/classes.php";
+require_once '../app/Model/User.php';
+require_once '../app/Model/Patient.php';
+require_once '../app/Model/Doctor.php';
+require_once '../app/Model/Clinic.php';
+require_once '../app/Model/UserType.php';
+require_once '../app/Model/Pages.php';
+require_once '../app/controller/UserController.php';
+require_once '../app/controller/PatientController.php';
+require_once '../app/controller/DrController.php';
+require_once '../app/controller/ClinicController.php';
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $firstname = $_POST['Fname'];
@@ -77,10 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     if ($userType == 'patient') 
     {
-       $uid= User::signupUser($email, $password, 4,$imageDB);
+       $uid= UserController::signupUser($email, $password, 4,$imageDB);
     if ($uid !== false) {
 
-       if (Patient::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid)) {
+       if (PatientController::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid)) {
         header("Location:../views/login.php");
     } 
 }
@@ -90,18 +101,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     {
         $educ = $_POST['education'];
         $specialization = $_POST['specialization'];
-        $uid= User::signupUser($email, $password, 2,$imageDB); 
+        $uid= UserController::signupUser($email, $password, 2,$imageDB); 
     if ($uid !== false) {
-        if (Dr::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid)) {
+        if (DrController::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid)) {
             header("Location:../views/login.php");
         } 
     }
     }
     if ($userType == 'Clinc')
     {
-        $uid= User::signupUser($email, $password, 3); 
+        $uid= UserController::signupUser($email, $password, 3,$imageDB); 
         if ($uid !== false) {
-            if (Clinic::signupClinic($cname,$cloc,$cnumber,$uid) ) {
+            if (ClinicController::signupClinic($cname,$cloc,$cnumber,$uid) ) {
                 header("Location:../views/login.php");
             } 
         }
