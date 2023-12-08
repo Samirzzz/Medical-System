@@ -2,11 +2,8 @@
 include_once '..\includes\navigation.php';
 require_once '../app\controller\AppointmentController.php';
 $appointmentcntrl =new AppointmentController($conn);
-if(isset($_GET['specialization'])){
-    $specUrl=$_GET['specialization'];
-};
-    $spec =$appointmentcntrl->bookingOptions();
-    ?>
+ $spec =$appointmentcntrl->bookingOptions();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
