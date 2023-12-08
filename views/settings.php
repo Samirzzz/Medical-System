@@ -1,5 +1,5 @@
 <?php
-include_once '../includes/pnavigation.php';
+include_once '../includes/navigation.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

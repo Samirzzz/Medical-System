@@ -9,7 +9,7 @@
 </head>
 <body >
 <?php
-include_once'..\includes\navigation.php';
+include_once '..\includes\navigation.php';
 ?>
 <section class="vh-100" style="background-color:lightgray">
   <div class="container h-100">

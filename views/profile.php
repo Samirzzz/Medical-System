@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <?php
-    include_once "../includes/pnavigation.php";
+    include_once "../includes/navigation.php";
     include_once "../includes/db.php";
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -20,6 +20,12 @@
         } elseif ($UserType == 'doctor') {
             $sql = "DELETE FROM dr WHERE uid = " . $_SESSION['ID'];
         }
+        elseif ($UserType == 'clinic') {
+            $sql = "DELETE FROM clinic WHERE uid = " . $_SESSION['ID'];
+        }
+        // elseif ($UserType == 'admin') {
+        //     $sql = "DELETE FROM admin WHERE uid = " . $_SESSION['ID'];
+        // }
 
         $result = mysqli_query($conn, $sql);
 
