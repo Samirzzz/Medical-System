@@ -1,6 +1,4 @@
-<?php
-include_once '../includes/navigation.php';
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 

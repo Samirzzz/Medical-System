@@ -111,6 +111,18 @@ class UserController {
             return false;
         }
     }
+    public static function deleteUser($id)
+    {
+        $sql = "DELETE FROM user_acc WHERE uid=$id";
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+        if ($result) {
+            return true;
+        } else {
+            echo "Error deleting from 'patient': " . mysqli_error($GLOBALS['conn']);
+
+            return false;
+        }
+    }
     
 }
 ?>

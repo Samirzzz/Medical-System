@@ -36,7 +36,33 @@ class ClinicController
     
     
     }
-    
+
+    static function editClinic($cname,$cloc,$cnumber,$uid)
+    {
+        $sql = "UPDATE clinic Set cname='$cname', cloc='$cloc', cnumber='$cnumber' WHERE uid='$uid'";
+	    $result = mysqli_query($GLOBALS['conn'], $sql);
+        if($result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    public static function deleteClinic($id)
+    {
+        $sql = "DELETE FROM clinic WHERE uid=$id";
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+        if ($result) {
+            return true;
+        } else {
+            echo "Error deleting from 'patient': " . mysqli_error($GLOBALS['conn']);
+
+            return false;
+        }
+    }
     
 }
 ?>
