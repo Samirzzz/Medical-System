@@ -1,7 +1,9 @@
 <?php
-include_once("../includes/clinicNav.php");
-include_once ("./classes.php");
-$appointment1 = new Appointments($conn);
+include_once '..\includes\navigation.php';
+require_once '../app\controller\AppointmentController';
+$appointmentcntrl =new AppointmentController($conn);
+$clinic_id = $appointmentcntrl->getClinicID($_SESSION["ID"]);
+$clinic_name = $appointmentcntrl->getClinicName();
 $errors = array();
 
 if (isset($_GET['Appid'])) {
@@ -16,29 +18,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_time = htmlspecialchars($_POST['time']);
     $a_status = htmlspecialchars($_POST['status']);
     $a_price = htmlspecialchars($_POST['price']);
-    $a_did =htmlspecialchars($_POST['doctorid']);
-    $a_cid =htmlspecialchars($_POST['clinicid']);
-    $a_pid =htmlspecialchars($_POST['patientid']);
+    // $a_did =htmlspecialchars($_POST['doctorid']);
+    // $a_cid =htmlspecialchars($_POST['clinicid']);
+    // $a_pid =htmlspecialchars($_POST['patientid']);
 
-    $errors = $appointment1->validateAppointment($a_date, $a_time, $a_status,$a_price,$a_did, $a_cid, $a_pid);
+    $errors = $appointmentcntrl->validateAppointmentUpdate($a_date, $a_time, $a_status,$a_price);
 
 
     if (count($errors) === 0) 
     {
-  if ($appointment1->updateAppointment($appointmentId,$a_date, $a_time, $a_status,$a_price,$a_did, $a_cid, $a_pid)) {
+  if ($appointmentcntrl->updateAppointment($appointmentId,$a_date, $a_time, $a_status,$a_price)) {
             echo "Form submitted successfully!";
             header("location:../views/viewappointments.php");
         } else {
             echo "Error: " . mysqli_error($db);
         }
-    } else {
-        // Display validation errors
-        echo "Validation Errors:<br>";
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-    }
+    // } else {
+    //     // Display validation errors
+    //     echo "Validation Errors:<br>";
+    //     foreach ($errors as $error) {
+    //         echo $error . "<br>";
+    //     }
+    // }
 }
+} 
 ?>
 
 <!DOCTYPE html>
@@ -66,17 +69,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="p">price</label>
     <input type="text" placeholder="Enter price" id="p" name="price" value="<?php echo $appointment['price']; ?>">
     <br>
-    <label for="did">doctor id</label>
-    <input type="text" placeholder="Enter doctor id" id="did" name="doctorid" value="<?php echo $appointment['Did']; ?>">
+    <!-- <label for="did">doctor id</label>
+    <input type="text" placeholder="Enter doctor id" id="did" name="doctorid" value="">
     <br>
-    <label for="pid">patient id</label>
-    <input type="text" placeholder="Enter patient id" id="pid" name="patientid" value="<?php echo $appointment['Pid']; ?>">
+    < <label for="pid">patient id</label>
+    <input type="text" placeholder="Enter patient id" id="pid" name="patientid" value=""> -->
     <br>
-    <label for="cid">clinic id</label>
-    <input type="text" placeholder="Enter clinic id " id="cid" name="clinicid" value="<?php echo $appointment['Cid']; ?>">
-    <br>
+    <!-- <label for="cid">clinic id</label>
+    <input type="text" placeholder="Enter clinic id " id="cid" name="clinicid" value="">
+    <br> --> 
     <input type="hidden" name="appointment_id" value="<?php echo $appointmentId; ?>">
     <input type="submit" id="submit" name="submit"  >
+    <span class = "error">
+    <?php $appointmentcntrl->displayErrors($errors) ?>
+</span>
    </form>
    
    <script>

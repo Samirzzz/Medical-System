@@ -1,7 +1,7 @@
 <?php
-include_once("../includes/db.php");
-include_once ("./classes.php");
-$appointment = new Appointments($conn);
+include_once '..\includes\navigation.php';
+require_once '../app\controller\AppointmentController';
+$appointmentcntrl = new AppointmentController($conn);
 
 
 if (isset($_GET['Appid'])) {
@@ -9,7 +9,7 @@ if (isset($_GET['Appid'])) {
 
     
 
-    if ($appointment->deleteAppointment($appid)) {
+    if ($appointmentcntrl->deleteAppointment($appid)) {
        
         header("location:./viewappointments.php");
     } else {
