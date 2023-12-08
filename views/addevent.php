@@ -1,6 +1,6 @@
 <?php
 include_once '..\includes\navigation.php';
-require_once '../app\controller\AppointmentController';
+require_once '../app\controller\AppointmentController.php';
 $appointmentcntrl =new AppointmentController($conn);
 
 $errors = array();
@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     //         echo $error . "<br>";
     //     }
     // }
+}
 }
 ?>
 

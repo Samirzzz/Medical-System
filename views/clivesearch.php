@@ -3,18 +3,64 @@
         [id^="plink"] {
             display: none;
         }
+    #search-bar {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    #search-bar select {
+        margin-right: 10px;
+        padding: 5px;
+    }
+
+    #search-bar input[type="text"] {
+        padding: 5px;
+        flex: 1;
+    }
+
+    #search-results {
+        margin-top: 10px;
+    }
+
+    #search-results table {
+        width: 180%;
+        border-collapse: collapse;
+    }
+
+    #search-results table th,
+    #search-results table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    #search-results table th {
+        background-color: #f5f5f5;
+    }
+
+    #search-results a {
+        text-decoration: none;
+        color: black;
+        display: block;
+    }
+
 </style>
 <?php
-include("..\includes\db.php");
+require_once '../app/Model/Clinic.php';
+require_once '../app/controller/ClinicController.php';
+require_once '../app/controller/PatientController.php';
+require_once '../app/controller/DrController.php';
 
-include(".\classes.php");
+
+
+
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];
     $search = $_POST["query"];
 
     if ($usertype == 'clinic') {
-        $viewclinics = Clinic::clinicSearch($search);
+        $viewclinics = ClinicController::clinicSearch($search);
 
                    
                    if (!empty($viewclinics)) {
@@ -87,7 +133,7 @@ if (isset($_POST["query"])) {
                 // } 
     }
                  elseif ($usertype == 'patients') {
-                    $viewpatients = Patient::patientSearch($search);
+                    $viewpatients = PatientController::patientSearch($search);
     if (!empty($viewpatients)) {
         echo '<div id="search-results">';
         echo '<table>';
@@ -145,7 +191,7 @@ if (isset($_POST["query"])) {
                 } elseif ($usertype == 'doctors') {
                     
 
-                    $viewpatients = Dr::drSearch($search);
+                    $viewpatients = DrController::drSearch($search);
                     if (!empty($viewpatients)) {
                         echo '<div id="search-results">';
                         echo '<table>';

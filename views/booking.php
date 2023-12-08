@@ -1,40 +1,41 @@
 <?php
 include_once '..\includes\navigation.php';
-require_once '../app\controller\AppointmentController';
+require_once '../app\controller\AppointmentController.php';
 $appointmentcntrl =new AppointmentController($conn);
-if(isset($_GET['specialization'])){
-    $specUrl=$_GET['specialization'];
-};
-$spec =$appointmentcntrl->bookingOptions();
+ $spec =$appointmentcntrl->bookingOptions();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="booking.php" method="get" id="specializationForm" onsubmit="submitForm(event)">
-
-    <label for="sp">select a specialization</label>
-
-
-    <select id="sp" name="specialization" onchange="updateFormAndSubmit(event)">
-    <option value="">choose</option>
-    <?php foreach ($spec as $specs) { ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <form action="booking.php" method="get" id="specializationForm" onsubmit="submitForm(event)">
+            
+        <label for="sp">select a specialization</label>
         
-        <option value="<?php echo $specs['specialization']; ?>">
-            <?php echo $specs['specialization']; ?>
-        </option>
+        
+        <select id="sp" name="specialization" onchange="updateFormAndSubmit(event)">
+            <option value="">choose</option>
+            <?php foreach ($spec as $specs) { ?>
+                
+                <option value="<?php echo $specs['specialization']; ?>">
+                    <?php echo $specs['specialization']; ?>
+                </option>
     <?php } ?>
 </select>
 
 
     <!-- <input type="submit" value = "search"onclick="updateFormAndSubmit(event)"> -->
     <div id='searching'>
-<?php if( $specUrl != "")
-{
+<?php
+$specUrl = null;
+
+if (isset($_GET['specialization'])) {
+    $specUrl = $_GET['specialization'];
     echo "<h3>" . "searching for : " . $specUrl . " " . "<h3>";
 }
 

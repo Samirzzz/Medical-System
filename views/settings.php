@@ -99,9 +99,7 @@
     }
     </style>
 </head>
-<?php
-    include_once "../includes/navigation.php";
-    ?>
+
 <body>
     <div class="filter-container">
         <div class="dashboard-box">
@@ -133,7 +131,8 @@
                 <div class="dashboard-items setting-tabs">
                     <div>
                         <div class="h1-dashboard" style="color: #ff5050;">Delete Account</div><br>
-                        <div class="h3-dashboard" style="font-size: 15px;">Will Permanently Remove your Account</div>
+                        <div class="h3-dashboard" style="font-size: 15px;">Will Permanently Remove your Account
+                        </div>
                     </div>
                 </div>
             </button>

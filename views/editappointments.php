@@ -1,6 +1,6 @@
 <?php
 include_once '..\includes\navigation.php';
-require_once '../app\controller\AppointmentController';
+require_once '../app\controller\AppointmentController.php';
 $appointmentcntrl =new AppointmentController($conn);
 $clinic_id = $appointmentcntrl->getClinicID($_SESSION["ID"]);
 $clinic_name = $appointmentcntrl->getClinicName();

@@ -19,7 +19,7 @@
     }
 
     #search-results table {
-        width: 100%;
+        width: 180%;
         border-collapse: collapse;
     }
 
@@ -42,14 +42,15 @@
 </style>
 
 <?php
-include("../includes/db.php");
-include(".\classes.php");
+require_once '../app/Model/User.php';
+require_once '../app/controller/PatientController.php';
+
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];
     $search = $_POST["query"];
 
-    $viewpatients = Patient::patientSearch($search);
+    $viewpatients = PatientController::patientSearch($search);
     if (!empty($viewpatients)) {
         echo '<div id="search-results">';
         echo '<table>';
