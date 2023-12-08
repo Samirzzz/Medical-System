@@ -12,10 +12,15 @@ include_once "../includes/navigation.php";
 include_once "../includes/db.php";
 require_once '../app/Model/User.php';
 require_once '../app/Model/Patient.php';
+require_once '../app/Model/Doctor.php';
+require_once '../app/Model/Clinic.php';
 require_once '../app/Model/UserType.php';
 require_once '../app/Model/Pages.php';
 require_once '../app/controller/UserController.php';
 require_once '../app/controller/PatientController.php';
+require_once '../app/controller/DrController.php';
+require_once '../app/controller/ClinicController.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -40,8 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     elseif($Usertype=='clinic')
     {
-        $cloc = htmlspecialchars($_POST['cloc']);
-        $cname = htmlspecialchars($_POST['cname']);
+        $cloc = htmlspecialchars($_POST['clinicLocation']);
+        $cname = htmlspecialchars($_POST['clinicName']);
+        $cnumber = htmlspecialchars($_POST['clinicNumber']);
+
     }
 
     $edituser=UserController::editUser($email,$imageDB,$userID);
@@ -61,14 +68,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             }
         } elseif ($UserType == "doctor") {
-            $editpatient=DrController::editDoctor($Fname,$Lname,$number,$Education,$Specialization,$userID);
-            if($editpatient)
+            $editdoctor=DrController::editDoctor($Fname,$Lname,$number,$Education,$Specialization,$userID);
+            if($editdoctor)
             {
                 $_SESSION['email']=$email;
                 $_SESSION['firstname']=$Fname;
                 $_SESSION['lastname']=$Lname;
                 $_SESSION['educ']=$Education;
                 $_SESSION['specialization']=$Specialization;
+                header("Location:../views/admin.php");
+
+            }
+        }
+        elseif ($UserType == "clinic") {
+            $editclinic=ClinicController::editClinic($cname,$cloc,$cnumber,$userID);
+            if($editclinic)
+            {
+                $_SESSION['cname']=$cname;
+                $_SESSION['cnumber']=$cnumber;
+                $_SESSION['cloc']=$cloc;
                 header("Location:../views/admin.php");
 
             }
@@ -119,7 +137,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <label for="clinicLocation">Clinic Location</label>
                         <input type="text" class="form-control" id="clinicLocation" name="clinicLocation" value="' . $_SESSION["cloc"] . '">
                         <div class="error-message" id="clinicLocation-error"></div>
-                    </div>';
+                    </div>
+                    <div class="form-group">
+                    <label for="clinicLocation">Clinic Location</label>
+                    <input type="text" class="form-control" id="clinicLocation" name="clinicNumber" value="' . $_SESSION["cnumber"] . '">
+                    <div class="error-message" id="clinicLocation-error"></div>
+                </div>
+                    ';
             }
             elseif ($_SESSION["type"] == 'patient') {
                 echo '

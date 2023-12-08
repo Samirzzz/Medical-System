@@ -65,6 +65,17 @@ static function editPatient($firstname, $lastname, $number,$gender,$address,$uid
         }
 
 }
+public static function deletePatient($id)
+{
+	$sql = "DELETE FROM patient WHERE uid=$id";
+	$result = mysqli_query($GLOBALS['conn'], $sql);
+	if ($result) {
+		return true;
+	} else {
+		echo "Error deleting from 'patient': " . mysqli_error($GLOBALS['conn']);
+		return false;
+	}
+}
 }
 
 ?>

@@ -70,5 +70,17 @@ class DrController
         }
 
 }
+public static function deleteDoctor($id)
+{
+    $sql = "DELETE FROM dr WHERE uid=$id";
+    $result = mysqli_query($GLOBALS['conn'], $sql);
+    if ($result) {
+        return true;
+    } else {
+        echo "Error deleting from 'patient': " . mysqli_error($GLOBALS['conn']);
+
+        return false;
+    }
+}
 }
 ?>
