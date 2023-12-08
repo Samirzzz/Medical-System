@@ -16,7 +16,7 @@ class Dr extends user{
 	function __construct($id)
 	{
     $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.firstname, dr.lastname,dr.specialization,
-	dr.educ,dr.number,dr.uid,dr.cid,dr.did 
+	dr.educ,dr.number,dr.uid,dr.cid,dr.did,user_acc.image
 	FROM dr 
 	JOIN user_acc ON user_acc.uid = dr.uid where user_acc.uid=".$id;
 			$result = mysqli_query($GLOBALS['conn'],$sql);
@@ -32,7 +32,7 @@ class Dr extends user{
 	             	$this->number=$row["number"];
 	             	$this->cid=$row["cid"];
 	 				$this->uid=$row["uid"];
-	 				$this->uid=$row["image"];
+	 				$this->image=$row["image"];
 
 
 

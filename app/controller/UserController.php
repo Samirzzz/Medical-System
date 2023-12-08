@@ -1,9 +1,9 @@
 <?php
 require_once '../app/Model/User.php';
 require_once '../app/Model/Patient.php';
+require_once '../app/Model/Doctor.php';
+require_once '../app/Model/Admin.php';
 require_once '../app/Model/Clinic.php';
-
-
 class UserController {
     public static function login($email, $pass)
     {
