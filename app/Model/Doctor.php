@@ -33,10 +33,6 @@ class Dr extends user{
 	             	$this->cid=$row["cid"];
 	 				$this->uid=$row["uid"];
 	 				$this->image=$row["image"];
-
-
-
-
 	
 	}
 
