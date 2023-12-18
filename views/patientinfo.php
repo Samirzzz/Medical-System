@@ -22,6 +22,8 @@
     <?php 
     include_once '..\includes\navigation.php';
     require_once '../app/Model/Patient.php';
+    require_once '../app/controller/PatientController.php';
+
 
   
     if (isset($_GET['uid'])) {
@@ -171,18 +173,26 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
         $gender = $_POST['gender'];
         $address = $_POST['address'];
         $number = $_POST['number'];
+        $editpatient=PatientController::editPatient($firstname,$lastname,$number,$gender,$address,$uid);
+        if($editpatient)
+        {
+            $patient=new Patient($uid);
+        }
+        else{
+            echo "error";
+        }
 
 
 
 
-        $sql = "UPDATE patient
+        // $sql = "UPDATE patient
         
-        SET patient.firstname='$firstname',
-            patient.lastname='$lastname',
-            patient.gender='$gender',
-            patient.address='$address',
-            patient.number='$number'
-        WHERE patient.uid ='$uid'";
+        // SET patient.firstname='$firstname',
+        //     patient.lastname='$lastname',
+        //     patient.gender='$gender',
+        //     patient.address='$address',
+        //     patient.number='$number'
+        // WHERE patient.uid ='$uid'";
 
 
 
@@ -190,7 +200,7 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
 
     } 
 
-    $result = mysqli_query($conn, $sql);
+    // $result = mysqli_query($conn, $sql);
     }
     // if ($result) {
     //     if (isset($_POST["updateEmail"])) {
