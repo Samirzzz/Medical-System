@@ -99,7 +99,9 @@
     }
     </style>
 </head>
-
+<?php
+    include_once "../includes/navigation.php";
+    ?>
 <body>
     <div class="filter-container">
         <div class="dashboard-box">
