@@ -15,7 +15,10 @@
 
     <?php 
     include_once '..\includes\navigation.php';
-  
+require_once '../app/controller/PatientController.php';
+
+    $db = Database::getInstance();
+	$conn = $db->getConnection();	
 
 
     $sql = "select treat_id , treat_name from treatment";
@@ -90,7 +93,7 @@
         <div class="col-md-4">
             <div class="p-3 py-5">
                 <div class="col-md-12">
-                    <label class="labels" style="font-size: larger;">Medical History</label>
+                    <label class="labels" style="font-size: larger;">Patient Diagnose</label>
                     <br>
                     <br>
                     <form action="" method="post">
@@ -102,7 +105,7 @@
                         <select id="treatment_id" name="treatment_id">
                             <option value="">choose</option>
                             <?php foreach ($treat_opt as $opt) { ?>
-                                
+
                             <option value="<?php echo $opt['treat_id']; ?>">
                                 <?php echo $opt['treat_name']; ?>
                             </option>
@@ -117,6 +120,68 @@
                         <input type="text" placeholder="option value" id="optionvalue" name="optionvalue">
                         <br>
                         <button type="submit" name="sov">Submit</button>
+                    </form>
+                    <br>
+                    <div>
+    <table class="table mt-3" style="margin-left: -40px;">
+        <thead>
+            <tr>
+                <th>Diagnosis</th>
+                <th>Treatment</th>
+                <th>Option Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            
+            $sqlPid = "SELECT Pid, uid FROM patient WHERE uid = '$uid'";
+            $resultPid = mysqli_query($conn, $sqlPid);
+
+            if ($rowPid = mysqli_fetch_array($resultPid)) {
+                $uid = $rowPid['uid'];
+
+                $sql="SELECT diagnosis_name,diagnosis_id,treat_id FROM diagnosis WHERE uid='$uid'";
+                $result= mysqli_query($conn, $sql);
+                if($row=mysqli_fetch_array($result))
+                {
+                    $diagnosisName=$row['diagnosis_name'];
+                    $diagnosis_id=$row['diagnosis_id'];
+                    $treatID=$row['treat_id'];
+                     $sql="SELECT treat_name FROM treatment WHERE treat_id='$treatID'";
+                    $result= mysqli_query($conn, $sql);
+                    if($row=mysqli_fetch_array($result))
+                    {
+                        $treatName=$row['treat_name'];
+                        $sql="SELECT value FROM d_s_o_v WHERE diagnosis_id='$diagnosis_id'";
+                        $result= mysqli_query($conn, $sql);
+                        if($row=mysqli_fetch_array($result))
+                        {
+                            $opt_value=$row['value'];
+                        }
+
+
+                    }
+                    
+
+
+
+                }
+
+                if (!empty($diagnosisName)) {
+                    echo '<tr>';
+                    echo '<td>' . $diagnosisName . '</td>';
+                    echo '<td>' . $treatName . '</td>';
+                    // echo '<td>' . $row["opt_name"] . '</td>';
+                    // echo '<td>' . $opt_value . '</td>';
+                    echo '</tr>';
+                }
+                
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+
 
 
                 </div>
@@ -124,22 +189,24 @@
         </div>
     </div>
     </div>
-    </form>
+
 
     <?php
     if($_SERVER['REQUEST_METHOD']== "POST"){
         if (isset($_GET['uid'])) {
             $uid = $_GET['uid'];
             if (isset($_POST["con"])) {
+
                 $firstname = $_POST['firstname'];
                 $lastname = $_POST['lastname'];
                 $gender = $_POST['gender'];
                 $address = $_POST['address'];
                 $number = $_POST['number'];
-                $editpatient=PatientController::editPatient($firstname,$lastname,$number,$gender,$address,$uid);
+                $editpatient=PatientController::editPatient($firstname,$lastname,$number,$gender,$address,$uid,$conn);
                 if($editpatient)
                 {
                     $patient=new Patient($uid);
+
                 }
                 else{
                     echo "error";
@@ -157,29 +224,29 @@
     
           
                 $sqlInsertDiagnosis = "INSERT INTO diagnosis (diagnosis_name, treat_id, uid) VALUES ('$diagnoseName', '$treatmentId', '$uid')";
-                $resultInsertDiagnosis = mysqli_query($GLOBALS['conn'], $sqlInsertDiagnosis);
+                $resultInsertDiagnosis = mysqli_query($conn, $sqlInsertDiagnosis);
     
                 if ($resultInsertDiagnosis)
                  {
-                    $diagnosisId = mysqli_insert_id($GLOBALS['conn']); 
+                    $diagnosisId = mysqli_insert_id($conn); 
                 } else
                  {
                     
-                    echo "Error inserting diagnosis: " . mysqli_error($GLOBALS['conn']);
+                    echo "Error inserting diagnosis: " . mysqli_error($conn);
                     exit;
                 }
             }
     
-            $optionId = $_POST['options'];
+            $optionId = $_POST['options'];  
             $optionValue = $_POST['optionvalue'];
     
             $sql = "INSERT INTO d_s_o_v (diagnosis_id, treat_id, d_s_o_id, value) VALUES ('$diagnosisId', '$treatmentId', '$optionId', '$optionValue')";
-            $result = mysqli_query($GLOBALS['conn'], $sql);
+            $result = mysqli_query($conn, $sql);
     
             if ($result) {
                 echo "trueee";
             } else {
-                echo "Error inserting into d_s_o_v: " . mysqli_error($GLOBALS['conn']);
+                echo "Error inserting into d_s_o_v: " . mysqli_error($conn);
             }
         }
     
@@ -197,7 +264,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: 'get_options.php?treat_id=1',
+            url: 'get_options.php',
             data: {
                 treat_id: selectedValue
             },

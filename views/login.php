@@ -35,11 +35,11 @@
             }
 
             if (email === "") {
-            document.getElementById("user-err").innerHTML = "Email is required.";
+            document.getElementById("user-err").innerHTML = " Email is required.";
             isValid = false;
         }
         if (password === "") {
-            document.getElementById("pass-err").innerHTML = "Password is required.";
+            document.getElementById("pass-err").innerHTML = " Password is required.";
             isValid = false;
         }
 
@@ -55,9 +55,11 @@ require_once '../app/controller/UserController.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
     $email = $_POST["email"];
     $pass = $_POST["password"];
-    $UserObject = UserController::login($email, $pass);
+    $UserObject = UserController::login($email, $pass,$conn);
 
     if ($UserObject) {
         session_start();
@@ -92,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $_SESSION["aid"] = $UserObject->id;
             $_SESSION["name"] = $UserObject->name;
 
-            header("Location: admin.php");
+            header("Location: adminmain.php");
             exit();
         } elseif ($UserObject instanceof Clinic) {
             $_SESSION["Cid"] = $clinicCid; 

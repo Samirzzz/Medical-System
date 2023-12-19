@@ -1,9 +1,9 @@
 <?php
 class Database {
-    public static $instance;
-    public $conn;
+    private static $instance;
+    private $conn;
 
-    public function __construct() {
+    private function __construct() {
         $db_server = 'localhost';
         $db_user = 'root';
         $db_pass = '';
@@ -28,11 +28,8 @@ class Database {
         return $this->conn;
     }
 
-    // You may add other methods for interacting with the database if needed
 }
 
-// Usage:
-$database = Database::getInstance();
-$conn = $database->getConnection();
 
-// Now, use $conn to perform your database operations
+
+

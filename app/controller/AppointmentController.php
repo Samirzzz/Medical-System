@@ -2,11 +2,13 @@
  require_once '../app/Model/Appointment.php';
 class AppointmentController
 {
+    public $db;
+	public $conn;
    public $appointment;
-   public $conn;
-   public function __construct($conn){
-    $this->conn = $conn;
-    $this->appointment = new Appointments($this->conn);
+   public function __construct(){
+    $db = Database::getInstance();
+	$this->conn = $db->getConnection();
+    $this->appointment=new Appointments();
   
 }
 public function getAppointmentInstance(){
@@ -92,7 +94,7 @@ public function getClinicID($id)
     clinic.cnumber,clinic.workhrs,clinic.cloc
     FROM clinic 
     JOIN user_acc ON user_acc.uid = clinic.uid where user_acc.uid=".$id;
-    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $result = mysqli_query($this->conn,$sql);
     if($row=mysqli_fetch_array($result)){
         // parent::__construct($row["uid"]);
     
@@ -102,13 +104,13 @@ public function getClinicID($id)
     return $CID;
 
 }
-public function getDocID($id)
+public function getDocID($id) //test
  {
     // return $_SESSION["ID"];
     $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.did, dr.uid
     FROM dr 
     JOIN user_acc ON user_acc.uid = dr.uid where user_acc.uid=".$id;
-    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $result = mysqli_query($this->conn,$sql);
     if($row=mysqli_fetch_array($result)){
         // parent::__construct($row["uid"]);
     
@@ -153,6 +155,8 @@ public function addAppointment($date, $time, $status, $price, $doctorId, $clinic
         $this->appointment->doctorId=$doctorId;
         $this->appointment->clinicId=$clinicId;
         $this->appointment->patientId=$patientId;
+        header("location: ./viewappointments.php");
+
         
         return true;
     } else {
@@ -165,6 +169,7 @@ public function updateAppointment($appointmentId,$a_date, $a_time, $a_price){
     $res = mysqli_query($this->conn, $sql);
 
     if ($res) {
+
         $this->appointment->date=$a_date;
         $this->appointment->time=$a_time;
        
@@ -225,7 +230,7 @@ if ($res2) {
 
 
 
-public function getDoctorAppointments($docID){
+public function getDoctorAppointments($docID){ //test
     $sql = "SELECT * FROM appointments where did =".$docID;
    $result = mysqli_query($this->conn,$sql);
    
@@ -306,7 +311,7 @@ public function getSpecializationAppointments($specialization){
     JOIN
         clinic c ON a.Cid = c.Cid
     WHERE
-        d.specialization = '$specialization'";
+        d.specialization = '$specialization' and a.status = 'available' ";
 
 
     $result = mysqli_query($this->conn,$sql);
@@ -320,10 +325,11 @@ public function getSpecializationAppointments($specialization){
             echo "<td>" . $row['time'] . "</td>";      
             echo "<td>" . $row['price'] . "</td>";     
             echo "<td>" . $row['cname'] . "</td>";
-            echo "<td><a href='./booking.php?Appid=" . $row['Appid'] . "'>Book Now </a></td>";
+            echo "<td><a href='./patientReservations.php?Appid=" . $row['Appid'] . "'>Book Now </a></td>";
             echo "</tr>";
         }
-    } else {
+    } else 
+    {
         echo  "<div class='no-appointments-found'><h1>NO APPOINTMENTS FOUND!</h1></div>";
         
     }
@@ -334,11 +340,105 @@ public function getSpecializationAppointments($specialization){
 
 
 
-}    
+}   
+public function getPatientID($id)
+ {
+    
+    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, patient.Pid, patient.uid
+    FROM patient 
+    JOIN user_acc ON user_acc.uid = patient.uid where user_acc.uid=".$id;
+    $result = mysqli_query($this->conn,$sql);
+    if($row=mysqli_fetch_array($result)){
+        
+    
+                    $PID=$row["Pid"];
 
+    }
+    return $PID;
 
+} 
+public function bookForPatient($pid,$appid)
+{
+    $sql = "UPDATE appointments SET pid = '$pid',status='reserved' WHERE Appid = $appid";
+    $res = mysqli_query($this->conn, $sql);
+    if ($res) {
+        $this->appointment->pid=$pid;
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
+}
+public function viewPatientAppointments($pid){
+    $sql = "SELECT
+    a.Appid, a.date, a.time, a.price, a.Did, a.Cid,
+    d.firstname, d.lastname, 
+    c.cname
+FROM
+    appointments a
+JOIN
+    dr d ON a.Did = d.Did
+JOIN
+    clinic c ON a.Cid = c.Cid
+WHERE
+    a.Pid =".$pid;
 
+    $result = mysqli_query($this->conn,$sql);
+    
+    if ($result->num_rows > 0) {
+     while ($row = $result->fetch_assoc()) {
+         echo "<tr>";
+         echo "<td>" . $row['date'] . "</td>";
+         echo "<td>" . $row['time'] . "</td>";
+        
+         echo "<td>" . $row['firstname'] ." ". $row['lastname']. "</td>";
+        
+         echo "<td>" . $row['cname'] . "</td>";
+         echo "<td>" . $row['price'] . "</td>";
+         echo "<td><a href='./cancelReservation.php?Appid=" . $row['Appid'] . "'>Cancel</a> </td>";
+        //  $sql2 = "Select cname from clinic WHERE Cid = '{$row['Cid']}'";
+        //  $res2=mysqli_query($this->conn,$sql2);
+        //  if ($res2->num_rows>0){
+        //      $clincirow = $res2->fetch_assoc();
+        //      echo "<td>" . $clincirow['cname'] . "</td>";
+        //  }
+        
+     
+     
+         echo "</tr>";
+     }
+ } else {
+     echo "<h1>" ."No appointments found"."</h1" ;
+ }
+//  $sql2="select cname from clinic where cid = {$ID}";
+//  $res2=mysqli_query($this->conn,$sql2);
+//  if ($res2) {
+//      $row = mysqli_fetch_assoc($res2);
+//      $_SESSION['AppView'] = $row['cname'];
+//  }
+}
 
+// <th>Date</th>
+// <th>Time</th>
+// <th>Doctor</th>
+// <th>Actions</th>
+// <th>Clinic</th>
+// <th>Price</th>
+public function cancelReservation($pid,$appid)
+{
+    $sql = "UPDATE appointments SET pid = NULL , status='available' WHERE Appid = $appid";
+    $res = mysqli_query($this->conn, $sql);
+    if ($res) {
+        
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
+
+}
 
 }
 

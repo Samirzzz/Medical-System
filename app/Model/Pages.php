@@ -8,12 +8,17 @@ class Pages{
     public $linkaddress;
     public $icons;
     public $class;
+    public $db;
+    public $conn;
 
 
     function __construct($id){
+        $this->db = Database::getInstance();
+	    $this->conn = $this->db->getConnection();
+
         if ($id !=""){	
             $sql="select * from pages where pgid=$id";
-            $result2=mysqli_query($GLOBALS['conn'],$sql) ;
+            $result2=mysqli_query($this->conn,$sql) ;
             if ($row2 = mysqli_fetch_array($result2)){
                 $this->name=$row2["name"];
                 $this->linkaddress=$row2["linkaddress"];
@@ -28,9 +33,9 @@ class Pages{
 
     }
 
-static function getallpages(){
+static function getallpages($conn){
     $sql="select * from pages";
-    $PageDataSet = mysqli_query($GLOBALS['conn'],$sql);		
+    $PageDataSet = mysqli_query($conn,$sql);		
     $i=0;
     $Result=array();
     while ($row = mysqli_fetch_array($PageDataSet))	{

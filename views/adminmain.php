@@ -11,9 +11,9 @@
 </head>
 <?php
 include_once '..\includes\navigation.php';
-$db = Database::getInstance();
-	$conn = $db->getConnection();	
 
+    $db = Database::getInstance();
+	$conn = $db->getConnection();	
 
 
 
@@ -23,7 +23,7 @@ $db = Database::getInstance();
 
 <div class="main--container">
             <div class="section--title">
-                <h3 class="title">Welcome back <?php  echo $_SESSION["firstname"] ?></h3>
+                <h3 class="title">Welcome back <?php  echo $_SESSION["email"] ?></h3>
                 
             </div>
             <div class="cards">
@@ -45,16 +45,16 @@ $db = Database::getInstance();
                 <div class="card card-2">
                     <div class="card--title">
                         <span class="card--icon icon"><i class="ri-gift-line"></i></span>
-                        <span>Sales</span>
+                        <span>Clinics</span>
+                        
                     </div>
-                    <h3 class="card--value"><?php $sql = $sql = "SELECT Sum(amount) from billing";
+                   
+                    <h3 class="card--value"><?php $sql = "SELECT * from clinic";
                     if ($result = mysqli_query($conn, $sql)) {
 
-                        $rowsum = mysqli_fetch_assoc( $result );
-                        echo $rowsum['Sum(amount)'];
+                        $rowcount = mysqli_num_rows( $result );
                     }
-                        ?> </i></h3>
-                    <div class="chart">
+                    echo "$rowcount";    ?> </i></h3>                    <div class="chart">
                         <canvas id="orders"></canvas>
                     </div>
                 </div>
@@ -63,8 +63,12 @@ $db = Database::getInstance();
                         <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
                         <span>Appointments</span>
                     </div>
-                    <h3 class="card--value">587 <i class="ri-arrow-up-circle-fill up"></i></h3>
-                    <h5 class="more">23 more than usual</h5>
+                    <h3 class="card--value"><?php $sql = "SELECT * from appointments";
+                    if ($result = mysqli_query($conn, $sql)) {
+
+                        $rowcount = mysqli_num_rows( $result );
+                    }
+                    echo "$rowcount";    ?> </i></h3>
                     <div class="chart">
                         <canvas id="products"></canvas>
                     </div>
@@ -86,22 +90,8 @@ $db = Database::getInstance();
                 </div>
             </div>
             <div class="target-vs-sales--container">
-                <div class="section--title">
-                    <h3 class="title">Schedule</h3>
-                    <div class="sales--value">
-                        <div class="target">
-                            <i class="ri-checkbox-blank-circle-fill circle"></i>
-                            Finished <span>&nbsp; </span>
-                        </div>
-                        <div class="current">
-                            <i class="ri-checkbox-blank-circle-fill circle"></i>
-                            Not  <span>&nbsp;Finished</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="target--vs--sales">
-                    <canvas id="tarsale"></canvas>
-                </div>
+               
+               
             </div>
             <div class="table">
                 <div class="section--title">
@@ -111,38 +101,21 @@ $db = Database::getInstance();
                 <table>
                     <thead>
                         <tr>
-                            <th>Patient name</th>
-                            <th>Patient ID</th>
-                            <th>Age</th>
-                            <th>Mobile Number</th>
-                            <th>Clinic</th>
-                            <th>Next time Appointment</th>
+                            <th>id</th>
+                            <th>email</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                             <?php 
-$sql = "SELECT
-patient.firstname,
-patient.lastname,
-patient.age,
-patient.pid,
-
-patient.number
-FROM
-patient
-
--- JOIN
--- medications ON patient.Pid=medications.Pid  
-
-";
+$sql = "SELECT * FROM user_acc WHERE usertype_id = 1";
 $result = mysqli_query($conn,$sql);
 while ($row = $result->fetch_array()) {
     echo '<tr>';
 
-    echo '<td>'.$row["firstname"]. '</td>';
-    echo '<td>'.$row["pid"].    '</td>';
-    echo '<td>'.$row["age"].'</td>';
-    echo '<td>'.$row["number"].'</td>';
+    echo '<td>'.$row["uid"]. '</td>';
+    echo '<td>'.$row["email"].    '</td>';
+  
     //echo '<td>'.$row["diagnosis"].'</td>';
    echo '</tr>';
     
