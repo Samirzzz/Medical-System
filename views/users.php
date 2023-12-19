@@ -58,9 +58,9 @@ include_once '..\includes\navigation.php';
                   <label class="form-label" for="confpass">Confirm password</label>
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="radio" name="type" id="userType" value="doctor"/>
+                  <input type="radio" name="type" id="type" value="doctor"/>
                   <class="form-label" for="userType">Doctor</label><br>
-                  <input type="radio" name="type" id="userType" value="patient" />
+                  <input type="radio" name="type" id="type" value="patient" />
                   <label class="form-label" for="userType">Patient</label>
                 </div>
                 <button type="submit" class="btn btn-success btn-block btn-lg">Save</button>
@@ -150,9 +150,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $pass = htmlspecialchars($_POST["pass"]);
     $type = htmlspecialchars($_POST["type"]);
+    if($type=='patient')
+    {
+      $sql_user_acc = "INSERT INTO user_acc (email, pass, usertype_id) VALUES ('$email', '$pass', 4)";
+    }
+    else if($type=='doctor')
+    {
+      $sql_user_acc = "INSERT INTO user_acc (email, pass, usertype_id) VALUES ('$email', '$pass', 2)";
+    }
 
-    $sql_user_acc = "INSERT INTO user_acc (email, pass, type) VALUES ('$email', '$pass', '$type')";
     $result_user_acc = mysqli_query($conn, $sql_user_acc);
+
 
     if ($result_user_acc) {
         $last_uid = mysqli_insert_id($conn);
@@ -161,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result_patient = mysqli_query($conn, $sql_patient);
 
         if ($result_patient) {
-            header("Location: users.php");
+            return true;
         } else {
             echo "Error inserting data into the patient table: " . mysqli_error($conn);
         }
