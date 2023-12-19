@@ -53,7 +53,7 @@ public function validateAppointment($date, $time, $status, $price, $doctorId, $c
 
     return $errors;
 }
-public function validateAppointmentUpdate($date, $time, $status, $price)
+public function validateAppointmentUpdate($date, $time, $price)
 {
     $errors = array();
 
@@ -66,9 +66,9 @@ public function validateAppointmentUpdate($date, $time, $status, $price)
         $errors[] = "Time is required";
     }
 
-    if (empty($status)) {
-        $errors[] = "Status is required";
-    }
+    // if (empty($status)) {
+    //     $errors[] = "Status is required";
+    // }
     if (empty($price)) {
         $errors[] = "Price is required";
     }
@@ -160,14 +160,14 @@ public function addAppointment($date, $time, $status, $price, $doctorId, $clinic
     }
 }
 
-public function updateAppointment($appointmentId,$a_date, $a_time, $a_status,$a_price){
-    $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time', status = '$a_status' ,price ='$a_price' WHERE Appid = $appointmentId";
+public function updateAppointment($appointmentId,$a_date, $a_time, $a_price){
+    $sql = "UPDATE appointments SET date = '$a_date', time = '$a_time',  price ='$a_price' WHERE Appid = $appointmentId";
     $res = mysqli_query($this->conn, $sql);
 
     if ($res) {
         $this->appointment->date=$a_date;
         $this->appointment->time=$a_time;
-        $this->appointment->status=$a_status;
+       
         $this->appointment->price=$a_price;
         
         return true;
@@ -212,7 +212,7 @@ public function viewAppointments($ID){
         echo "</tr>";
     }
 } else {
-    echo "No appointments found.";
+    echo "<h1>" ."No appointments found"."</h1" ;
 }
 $sql2="select cname from clinic where cid = {$ID}";
 $res2=mysqli_query($this->conn,$sql2);
@@ -237,7 +237,7 @@ public function getDoctorAppointments($docID){
         echo "<td>" . $row['date'] . "</td>";
         echo "<td>" . $row['time'] . "</td>";
         echo "<td>" . $row['status'] . "</td>";
-        echo "<td><a href='./editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='./deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
+        echo "<td><a href='./deleteappointments.php?Appid=" . $row['Appid'] . "'>Cancel</a></td>";
         $sql2 = "Select cname from clinic WHERE Cid = '{$row['Cid']}'";
         $res2=mysqli_query($this->conn,$sql2);
         if ($res2->num_rows>0){
@@ -250,7 +250,7 @@ public function getDoctorAppointments($docID){
         echo "</tr>";
     }
 } else {
-    echo "No appointments found.";
+    echo "<h1>" ."No appointments found"."</h1" ;
 }
 $sql2 = "SELECT firstname, lastname FROM dr WHERE did = {$docID}";
 $res2 = mysqli_query($this->conn, $sql2);

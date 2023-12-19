@@ -16,18 +16,17 @@ $appointment = mysqli_fetch_assoc($result);
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_date = htmlspecialchars($_POST['date']);
     $a_time = htmlspecialchars($_POST['time']);
-    $a_status = htmlspecialchars($_POST['status']);
     $a_price = htmlspecialchars($_POST['price']);
     // $a_did =htmlspecialchars($_POST['doctorid']);
     // $a_cid =htmlspecialchars($_POST['clinicid']);
     // $a_pid =htmlspecialchars($_POST['patientid']);
 
-    $errors = $appointmentcntrl->validateAppointmentUpdate($a_date, $a_time, $a_status,$a_price);
+    $errors = $appointmentcntrl->validateAppointmentUpdate($a_date, $a_time, $a_price);
 
 
     if (count($errors) === 0) 
     {
-  if ($appointmentcntrl->updateAppointment($appointmentId,$a_date, $a_time, $a_status,$a_price)) {
+  if ($appointmentcntrl->updateAppointment($appointmentId,$a_date, $a_time, $a_price)) {
             echo "Form submitted successfully!";
             header("location:../views/viewappointments.php");
         } else {
@@ -63,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="t">Time</label>
     <input type="text" placeholder="Enter the time" id="t" name="time" value="<?php echo $appointment['time']; ?>">
     <br>
-    <label for="s">Status</label>
-    <input type="text" placeholder="Enter status" id="s" name="status" value="<?php echo $appointment['status']; ?>">
+    <!-- <label for="s">Status</label>
+    <input type="text" placeholder="Enter status" id="s" name="status" value=""> -->
     <br>
     <label for="p">price</label>
     <input type="text" placeholder="Enter price" id="p" name="price" value="<?php echo $appointment['price']; ?>">
