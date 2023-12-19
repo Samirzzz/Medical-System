@@ -1,7 +1,9 @@
 <?php
 include_once '..\includes\navigation.php';
 require_once '../app\controller\AppointmentController.php';
-$appointmentcntrl =new AppointmentController($conn);
+$db = Database::getInstance();
+$conn = $db->getConnection();	
+$appointmentcntrl =new AppointmentController();
 
 $errors = array();
 $clinic_id = $appointmentcntrl->getClinicID($_SESSION["ID"]);

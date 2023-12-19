@@ -1,9 +1,13 @@
 <?php
-include_once "classes.php";
 include_once '..\includes\db.php';
 include_once '..\includes\navigation.php';
+require_once '../app/Model/User.php';
+require_once '../app/Model/Pages.php';
+$db = Database::getInstance();
+	$conn = $db->getConnection();
 
-if(isset($_POST['submit'])){ //check if form was submitted
+if(isset($_POST['submit'])){ 
+		
 	$sql="delete from usertype_pages where usertypeid=".$_POST["UserType"].";";
 	mysqli_query($conn,$sql);
 	foreach ($_POST["choosen-pages"] as $page){
@@ -105,7 +109,7 @@ tbody tr:hover{
 				<td>
 					<select id="leftValues" STYLE="width: 160px;box-sizing: border-box;" size="5" multiple>
 						<?php
-						$obj=Pages::getallpages();
+						$obj=Pages::getallpages($conn);
 						for ($i=0;$i<count($obj);$i++){
 							echo "<option value='".$obj[$i]->pgid."'>".$obj[$i]->name."</option>";
 						}?>
@@ -128,10 +132,10 @@ tbody tr:hover{
 				<td>
 					<select name="UserType">
 						<?php 
-						$obj=UserType::getallusertypes(); 
+						$obj=UserType::getallusertypes($conn); 
 						for ($i=0;$i<count($obj);$i++){ 
 							echo "<option value='".$obj[$i]->utid."'>".$obj[$i]->name."</option>";
-						}?>							
+						} ?>							
 					</select>
 				</td>
 			</tr>

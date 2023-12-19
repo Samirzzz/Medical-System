@@ -10,9 +10,8 @@
     <title>VeZeeTa</title>
 </head>
 <?php
-include_once '..\includes\navigation.php';
-$db = Database::getInstance();
-	$conn = $db->getConnection();	
+include_once'..\includes\navigation.php';
+
 
 
 
@@ -23,7 +22,7 @@ $db = Database::getInstance();
 
 <div class="main--container">
             <div class="section--title">
-                <h3 class="title">Welcome back <?php  echo $_SESSION["firstname"] ?></h3>
+                <h2 class="title">Welcome back <?php  echo $_SESSION["email"] ?></h2>
                 
             </div>
             <div class="cards">
@@ -45,13 +44,14 @@ $db = Database::getInstance();
                 <div class="card card-2">
                     <div class="card--title">
                         <span class="card--icon icon"><i class="ri-gift-line"></i></span>
-                        <span>Sales</span>
+                        <span>Clinics</span>
                     </div>
-                    <h3 class="card--value"><?php $sql = $sql = "SELECT Sum(amount) from billing";
+                    <h3 class="card--value"><?php $sql = $sql = "SELECT cname from clinic";
                     if ($result = mysqli_query($conn, $sql)) {
-
-                        $rowsum = mysqli_fetch_assoc( $result );
-                        echo $rowsum['Sum(amount)'];
+                        while('cname'!= null){
+                            $rowsum = mysqli_fetch_assoc( $result );
+                            echo $rowsum['cname'];
+                        }
                     }
                         ?> </i></h3>
                     <div class="chart">
@@ -135,7 +135,7 @@ patient
 -- medications ON patient.Pid=medications.Pid  
 
 ";
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 while ($row = $result->fetch_array()) {
     echo '<tr>';
 

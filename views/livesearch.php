@@ -44,13 +44,15 @@
 <?php
 require_once '../app/Model/User.php';
 require_once '../app/controller/PatientController.php';
+$db = Database::getInstance();
+$conn = $db->getConnection();	
 
 
 if (isset($_POST["query"])) {
     $usertype = $_POST['type'];
     $search = $_POST["query"];
 
-    $viewpatients = PatientController::patientSearch($search);
+    $viewpatients = PatientController::patientSearch($search,$conn);
     if (!empty($viewpatients)) {
         echo '<div id="search-results">';
         echo '<table>';

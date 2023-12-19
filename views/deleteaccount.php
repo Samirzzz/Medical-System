@@ -16,32 +16,33 @@ require_once '../app/controller/ClinicController.php';
 
         $UserType = $_SESSION["type"];
         $userID=$_SESSION['ID'];
-
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
         if ($UserType == 'patient') {
-            $deletepatient=PatientController::deletePatient($userID);
+            $deletepatient=PatientController::deletePatient($userID,$conn);
             if($deletepatient)
             {
-                $deleteuser=UserController::deleteUser($userID);
+                $deleteuser=UserController::deleteUser($userID,$conn);
                 if($deleteuser)
                 {
                     header("location:home.php");
                 }
             }
         } elseif ($UserType == 'doctor') {
-            $deletedoctor=DrController::deleteDoctor($userID);
+            $deletedoctor=DrController::deleteDoctor($userID,$conn);
             if($deletedoctor)
             {
-                $deleteuser=UserController::deleteUser($userID);
+                $deleteuser=UserController::deleteUser($userID,$conn);
                 if($deleteuser)
                 {
                     header("location:home.php");
                 }
             }
         }elseif ($UserType == 'clinic') {
-            $deleteclinic=ClinicController::deleteClinic($userID);
+            $deleteclinic=ClinicController::deleteClinic($userID,$conn);
             if($deleteclinic)
             {
-                $deleteuser=UserController::deleteUser ($userID);
+                $deleteuser=UserController::deleteUser ($userID,$conn);
                 if($deleteuser)
                 {
                     header("location:home.php");

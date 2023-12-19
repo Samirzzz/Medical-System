@@ -13,7 +13,9 @@
 <body>
     
 <?php
-include_once'..\includes\navigation.php';
+include_once '..\includes\navigation.php';
+$db = Database::getInstance();
+	$conn = $db->getConnection();	
 ?>
     
     <div class="container">

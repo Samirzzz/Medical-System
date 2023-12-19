@@ -10,13 +10,16 @@ class user{
 	public $id;
     public $usertype;
 	public $image;
-
+	public $db;
+	public $conn;
 function __construct($id)
 {
+	$db = Database::getInstance();
+	$conn = $db->getConnection();
 if($id!="")
 {
     $sql="select * from user_acc where uid=$id";
-    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $result = mysqli_query($conn,$sql);
 if($row=mysqli_fetch_array($result)){
                 $this->email=$row["email"];
 				$this->pass=$row["pass"];

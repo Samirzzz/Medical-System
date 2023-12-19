@@ -1,5 +1,7 @@
 <?php
 include_once "..\includes\db.php";
+$db = Database::getInstance();
+	$conn = $db->getConnection();
 if (isset($_GET['uid'])) {
     $uid = $_GET['uid'];
     $pid = $_GET['pid'];
@@ -17,7 +19,7 @@ if (isset($_GET['uid'])) {
     } else {
         echo "Error deleting drs: " . $conn->error;
     }
-    $sql = "DELETE FROM medications WHERE uid = $uid";
+    $sql = "DELETE FROM diagnosis WHERE uid = $uid";
     if ($conn->query($sql) === TRUE) {
         header("location:adminsearch.php");
     } else {

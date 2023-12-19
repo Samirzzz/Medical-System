@@ -13,17 +13,20 @@ class Patient extends user{
 	public $uid;
 	public $pid;
 	public $image;
-
+	public $db;
+	public $conn;
 
 
 	
 	function __construct($id)
 	{
+		$this->db = Database::getInstance();
+		$this->conn = $this->db->getConnection();	
     $sql = "SELECT user_acc.uid,user_acc.image, user_acc.email,user_acc.usertype_id, patient.firstname, patient.lastname,patient.gender,
 	patient.address,patient.number,patient.age,patient.uid,patient.pid 
 	FROM patient 
 	JOIN user_acc ON user_acc.uid = patient.uid where user_acc.uid=".$id;
-			$result = mysqli_query($GLOBALS['conn'],$sql);
+			$result = mysqli_query($this->conn,$sql);
 	        if($row=mysqli_fetch_array($result)){
 				parent::__construct($row["uid"]);
 					$this->pid=$row["pid"];

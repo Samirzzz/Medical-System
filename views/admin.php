@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <title>VeZeeTa</title>
+    <title>Tabeeby</title>
 </head>
 <?php
-include_once'..\includes\navigation.php';
+include_once '..\includes\navigation.php';
 
-
+    $db = Database::getInstance();
+	$conn = $db->getConnection();	
 
 
 
@@ -46,13 +47,8 @@ include_once'..\includes\navigation.php';
                         <span class="card--icon icon"><i class="ri-gift-line"></i></span>
                         <span>Sales</span>
                     </div>
-                    <h3 class="card--value"><?php $sql = $sql = "SELECT Sum(amount) from billing";
-                    if ($result = mysqli_query($conn, $sql)) {
-
-                        $rowsum = mysqli_fetch_assoc( $result );
-                        echo $rowsum['Sum(amount)'];
-                    }
-                        ?> </i></h3>
+                   
+                         </i></h3>
                     <div class="chart">
                         <canvas id="orders"></canvas>
                     </div>
@@ -134,7 +130,7 @@ patient
 -- medications ON patient.Pid=medications.Pid  
 
 ";
-$result = $conn->query($sql);
+$result = mysqli_query($conn,$sql);
 while ($row = $result->fetch_array()) {
     echo '<tr>';
 
