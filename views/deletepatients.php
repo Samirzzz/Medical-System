@@ -17,7 +17,7 @@ if (isset($_GET['uid'])) {
     } else {
         echo "Error deleting drs: " . $conn->error;
     }
-    $sql = "DELETE FROM medications WHERE uid = $uid";
+    $sql = "DELETE FROM diagnosis WHERE uid = $uid";
     if ($conn->query($sql) === TRUE) {
         header("location:adminsearch.php");
     } else {

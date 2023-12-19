@@ -8,7 +8,8 @@ class UserController {
     public static function login($email, $pass)
     {
        $sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
-   
+       $db=new Database();
+
        $result = mysqli_query($GLOBALS['conn'], $sql);
        if ($row = mysqli_fetch_array($result)) {		
            // if (password_verify($pass, $row['pass'])){
@@ -19,7 +20,7 @@ class UserController {
            $user->usertype = new Usertype($row['usertype_id']);
            if ($user->usertype->utid == "4") {
                $patientInfoSql = "SELECT * FROM patient WHERE uid = " . $row['uid'];
-               $patientInfoResult = mysqli_query($GLOBALS['conn'], $patientInfoSql);
+               $patientInfoResult = mysqli_query($db->getConnection(), $patientInfoSql);
    
                if ($patientRow = mysqli_fetch_array($patientInfoResult)) {
                    $patient = new Patient($row['uid']);
