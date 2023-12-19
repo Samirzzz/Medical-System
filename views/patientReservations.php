@@ -1,12 +1,13 @@
 <?php
  session_start();
+ require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
  use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require '../PHPMailer/src/Exception.php';
-require '../PHPMailer/src/PHPMailer.php';
-require '../PHPMailer/src/SMTP.php';
+
 require_once '../app\controller\AppointmentController.php';
 //hello
 
@@ -21,15 +22,11 @@ $patientId = $appointmentcntrl->getPatientID( $_SESSION["Pid"]);
 echo "patient id : ".$patientId;
 echo "appointment id : ".$appID;
 $appointmentcntrl->bookForPatient($patientId,$appID);
+$curr_email= $_SESSION["email"];
 
-$curr_email=$_SESSION[$email];
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
-{
 
-$email = $_POST["email"];
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-
 try {
     //Server settings                 
     $mail->isSMTP();                                            //Send using SMTP
@@ -58,7 +55,7 @@ try {
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-};
+
 header("location:./pindex.php");
 
 ?>
