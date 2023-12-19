@@ -99,7 +99,9 @@
                         <br>
                         <label for="treatment_id">Treatment</label>
                         <select id="treatment_id" name="treatment_id">
+                            <option value="">choose</option>
                             <?php foreach ($treat_opt as $opt) { ?>
+                                
                             <option value="<?php echo $opt['treat_id']; ?>">
                                 <?php echo $opt['treat_name']; ?>
                             </option>
