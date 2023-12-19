@@ -12,6 +12,13 @@
 </head>
 <?php
 include_once '../includes/navigation.php';
+require_once '../app\controller\AppointmentController.php';
+$appointmentcntrl =new AppointmentController($conn);
+$patientId = $appointmentcntrl->getPatientID( $_SESSION["Pid"]);
+echo "patient id : ".$patientId;
+echo "appointment id : ".$appID;
+
+
 ?>
 <style>
     .target-vs-sales--container {
@@ -187,13 +194,19 @@ include_once '../includes/navigation.php';
             </div>
             <table>
                 <thead>
-                    <tr>
-                        <th>Doctor name</th>
-                        <th>Patient ID</th>
-                        <th>Location</th>
-                        <th>Mobile Number</th>
-                        <th>Date&Time</th>
-                    </tr>
+                <tr>
+      
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Doctor</th>
+                       
+                        <th>Clinic</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+
+     
+  </tr>
+ <?php $appointmentcntrl->viewPatientAppointments($patientId);?>
                 </thead>
                 <tbody>
 
