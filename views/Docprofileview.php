@@ -13,6 +13,8 @@
 <?php 
     include_once '../includes/pnavigation.php'; 
     include_once "../includes/db.php";
+    $db = Database::getInstance();
+	$conn = $db->getConnection();	
 
     if (isset($_GET['Did']))
      {

@@ -51,7 +51,8 @@ require_once '../app/controller/ClinicController.php';
 require_once '../app/controller/PatientController.php';
 require_once '../app/controller/DrController.php';
 
-
+$db = Database::getInstance();
+$conn = $db->getConnection();	
 
 
 
@@ -60,7 +61,7 @@ if (isset($_POST["query"])) {
     $search = $_POST["query"];
 
     if ($usertype == 'clinic') {
-        $viewclinics = ClinicController::clinicSearch($search);
+        $viewclinics = ClinicController::clinicSearch($search,$conn);
 
                    
                    if (!empty($viewclinics)) {
@@ -133,7 +134,7 @@ if (isset($_POST["query"])) {
                 // } 
     }
                  elseif ($usertype == 'patients') {
-                    $viewpatients = PatientController::patientSearch($search);
+                    $viewpatients = PatientController::patientSearch($search,$conn);
     if (!empty($viewpatients)) {
         echo '<div id="search-results">';
         echo '<table>';
@@ -191,7 +192,7 @@ if (isset($_POST["query"])) {
                 } elseif ($usertype == 'doctors') {
                     
 
-                    $viewpatients = DrController::drSearch($search);
+                    $viewpatients = DrController::drSearch($search,$conn);
                     if (!empty($viewpatients)) {
                         echo '<div id="search-results">';
                         echo '<table>';

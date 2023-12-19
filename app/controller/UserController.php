@@ -5,12 +5,19 @@ require_once '../app/Model/Doctor.php';
 require_once '../app/Model/Admin.php';
 require_once '../app/Model/Clinic.php';
 class UserController {
-    public static function login($email, $pass)
-    {
-       $sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
-       $db=new Database();
+    private $db;
+    private $conn;
 
-       $result = mysqli_query($GLOBALS['conn'], $sql);
+    public function __construct() {
+        $this->db = Database::getInstance();
+        $this->conn = $this->db->getConnection();
+    }
+    public static function login($email, $pass,$conn)
+    {
+     
+       $sql = "SELECT * FROM user_acc WHERE email='$email' AND pass='$pass'";
+
+       $result = mysqli_query($conn, $sql);
        if ($row = mysqli_fetch_array($result)) {		
            // if (password_verify($pass, $row['pass'])){
            $user = new User($row['uid']);
@@ -20,7 +27,7 @@ class UserController {
            $user->usertype = new Usertype($row['usertype_id']);
            if ($user->usertype->utid == "4") {
                $patientInfoSql = "SELECT * FROM patient WHERE uid = " . $row['uid'];
-               $patientInfoResult = mysqli_query($db->getConnection(), $patientInfoSql);
+               $patientInfoResult = mysqli_query($conn, $patientInfoSql);
    
                if ($patientRow = mysqli_fetch_array($patientInfoResult)) {
                    $patient = new Patient($row['uid']);
@@ -41,7 +48,7 @@ class UserController {
                
            } elseif ($user->usertype->utid=="2") {
                $doctorInfoSql = "SELECT * FROM dr WHERE uid = " . $row['uid'];
-               $doctorInfoResult = mysqli_query($GLOBALS['conn'], $doctorInfoSql);
+               $doctorInfoResult = mysqli_query($conn, $doctorInfoSql);
    
                if ($doctorRow = mysqli_fetch_array($doctorInfoResult)) {
                    $doctor = new Dr($row['uid']);
@@ -60,7 +67,7 @@ class UserController {
            }
            elseif ($user->usertype->utid=="1") {
                $doctorInfoSql = "SELECT * FROM admin WHERE uid = " . $row['uid'];
-               $doctorInfoResult = mysqli_query($GLOBALS['conn'], $doctorInfoSql);
+               $doctorInfoResult = mysqli_query($conn, $doctorInfoSql);
            
                if ($doctorRow = mysqli_fetch_array($doctorInfoResult)) {
                    $admin = new Admin($row['uid']);
@@ -74,7 +81,7 @@ class UserController {
    
            elseif ($user->usertype->utid=="3") {
                $clinicInfoSql = "SELECT * FROM clinic WHERE uid = " . $row['uid'];
-               $clinicInfoResult = mysqli_query($GLOBALS['conn'], $clinicInfoSql);
+               $clinicInfoResult = mysqli_query($conn, $clinicInfoSql);
    
                if ($clinicRow = mysqli_fetch_array($clinicInfoResult)) {
                    $clinic = new Clinic($row['uid']);
@@ -93,18 +100,18 @@ class UserController {
    
    }
 
-    public static function signupUser($email, $pass, $usertype, $image) {
+    public static function signupUser($email, $pass, $usertype, $image,$conn) {
         $sql = "INSERT INTO user_acc (email, pass, usertype_id, image) VALUES ('$email', '$pass', '$usertype', '$image')";
-        if (mysqli_query($GLOBALS['conn'], $sql)) {
-            return mysqli_insert_id($GLOBALS['conn']);
+        if (mysqli_query($conn, $sql)) {
+            return mysqli_insert_id($conn);
         } else {
             return false;
         }
     }
-    public static function editUser($email, $image, $id)
+    public static function editUser($email, $id,$conn)
     {
-        $sql = "UPDATE user_acc SET email='$email', image='$image' WHERE uid=$id";
-        $result = mysqli_query($GLOBALS['conn'], $sql);
+        $sql = "UPDATE user_acc SET email='$email' WHERE uid=$id";
+        $result = mysqli_query($conn, $sql);
     
         if ($result) {
             return true;
@@ -112,14 +119,14 @@ class UserController {
             return false;
         }
     }
-    public static function deleteUser($id)
+    public static function deleteUser($id,$conn)
     {
         $sql = "DELETE FROM user_acc WHERE uid=$id";
-        $result = mysqli_query($GLOBALS['conn'], $sql);
+        $result = mysqli_query($conn, $sql);
         if ($result) {
             return true;
         } else {
-            echo "Error deleting from 'patient': " . mysqli_error($GLOBALS['conn']);
+            echo "Error deleting from 'patient': " . mysqli_error($conn);
 
             return false;
         }

@@ -1,7 +1,7 @@
 <?php
 include_once '..\includes\navigation.php';
 require_once '../app\controller\AppointmentController.php';
-$appointmentcntrl =new AppointmentController($conn);
+$appointmentcntrl =new AppointmentController();
  $spec =$appointmentcntrl->bookingOptions();
 ?>
 

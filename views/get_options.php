@@ -1,5 +1,7 @@
 <?php
 include_once '..\includes\db.php'; 
+$db = Database::getInstance();
+	$conn = $db->getConnection();	
 
 if (isset($_GET['treat_id'])) {
     $treat_id = $_GET['treat_id'];
@@ -26,3 +28,4 @@ mysqli_close($conn);
 ?>
 
 
+    

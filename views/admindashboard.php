@@ -10,10 +10,9 @@
     <title>VeZeeTa</title>
 </head>
 <?php
-include_once'..\includes\adminnavigation.php';
-
-
-
+include_once '..\includes\adminnavigation.php';
+$db = Database::getInstance();
+$conn = $db->getConnection();	
 
 
 ?>
@@ -139,7 +138,7 @@ patient
 -- medications ON patient.Pid=medications.Pid  
 
 ";
-$result = $conn->query($sql);
+$result = mysqli_query($conn,$sql);
 while ($row = $result->fetch_array()) {
     echo '<tr>';
 

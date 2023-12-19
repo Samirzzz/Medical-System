@@ -2,11 +2,13 @@
  require_once '../app/Model/Appointment.php';
 class AppointmentController
 {
+    public $db;
+	public $conn;
    public $appointment;
-   public $conn;
-   public function __construct($conn){
-    $this->conn = $conn;
-    $this->appointment = new Appointments($this->conn);
+   public function __construct(){
+    $db = Database::getInstance();
+	$this->conn = $db->getConnection();
+    $this->appointment=new Appointments();
   
 }
 public function getAppointmentInstance(){
@@ -92,7 +94,7 @@ public function getClinicID($id)
     clinic.cnumber,clinic.workhrs,clinic.cloc
     FROM clinic 
     JOIN user_acc ON user_acc.uid = clinic.uid where user_acc.uid=".$id;
-    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $result = mysqli_query($this->conn,$sql);
     if($row=mysqli_fetch_array($result)){
         // parent::__construct($row["uid"]);
     
@@ -102,13 +104,13 @@ public function getClinicID($id)
     return $CID;
 
 }
-public function getDocID($id)
+public function getDocID($id) //test
  {
     // return $_SESSION["ID"];
     $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.did, dr.uid
     FROM dr 
     JOIN user_acc ON user_acc.uid = dr.uid where user_acc.uid=".$id;
-    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $result = mysqli_query($this->conn,$sql);
     if($row=mysqli_fetch_array($result)){
         // parent::__construct($row["uid"]);
     
@@ -153,6 +155,8 @@ public function addAppointment($date, $time, $status, $price, $doctorId, $clinic
         $this->appointment->doctorId=$doctorId;
         $this->appointment->clinicId=$clinicId;
         $this->appointment->patientId=$patientId;
+        header("location: ./viewappointments.php");
+
         
         return true;
     } else {
@@ -165,6 +169,7 @@ public function updateAppointment($appointmentId,$a_date, $a_time, $a_price){
     $res = mysqli_query($this->conn, $sql);
 
     if ($res) {
+
         $this->appointment->date=$a_date;
         $this->appointment->time=$a_time;
        
@@ -225,7 +230,7 @@ if ($res2) {
 
 
 
-public function getDoctorAppointments($docID){
+public function getDoctorAppointments($docID){ //test
     $sql = "SELECT * FROM appointments where did =".$docID;
    $result = mysqli_query($this->conn,$sql);
    

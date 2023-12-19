@@ -10,6 +10,8 @@
 <?php
     include_once "../includes/navigation.php";
     include_once "../includes/db.php";
+    $db = Database::getInstance();
+	$conn = $db->getConnection();	
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $x = $_SESSION['email'];
@@ -74,7 +76,7 @@ p {
             echo "<p>Address: <br> " . $_SESSION["address"] . "</p>";
         } elseif ($_SESSION["type"] === 'doctor') {
             echo "<p>Specialization: <br>" . $_SESSION["specialization"] . "</p>";
-            echo "<p>Education: <br> " . $_SESSION["education"] . "</p>";
+            echo "<p>Education: <br> " . $_SESSION["educ"] . "</p>";
         }
         ?>
 

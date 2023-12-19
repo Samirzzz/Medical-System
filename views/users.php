@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-include_once'..\includes\navigation.php';
+include_once '..\includes\navigation.php';
 ?>
 
 <section class="vh-100 bg-image"
@@ -142,6 +142,8 @@ include_once'..\includes\navigation.php';
     </script>
     <?php 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $db = Database::getInstance();
+	$conn = $db->getConnection();	
   $firstname = htmlspecialchars($_POST["firstname"]);
   $lastname = htmlspecialchars($_POST["lastname"]);
   $email = htmlspecialchars($_POST["email"]);
