@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
                     <div id="sgu">
                         <a class="link" href="signup.php">Sign Up</a> 
-                        
+                        <a class="link" href="forgetpassword.php" style="margin-top:50px; margin-left:50px;">forget password</a> 
                         <p> Not a member yet ? </p>
                         
                     </div>

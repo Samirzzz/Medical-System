@@ -7,6 +7,13 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
+function generateRandomFourDigitNumber() 
+{
+    $min = 1000;
+    $max = 9999;
+    return random_int($min, $max);
+}
+$randomtoken = generateRandomFourDigitNumber();
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
 {
@@ -36,7 +43,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'here is your token :';
-    $mail->Body    = 'ya kamallll , ana 3amlt forget password using php  da project el sanadi be nafs el flow beta3 el sana ely fatet ely oltholi ';
+    $mail->Body    = $randomtoken;
 
     $mail->send();
     echo 'Message has been sent';
