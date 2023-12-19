@@ -12,6 +12,7 @@ $patientId = $appointmentcntrl->getPatientID( $_SESSION["Pid"]);
 echo "patient id : ".$patientId;
 echo "appointment id : ".$appID;
 $appointmentcntrl->bookForPatient($patientId,$appID);
+
 header("location:./pindex.php");
 
 
