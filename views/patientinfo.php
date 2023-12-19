@@ -15,6 +15,8 @@
 
     <?php 
     include_once '..\includes\navigation.php';
+require_once '../app/controller/PatientController.php';
+
     $db = Database::getInstance();
 	$conn = $db->getConnection();	
 
@@ -194,6 +196,7 @@
         if (isset($_GET['uid'])) {
             $uid = $_GET['uid'];
             if (isset($_POST["con"])) {
+
                 $firstname = $_POST['firstname'];
                 $lastname = $_POST['lastname'];
                 $gender = $_POST['gender'];
@@ -203,6 +206,7 @@
                 if($editpatient)
                 {
                     $patient=new Patient($uid);
+
                 }
                 else{
                     echo "error";
