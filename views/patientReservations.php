@@ -22,6 +22,8 @@ echo "patient id : ".$patientId;
 echo "appointment id : ".$appID;
 $appointmentcntrl->bookForPatient($patientId,$appID);
 
+<<<<<<< HEAD
+=======
 $curr_email=$_SESSION[$email];
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']))
 {
@@ -59,6 +61,7 @@ try {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 };
+>>>>>>> f08dd2c19700a485903d9578cf46c67c18fe4454
 header("location:./pindex.php");
 
 
