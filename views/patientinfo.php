@@ -48,32 +48,7 @@ $treat_id=null;
     if (isset($_GET['uid'])) {    // get uid
         $uid = $_GET['uid'];
         $patient= new Patient($uid);
-        echo $patient->getFirstName();
-
-    //     $sql = "SELECT
-    //     patient.firstname,
-    //     patient.lastname,
-    //     patient.age,
-    //     patient.gender,
-    //     patient.address,
-    //     patient.number
-    //     from patient
-    
-    //     WHERE patient.uid ='$uid'";
-
-    //     $result = mysqli_query($conn, $sql);
-    //     if ($row = mysqli_fetch_array($result)) 
-    //     {
-    //         $firstname = $row['firstname'];
-    //         $lastname = $row['lastname'];
-    //         $age = $row['age'];
-    //         $gender = $row['gender'];
-    //         $address = $row['address'];
-    //         $number = $row['number'];
-            
-    //     } else {
-    //         echo "Patient not found.";
-    //     }
+ 
     } 
     else {
         echo "Invalid request.";
@@ -224,38 +199,10 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
             echo "error";
         }
 
-
-
-
-        // $sql = "UPDATE patient
-        
-        // SET patient.firstname='$firstname',
-        //     patient.lastname='$lastname',
-        //     patient.gender='$gender',
-        //     patient.address='$address',
-        //     patient.number='$number'
-        // WHERE patient.uid ='$uid'";
-
-
-
-
-
     } 
 
-    // $result = mysqli_query($conn, $sql);
     }
-    if ($result) {
-        if (isset($_POST["updateEmail"])) {
-            $_SESSION['email'] = $email;
-            echo "Email updated";
-        } elseif (isset($_POST["updatePassword"])) {
-            $_SESSION['password'] = $pass;
-            echo "Password updated";
-        }
-    }
-     else {
-        echo "Invalid input";
-    }
+  
 
 }
 
