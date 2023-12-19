@@ -14,7 +14,7 @@
 include_once '../includes/navigation.php';
 require_once '../app\controller\AppointmentController.php';
         $db = Database::getInstance();
-        $conn = $this->db->getConnection();
+        $conn = $db->getConnection();
 $appointmentcntrl =new AppointmentController();
 $patientId = $appointmentcntrl->getPatientID( $_SESSION["Pid"]);
 echo "patient id : ".$patientId;

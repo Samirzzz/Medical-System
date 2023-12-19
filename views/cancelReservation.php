@@ -2,7 +2,7 @@
 session_start();
 require_once '../app\controller\AppointmentController.php';
 $db = Database::getInstance();
-$conn = $this->db->getConnection();
+$conn = $db->getConnection();
 $appointmentcntrl =new AppointmentController();
 if(isset($_GET['Appid']))
 {
