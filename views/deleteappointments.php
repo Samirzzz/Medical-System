@@ -11,7 +11,7 @@ if (isset($_GET['Appid'])) {
 
     
 
-    if ($appointmentcntrl->deleteAppointment($appid,$conn)) {
+    if ($appointmentcntrl->deleteAppointment($appid)) {
        
         header("location:./viewappointments.php");
     } else {
