@@ -8,7 +8,7 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 require_once '../app\controller\AppointmentController.php';
-
+//hello
 
         $db = Database::getInstance();
         $conn = $db->getConnection();
