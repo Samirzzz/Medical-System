@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $_SESSION["aid"] = $UserObject->id;
             $_SESSION["name"] = $UserObject->name;
 
-            header("Location: admin.php");
+            header("Location: adminmain.php");
             exit();
         } elseif ($UserObject instanceof Clinic) {
             $_SESSION["Cid"] = $clinicCid; 
