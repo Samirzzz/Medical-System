@@ -237,7 +237,7 @@ require_once '../app/controller/PatientController.php';
                 }
             }
     
-            $optionId = $_POST['options'];
+            $optionId = $_POST['options'];  
             $optionValue = $_POST['optionvalue'];
     
             $sql = "INSERT INTO d_s_o_v (diagnosis_id, treat_id, d_s_o_id, value) VALUES ('$diagnosisId', '$treatmentId', '$optionId', '$optionValue')";
