@@ -206,6 +206,7 @@ require_once '../app/controller/PatientController.php';
                 if($editpatient)
                 {
                     $patient=new Patient($uid);
+                    echo '<script>reloadPage();</script>';
 
                 }
                 else{
@@ -244,7 +245,7 @@ require_once '../app/controller/PatientController.php';
             $result = mysqli_query($conn, $sql);
     
             if ($result) {
-                echo "trueee";
+                echo '<script>reloadPage();</script>';
             } else {
                 echo "Error inserting into d_s_o_v: " . mysqli_error($conn);
             }
@@ -285,5 +286,11 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+    function reloadPage() {
+        location.reload();
+    }
+</script>
+
 
 </html>

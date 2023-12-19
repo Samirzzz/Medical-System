@@ -1,7 +1,9 @@
 <?php
  session_start();
 require_once '../app\controller\AppointmentController.php';
-$appointmentcntrl =new AppointmentController($conn);
+        $db = Database::getInstance();
+        $conn = $this->db->getConnection();
+$appointmentcntrl =new AppointmentController();
 if(isset($_GET['Appid']))
 {
 $appID=$_GET['Appid'];
@@ -13,7 +15,6 @@ $appointmentcntrl->bookForPatient($patientId,$appID);
 header("location:./pindex.php");
 
 
-// include_once '..\includes\navigation.php';
 
 ?>
 <!DOCTYPE html>
