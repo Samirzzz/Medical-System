@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/addevent.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/addevent.css">
     <title>Appointment Form</title>
     <style>
    
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 </head>
 <body>
 
-   <form action="" method="post" autocomplete="off" onsubmit="return validateForm();">
+   <form action="" method="post" name="addeventform" autocomplete="off" onsubmit="return validateForm();">
     <label for="d">Date</label>
     <input type="date" placeholder="Choose the date" id="d" name="date">
     <br>

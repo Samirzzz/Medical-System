@@ -72,6 +72,9 @@ if ($_SESSION["type"] == 'clinic') {
         th {
             background-color: #f2f2f2;
         }
+        tr:nth-child(even) {
+    background-color: #EDE5E5;
+}
         .crud-bar{
             width: 80%;
             

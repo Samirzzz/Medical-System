@@ -83,6 +83,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <?php $appointmentcntrl->displayErrors($errors) ?>
 </span>
    </form>
+   <style>
+    form{
+        width:500px;
+        height:500px;
+    }
+   </style>
    
    <script>
     function validateForm() {
