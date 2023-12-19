@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email=htmlspecialchars($_POST['email']);
     $UserType = $_SESSION["type"];
     $userID = $_SESSION['ID'];
+    $db = Database::getInstance();
+	$conn = $db->getConnection();
 
 
     if ($UserType == "patient") {
@@ -51,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     }
 
-    $edituser=UserController::editUser($email,$imageDB,$userID);
+    $edituser=UserController::editUser($email,$userID,$conn);
     if($edituser)
     {
         if ($UserType == "patient") {
-            $editpatient=PatientController::editPatient($Fname,$Lname,$number,$gender,$Address,$userID);
+            $editpatient=PatientController::editPatient($Fname,$Lname,$number,$gender,$Address,$userID,$conn);
             if($editpatient)
             {
                 $_SESSION['email']=$email;
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             }
         } elseif ($UserType == "doctor") {
-            $editdoctor=DrController::editDoctor($Fname,$Lname,$number,$Education,$Specialization,$userID);
+            $editdoctor=DrController::editDoctor($Fname,$Lname,$number,$Education,$Specialization,$userID,$conn);
             if($editdoctor)
             {
                 $_SESSION['email']=$email;
@@ -81,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
         elseif ($UserType == "clinic") {
-            $editclinic=ClinicController::editClinic($cname,$cloc,$cnumber,$userID);
+            $editclinic=ClinicController::editClinic($cname,$cloc,$cnumber,$userID,$conn);
             if($editclinic)
             {
                 $_SESSION['cname']=$cname;
@@ -119,12 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     value="<?php echo $_SESSION["email"]; ?>">
                 <div class="error-message" id="fname-error"></div>
             </div>
-            <div class="form-group">
-                <label for="Image">Image</label>
-                <input type="file" class="form-control" id="Uimage" placeholder="Upload Image" name="Uimage"
-                    value="<?php echo $_SESSION["image"]; ?>" required>
-                <div id="Uimage-error" class="error-message text-danger"></div>
-            </div>
+           
 
             <?php
             if ($_SESSION["type"] == 'clinic') {
@@ -206,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </div>
                     <div class="form-group">
                         <label for="education">Education</label>
-                        <input type="text" class="form-control" id="education" name="education" value="' . $_SESSION["education"] . '">
+                        <input type="text" class="form-control" id="education" name="education" value="' . $_SESSION["educ"] . '">
                         <div class="error-message" id="education-error"></div>
                     </div>';
             }

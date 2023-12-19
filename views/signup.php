@@ -47,6 +47,8 @@ require_once '../app/controller/ClinicController.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
     $firstname = $_POST['Fname'];
     $lastname = $_POST['Lname'];
     $number = $_POST['number'];
@@ -88,10 +90,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     if ($userType == 'patient') 
     {
-       $uid= UserController::signupUser($email, $password, 4,$imageDB);
+       $uid= UserController::signupUser($email, $password, 4,$imageDB,$conn);
     if ($uid !== false) {
 
-       if (PatientController::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid)) {
+       if (PatientController::signupPatient($firstname, $lastname, $number, $age, $gender, $address, $uid,$conn)) {
         header("Location:../views/login.php");
     } 
 }

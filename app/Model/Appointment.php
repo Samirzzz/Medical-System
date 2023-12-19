@@ -3,13 +3,15 @@
 include_once '..\includes\db.php';
 class Appointments extends Clinic
 {
-    private $conn;
+    public $db;
+    public $conn;
     public $date, $time, $status, $price, $doctorId, $clinicId, $patientId;
 	
 
-    public function __construct($conn)
+    public function __construct()
     {
-        $this->conn = $conn;
+        $this->db = Database::getInstance();
+        $this->conn = $this->db->getConnection();
     }
 
     // public function validateAppointment($date, $time, $status, $price, $doctorId, $clinicId, $patientId)

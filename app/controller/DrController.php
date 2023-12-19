@@ -4,7 +4,13 @@ require_once '../app/Model/Doctor.php';
 
 class DrController
 {
-    static function drsearch($value)  {
+    public $db;
+    public $conn;
+    public function __construct() {
+        $this->db = Database::getInstance();
+        $this->conn = $this->db->getConnection();
+    }
+    static function drsearch($value,$conn)  {
 
         $i=0;
             $dr=array();
@@ -12,7 +18,7 @@ class DrController
                                 FROM dr 
                                 JOIN user_acc ON user_acc.uid = dr.uid  
                                 WHERE email LIKE '%$value%'";
-            $result = mysqli_query($GLOBALS['conn'],$sql);
+            $result = mysqli_query($conn,$sql);
     
             while($row=mysqli_fetch_array($result)) {
                 $dr[$i++]=new Dr($row[0]);
@@ -22,10 +28,10 @@ class DrController
         }
         
     
-     static function getAlldoctors()
+     static function getAlldoctors($conn)
     {
         $sql = "SELECT * FROM dr";
-        $doctors = mysqli_query($GLOBALS['conn'], $sql);
+        $doctors = mysqli_query($conn, $sql);
     
         $result = array();
     
@@ -44,22 +50,22 @@ class DrController
     
         return $result;
     }
-    static function signupDoctor($firstname, $lastname, $number,$educ,$specialization,$uid) 
+    static function signupDoctor($firstname, $lastname, $number,$educ,$specialization,$uid,$conn) 
     {
     
     
         $sql = "INSERT INTO dr (firstname, lastname, number,educ,specialization,uid,cid) VALUES ('$firstname', '$lastname', '$number','$educ','$specialization','$uid','0')";
-        if(mysqli_query($GLOBALS['conn'],$sql))
+        if(mysqli_query($conn,$sql))
                 return true;
             else
                 return false;
     
     
     }
-    static function editDoctor($firstname, $lastname, $number,$educ,$specialization,$uid)
+    static function editDoctor($firstname, $lastname, $number,$educ,$specialization,$uid,$conn)
 {
 	$sql = "UPDATE dr Set firstname='$firstname', lastname='$lastname', number='$number', educ='$educ', specialization='$specialization' WHERE uid='$uid'";
-	$result = mysqli_query($GLOBALS['conn'], $sql);
+	$result = mysqli_query($conn, $sql);
         if($result)
         {
             return true;
@@ -70,14 +76,14 @@ class DrController
         }
 
 }
-public static function deleteDoctor($id)
+public static function deleteDoctor($id,$conn)
 {
     $sql = "DELETE FROM dr WHERE uid=$id";
-    $result = mysqli_query($GLOBALS['conn'], $sql);
+    $result = mysqli_query($conn, $sql);
     if ($result) {
         return true;
     } else {
-        echo "Error deleting from 'patient': " . mysqli_error($GLOBALS['conn']);
+        echo "Error deleting from 'patient': " . mysqli_error($conn);
 
         return false;
     }
