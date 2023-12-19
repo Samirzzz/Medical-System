@@ -6,12 +6,14 @@ $appointmentcntrl =new AppointmentController($conn);
 ?>
 <html>
 <head>
-    <title>Appointments</title>
+    <title></title>
  
 </head>
 <body>
-    <h1>Appointments</h1>
+   <h1 id="h1h1">Showing appointmnts for: </h1>
+
     <table >
+   
         <tr>
             <th>Appointment ID</th>
             <th>Date</th>
@@ -19,13 +21,24 @@ $appointmentcntrl =new AppointmentController($conn);
             <th>Status</th>
             <th>Actions</th>
             <th>Clinic</th>
-            
+           
         </tr>
-        <?php
-$appointmentcntrl->viewAppointments();
-        ?>
+     
+      <?php 
+
+if ($_SESSION["type"] == 'clinic') {
+   $clinic_id = $appointmentcntrl->getClinicID($_SESSION["ID"]);
+   $appointmentcntrl->viewAppointments($clinic_id);
+
+} else {
+   $docId =  $appointmentcntrl->getDocID($_SESSION["ID"]);
+   $appointmentcntrl->getDoctorAppointments($docId);
+}
+?>
 
     </table>
+    <input type="hidden" ID='AppView' value = <?php echo $_SESSION['AppView'] ?> >
+    
 
 
     <style>
@@ -38,7 +51,13 @@ $appointmentcntrl->viewAppointments();
         table {
             width: 70%;
             border-collapse: collapse;
+            margin-top: 30px;
             margin-left: 350px;
+        }
+        h1{
+            margin-left: 350px;  
+            margin-top: 36px;
+             
         }
 
         table, th, td {
@@ -61,4 +80,15 @@ $appointmentcntrl->viewAppointments();
     </style>
 
 </body>
+<script>
+    function updateAppViewHeading() {
+        var appViewValue = '<?php echo $_SESSION['AppView']; ?>';
+        document.getElementById('h1h1').innerText = "Showing appointments for: " + appViewValue;
+    }
+
+    window.onload = function() {
+        updateAppViewHeading();
+    };
+</script>
+
 </html>

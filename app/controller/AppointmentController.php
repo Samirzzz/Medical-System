@@ -102,6 +102,22 @@ public function getClinicID($id)
     return $CID;
 
 }
+public function getDocID($id)
+ {
+    // return $_SESSION["ID"];
+    $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.did, dr.uid
+    FROM dr 
+    JOIN user_acc ON user_acc.uid = dr.uid where user_acc.uid=".$id;
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    if($row=mysqli_fetch_array($result)){
+        // parent::__construct($row["uid"]);
+    
+                    $DID=$row["did"];
+
+    }
+    return $DID;
+
+}
 
 
 public function getClinicName()
@@ -171,8 +187,8 @@ public function deleteAppointment($appid){
     }
 }
 
-public function viewAppointments(){
-    $sql = "SELECT * FROM appointments";
+public function viewAppointments($ID){
+    $sql = "SELECT * FROM appointments where cid =".$ID;
    $result = mysqli_query($this->conn,$sql);
    
    if ($result->num_rows > 0) {
@@ -198,7 +214,52 @@ public function viewAppointments(){
 } else {
     echo "No appointments found.";
 }
+$sql2="select cname from clinic where cid = {$ID}";
+$res2=mysqli_query($this->conn,$sql2);
+if ($res2) {
+    $row = mysqli_fetch_assoc($res2);
+    $_SESSION['AppView'] = $row['cname'];
+}
+}
 
+
+
+
+public function getDoctorAppointments($docID){
+    $sql = "SELECT * FROM appointments where did =".$docID;
+   $result = mysqli_query($this->conn,$sql);
+   
+   if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row['Appid'] . "</td>";
+
+        echo "<td>" . $row['date'] . "</td>";
+        echo "<td>" . $row['time'] . "</td>";
+        echo "<td>" . $row['status'] . "</td>";
+        echo "<td><a href='./editappointments.php?Appid=" . $row['Appid'] . "'>Edit</a> | <a href='./deleteappointments.php?Appid=" . $row['Appid'] . "'>Delete</a></td>";
+        $sql2 = "Select cname from clinic WHERE Cid = '{$row['Cid']}'";
+        $res2=mysqli_query($this->conn,$sql2);
+        if ($res2->num_rows>0){
+            $clincirow = $res2->fetch_assoc();
+            echo "<td>" . $clincirow['cname'] . "</td>";
+        }
+       
+    
+    
+        echo "</tr>";
+    }
+} else {
+    echo "No appointments found.";
+}
+$sql2 = "SELECT firstname, lastname FROM dr WHERE did = {$docID}";
+$res2 = mysqli_query($this->conn, $sql2);
+
+if ($res2->num_rows > 0) {
+    $row = $res2->fetch_assoc();
+    $name=$row['firstname'] . ' ' . $row['lastname'];
+    $_SESSION['AppView'] = $name;
+}
 
 }
 

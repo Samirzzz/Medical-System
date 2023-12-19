@@ -16,7 +16,8 @@
     <?php 
     include_once '..\includes\navigation.php';
   
-$treat_id=null;
+
+
     $sql = "select treat_id , treat_name from treatment";
     $res = mysqli_query($conn,$sql);
     $treat_opt=[];
@@ -28,16 +29,16 @@ $treat_id=null;
         ];
     }
 
-    $sql = "select id , opt_id from d_s_o where treat_id ='$treat_id'";
-    $res = mysqli_query($conn,$sql);
-    $treat_opt=[];
-    while($row=mysqli_fetch_assoc($res)){
-        $treat_opt [] = [
-            'opt_id' => $row['opt_id'],
-            'treat_name'=>$row['id'],
+    // $sql = "select id , opt_id from d_s_o where treat_id ='$treat_id'";
+    // $res = mysqli_query($conn,$sql);
+    // $treat_opt=[];
+    // while($row=mysqli_fetch_assoc($res)){
+    //     $treat_opt [] = [
+    //         'opt_id' => $row['opt_id'],
+    //         'treat_name'=>$row['id'],
             
-        ];
-    }
+    //     ];
+    // }
    
 
 
@@ -142,9 +143,11 @@ $treat_id=null;
     <br>
     <br>
     <label for="treatment_id">Treatment</label>
-     <select id="treatment_id" name="treatment_id" onchange="treat_opt(event)">
+     <select id="treatment_id" name="treatment_id" >
         <?php foreach ($treat_opt as $opt) { ?>
-            <option value="<?php echo $opt['treat_id']; ?>">
+            <option value="<?php echo $opt['treat_id']; 
+            
+            ?>">
                 <?php echo $opt['treat_name'] ; ?>
             </option>
         <?php } ?>
@@ -242,7 +245,7 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
 
     } 
 
-    // $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
     }
     if ($result) {
         if (isset($_POST["updateEmail"])) {

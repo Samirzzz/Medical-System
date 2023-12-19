@@ -34,7 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
       
         if ($appointmentcntrl->addAppointment($a_date, $a_time, $a_status,$a_price, $a_did, $a_cid, $a_pid)) {
             echo "Form submitted successfully!";
-            header("location:./nextAppointment.php?did=$a_did");
+            header("location: ./viewappointments.php");
+            
+            
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -102,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="text" placeholder="Enter the price" id="p" name="price">
     <br>
   
-    <input type="submit" id="submit" name="submit" value="submit + next appointment">
+    <input type="submit" id="submit" name="submit" value="submit">
     <span class = "error">
     <?php $appointmentcntrl->displayErrors($errors) ?>
 </span>
