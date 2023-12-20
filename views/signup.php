@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap">
     <style>
     body {
-        background-image: url('test.jpg');
+        background-image: url('../public/images/test.jpg');
 
     }
 

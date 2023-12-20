@@ -11,7 +11,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
         <style>
       body {
-        background-image: url('test.jpg');
+        background-image: url('../public/images/test.jpg');
       }
       #login-error{
         text-align:left;
@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 <form action="" method="post" id="interface-form" name="form" onsubmit="return validateForm()">
                     <div id="fields">
                         <i class="fa fa-solid fa-user iicon"></i>
-                        <a href="./forget-pass"> </a>
+                        
                         
                         <input class="login-field" type="text" name="email" placeholder="Email" id="email" required>
                         <div id="user-err"></div>
@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </div>
                     <div id="sgu">
                         <a class="link" href="signup.php">Sign Up</a> 
-                        <a class="link" href="forgetpassword.php" style="margin-top:50px; margin-left:50px;">forget password</a> 
+                       
                         <p> Not a member yet ? </p>
                         
                     </div>
