@@ -54,7 +54,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Booking Confirmed ';
-    $mail->Body    = 'Thank you for booking Your appointment on tabibi application your appointment has been confirmed '." " ."date : $date ". " time : $time";
+    $mail->Body    = 'Thank you for booking Your appointment on tabibi application your appointment has been confirmed on '." " ."date : $date ". " time : $time";
 
     $mail->send();
     echo 'Message has been sent';
