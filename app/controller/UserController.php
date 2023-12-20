@@ -6,7 +6,7 @@ require_once '../app/Model/Admin.php';
 require_once '../app/Model/Clinic.php';
 class UserController {
     private $db;
-    private $conn;
+    private $conn;  
 
     public function __construct() {
         $this->db = Database::getInstance();
