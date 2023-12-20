@@ -93,7 +93,7 @@ require_once '../app/controller/PatientController.php';
         <div class="col-md-4">
             <div class="p-3 py-5">
                 <div class="col-md-12">
-                    <label class="labels" style="font-size: larger;">Patient Diagnose</label>
+                    <label class="labels" style="font-size: larger;">Patient Diagnosis</label>
                     <br>
                     <br>
                     <form action="" method="post">
@@ -133,54 +133,39 @@ require_once '../app/controller/PatientController.php';
         </thead>
         <tbody>
             <?php
-            
             $sqlPid = "SELECT Pid, uid FROM patient WHERE uid = '$uid'";
             $resultPid = mysqli_query($conn, $sqlPid);
 
             if ($rowPid = mysqli_fetch_array($resultPid)) {
                 $uid = $rowPid['uid'];
 
-                $sql="SELECT diagnosis_name,diagnosis_id,treat_id FROM diagnosis WHERE uid='$uid'";
-                $result= mysqli_query($conn, $sql);
-                if($row=mysqli_fetch_array($result))
-                {
-                    $diagnosisName=$row['diagnosis_name'];
-                    $diagnosis_id=$row['diagnosis_id'];
-                    $treatID=$row['treat_id'];
-                     $sql="SELECT treat_name FROM treatment WHERE treat_id='$treatID'";
-                    $result= mysqli_query($conn, $sql);
-                    if($row=mysqli_fetch_array($result))
-                    {
-                        $treatName=$row['treat_name'];
-                        $sql="SELECT value FROM d_s_o_v WHERE diagnosis_id='$diagnosis_id'";
-                        $result= mysqli_query($conn, $sql);
-                        if($row=mysqli_fetch_array($result))
-                        {
-                            $opt_value=$row['value'];
-                        }
+                $sql = "SELECT diagnosis.diagnosis_name, treatment.treat_name, d_s_o_v.value
+                        FROM diagnosis
+                        INNER JOIN treatment ON diagnosis.treat_id = treatment.treat_id
+                        INNER JOIN d_s_o_v ON diagnosis.diagnosis_id = d_s_o_v.diagnosis_id
+                        WHERE diagnosis.uid = '$uid'";
 
+                $result = mysqli_query($conn, $sql);
 
-                    }
-                    
+                while ($row = mysqli_fetch_array($result)) {
+                    $diagnosisName = $row['diagnosis_name'];
+                    $treatName = $row['treat_name'];
+                    $opt_value = $row['value'];
 
-
-
-                }
-
-                if (!empty($diagnosisName)) {
                     echo '<tr>';
                     echo '<td>' . $diagnosisName . '</td>';
                     echo '<td>' . $treatName . '</td>';
-                    // echo '<td>' . $row["opt_name"] . '</td>';
-                    // echo '<td>' . $opt_value . '</td>';
+                    echo '<td>' . $opt_value . '</td>';
                     echo '</tr>';
                 }
-                
             }
             ?>
         </tbody>
     </table>
 </div>
+
+
+
 
 
 
