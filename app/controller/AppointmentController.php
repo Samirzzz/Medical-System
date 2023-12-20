@@ -20,7 +20,6 @@ public function validateAppointment($date, $time, $status, $price, $doctorId, $c
 {
     $errors = array();
 
-    // Validation for required fields
     if (empty($date)) {
         $errors[] = "Date is required";
     }
@@ -41,9 +40,7 @@ public function validateAppointment($date, $time, $status, $price, $doctorId, $c
     if (empty($clinicId)) {
         $errors[] = "Clinic ID is required";
     }
-    // if (empty($patientId)) {
-    //     $errors[] = "Patient ID is required";
-    // }
+
 
     // Date validation
     $currentDate = date("Y-m-d");
@@ -59,7 +56,6 @@ public function validateAppointmentUpdate($date, $time, $price)
 {
     $errors = array();
 
-    // Validation for required fields
     if (empty($date)) {
         $errors[] = "Date is required";
     }
@@ -68,14 +64,11 @@ public function validateAppointmentUpdate($date, $time, $price)
         $errors[] = "Time is required";
     }
 
-    // if (empty($status)) {
-    //     $errors[] = "Status is required";
-    // }
+
     if (empty($price)) {
         $errors[] = "Price is required";
     }
 
-    // Date validation
     $currentDate = date("Y-m-d");
     $maxAllowedDate = date("Y-m-d", strtotime("+45 days")); // 1.5 months ahead
 
@@ -89,14 +82,12 @@ public function validateAppointmentUpdate($date, $time, $price)
 
 public function getClinicID($id)
  {
-    // return $_SESSION["ID"];
     $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, clinic.cname, clinic.uid,clinic.cid,
     clinic.cnumber,clinic.workhrs,clinic.cloc
     FROM clinic 
     JOIN user_acc ON user_acc.uid = clinic.uid where user_acc.uid=".$id;
     $result = mysqli_query($this->conn,$sql);
     if($row=mysqli_fetch_array($result)){
-        // parent::__construct($row["uid"]);
     
                     $CID=$row["cid"];
 
@@ -104,15 +95,13 @@ public function getClinicID($id)
     return $CID;
 
 }
-public function getDocID($id) //test
+public function getDocID($id) 
  {
-    // return $_SESSION["ID"];
     $sql = "SELECT user_acc.uid, user_acc.email,user_acc.usertype_id, dr.did, dr.uid
     FROM dr 
     JOIN user_acc ON user_acc.uid = dr.uid where user_acc.uid=".$id;
     $result = mysqli_query($this->conn,$sql);
     if($row=mysqli_fetch_array($result)){
-        // parent::__construct($row["uid"]);
     
                     $DID=$row["did"];
 
@@ -230,7 +219,7 @@ if ($res2) {
 
 
 
-public function getDoctorAppointments($docID){ //test
+public function getDoctorAppointments($docID){ 
     $sql = "SELECT * FROM appointments where did =".$docID;
    $result = mysqli_query($this->conn,$sql);
    
@@ -281,7 +270,6 @@ public function bookingOptions(){
     // Remove duplicates
     $spec = array_unique($spec);
 
-    // Convert to the desired format
     $spec = array_map(function ($specialization) {
         return ['specialization' => $specialization];
     }, $spec);
@@ -411,20 +399,10 @@ WHERE
  } else {
      echo "<h1>" ."No appointments found"."</h1" ;
  }
-//  $sql2="select cname from clinic where cid = {$ID}";
-//  $res2=mysqli_query($this->conn,$sql2);
-//  if ($res2) {
-//      $row = mysqli_fetch_assoc($res2);
-//      $_SESSION['AppView'] = $row['cname'];
-//  }
+
 }
 
-// <th>Date</th>
-// <th>Time</th>
-// <th>Doctor</th>
-// <th>Actions</th>
-// <th>Clinic</th>
-// <th>Price</th>
+
 public function cancelReservation($pid,$appid)
 {
     $sql = "UPDATE appointments SET pid = NULL , status='available' WHERE Appid = $appid";

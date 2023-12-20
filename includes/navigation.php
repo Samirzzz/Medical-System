@@ -1,6 +1,6 @@
 <?php 
-include_once '..\includes\db.php';
  session_start();
+include_once '..\includes\db.php';
 
  require_once '../app/Model/User.php';
  require_once '../app/Model/Patient.php';

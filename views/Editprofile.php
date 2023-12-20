@@ -23,7 +23,6 @@ require_once '../app/controller/ClinicController.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
     $email=htmlspecialchars($_POST['email']);
     $UserType = $_SESSION["type"];
     $userID = $_SESSION['ID'];
@@ -45,8 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $Specialization = htmlspecialchars($_POST['specialization']);
         $Education = htmlspecialchars($_POST['education']);
     }
-    elseif($Usertype=='clinic')
-    {
+    elseif($UserType=='clinic')    {
         $cloc = htmlspecialchars($_POST['clinicLocation']);
         $cname = htmlspecialchars($_POST['clinicName']);
         $cnumber = htmlspecialchars($_POST['clinicNumber']);
@@ -82,7 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             }
         }
-        elseif ($UserType == "clinic") {
+        elseif ($UserType == 'clinic') {
+            $cloc = htmlspecialchars($_POST['clinicLocation']);
+            $cname = htmlspecialchars($_POST['clinicName']);
+            $cnumber = htmlspecialchars($_POST['clinicNumber']);
             $editclinic=ClinicController::editClinic($cname,$cloc,$cnumber,$userID,$conn);
             if($editclinic)
             {
@@ -90,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $_SESSION['cnumber']=$cnumber;
                 $_SESSION['cloc']=$cloc;
                 header("Location:../views/admin.php");
+                
 
             }
         }
@@ -208,16 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </div>';
             }
             ?>
-            <!-- <div class="form-group">
-                <label for="number">Password</label>
-                <input type="password" class="form-control" id="number" name="password" >
-                <div class="error-message" id="pass-error"></div>
-            </div>
-            <div class="form-group">
-                <label for="number">Confirm Password</label>
-                <input type="tel" class="form-control" id="number" name="Cpassword">
-                <div class="error-message" id="pass-error"></div>
-            </div> -->
+
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
