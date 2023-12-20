@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="..\public\css\clive.css">
+<link rel="stylesheet" href="../public/css/clive.css">
 <style>
         [id^="plink"] {
             display: none;
@@ -50,6 +50,8 @@ require_once '../app/Model/Clinic.php';
 require_once '../app/controller/ClinicController.php';
 require_once '../app/controller/PatientController.php';
 require_once '../app/controller/DrController.php';
+require_once '../app/controller/AdminController.php';
+
 
 $db = Database::getInstance();
 $conn = $db->getConnection();	
