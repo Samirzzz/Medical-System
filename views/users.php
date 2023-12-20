@@ -79,7 +79,6 @@ include_once '..\includes\navigation.php';
 </section>
 <script>
       function validateForm() {
-  // Get form inputs
   var firstName = document.forms["f1"]["fname"].value;
   var lastName = document.forms["f1"]["lname"].value;
   var email = document.forms["f1"]["email"].value;
@@ -87,43 +86,36 @@ include_once '..\includes\navigation.php';
   var confirmPassword = document.forms["f1"]["confpass"].value;
   var radioButtons = document.forms["f1"]["userType"];
 
-  // Validate first name
   if (firstName == "") {
     alert("First name must be filled out");
     return false;
   }
 
-  // Validate last name
   if (lastName == "") {
     alert("Last name must be filled out");
     return false;
   }
 
-  // Validate email
   if (email == "") {
     alert("Email must be filled out");
     return false;
   }
 
-  // Validate password
   if (password == "") {
     alert("Password must be filled out");
     return false;
   }
 
-  // Validate confirm password
   if (confirmPassword == "") {
     alert("Confirm password must be filled out");
     return false;
   }
 
-  // Check if password and confirm password match
   if (password !== confirmPassword) {
     alert("Passwords do not match");
     return false;
   }
 
-  // Validate radio buttons
   var isChecked = false;
   for (var i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
