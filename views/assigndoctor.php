@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    <table>
-        
-</table>
-    
-</body>
-</html>
+<?php
+session_start();
+require_once '../app\controller\AppointmentController.php';
+$db = Database::getInstance();
+$conn = $db->getConnection();
+$appointmentcntrl =new AppointmentController();
+$clinicID=$appointmentcntrl->getClinicID($_SESSION["ID"]);
+if(isset($_GET['Did']))
+{
+$docID=$_GET['Did'];
+}
+echo "doc id : ".$docID;
+echo "clinic id : ".$clinicID;
+$appointmentcntrl->assignDoc($clinicID,$docID)
+
+?>

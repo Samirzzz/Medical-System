@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap">
     <style>
     body {
-        background-image: url('test.jpg');
+        background-image: url('../public/images/test.jpg');
 
     }
 
@@ -103,18 +103,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     {
         $educ = $_POST['education'];
         $specialization = $_POST['specialization'];
-        $uid= UserController::signupUser($email, $password, 2,$imageDB); 
+        $uid= UserController::signupUser($email, $password, 2,$imageDB,$conn); 
     if ($uid !== false) {
-        if (DrController::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid)) {
+        if (DrController::signupDoctor($firstname, $lastname, $number, $educ, $specialization, $uid,$conn)) {
             header("Location:../views/login.php");
         } 
     }
     }
     if ($userType == 'Clinc')
     {
-        $uid= UserController::signupUser($email, $password, 3,$imageDB); 
+        $uid= UserController::signupUser($email, $password, 3,$imageDB,$conn); 
         if ($uid !== false) {
-            if (ClinicController::signupClinic($cname,$cloc,$cnumber,$uid) ) {
+            if (ClinicController::signupClinic($cname,$cloc,$cnumber,$uid,$conn ) ) {
                 header("Location:../views/login.php");
             } 
         }

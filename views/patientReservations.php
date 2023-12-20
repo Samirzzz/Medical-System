@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 
 
 require_once '../app\controller\AppointmentController.php';
-//hello
+
 
         $db = Database::getInstance();
         $conn = $db->getConnection();
@@ -22,13 +22,20 @@ $patientId = $appointmentcntrl->getPatientID( $_SESSION["Pid"]);
 echo "patient id : ".$patientId;
 echo "appointment id : ".$appID;
 $appointmentcntrl->bookForPatient($patientId,$appID);
+
+
+
+
+
+
 $curr_email= $_SESSION["email"];
 
 $sql22= "select date , time from appointments where Appid =".$appID;
-$res22=mysqli_query($sql22,$conn);
-while($row=mysqli_fetch_array($res22)){
+$res22=mysqli_query($conn,$sql22,);
+while($row=mysqli_fetch_array($res22))
+{
     $date = date('Y-m-d H:i:s', strtotime($row["date"]));
-    $time = row["time"]; 
+    $time = $row["time"]; 
 }
 
 //Create an instance; passing `true` enables exceptions

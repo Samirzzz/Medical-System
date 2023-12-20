@@ -9,9 +9,13 @@
 </head>
 <body >
 <?php
-include_once '..\includes\navigation.php';
+include_once '../includes/navigation.php';
+require_once '../app/controller/AdminController.php';
+
 $db = Database::getInstance();
-	$conn = $db->getConnection();	
+	$conn = $db->getConnection();
+  $admincontroller =new AdminController();
+	
 ?>
 <section class="vh-100" style="background-color:lightgray">
   <div class="container h-100">
@@ -99,19 +103,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = htmlspecialchars($_POST["name"]);
   $address = htmlspecialchars($_POST["address"]);
   $icon = html_entity_decode($_POST["icon"]);
-    $class = htmlspecialchars($_POST["class"]);
-
-    $sql_pages = "INSERT INTO pages (name, linkaddress, icons,class) VALUES ('$name', '$address', '$icon','$class')";
-    $result_pages= mysqli_query($conn, $sql_pages);
-
-    if ($result_pages) {
-        
-       
-            header("Location: addpage.php");
-        } else {
-            echo "Error inserting data into the pages table: " . mysqli_error($conn);
-        
-         }
+  $class = htmlspecialchars($_POST["class"]);
+$admincontroller->addpage($name,$address,$icon,$class);
+    
 }
 ?>
 
