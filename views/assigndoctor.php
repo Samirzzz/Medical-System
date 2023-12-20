@@ -11,6 +11,7 @@ $docID=$_GET['Did'];
 }
 echo "doc id : ".$docID;
 echo "clinic id : ".$clinicID;
-$appointmentcntrl->assignDoc($clinicID,$docID)
+$appointmentcntrl->assignDoc($clinicID,$docID);
+header("location:./retrievedocs.php");
 
 ?>
