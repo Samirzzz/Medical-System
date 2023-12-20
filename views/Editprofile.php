@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <div class="error-message" id="clinicLocation-error"></div>
                     </div>
                     <div class="form-group">
-                    <label for="clinicLocation">Clinic Location</label>
+                    <label for="clinicLocation">Clinic Number</label>
                     <input type="text" class="form-control" id="clinicLocation" name="clinicNumber" value="' . $_SESSION["cnumber"] . '">
                     <div class="error-message" id="clinicLocation-error"></div>
                 </div>
