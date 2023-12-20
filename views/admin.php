@@ -58,8 +58,8 @@ include_once '..\includes\navigation.php';
                         <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
                         <span>Appointments</span>
                     </div>
-                    <h3 class="card--value">587 <i class="ri-arrow-up-circle-fill up"></i></h3>
-                    <h5 class="more">23 more than usual</h5>
+                    <h3 class="card--value"> <i class="ri-arrow-up-circle-fill up"></i></h3>
+                    <h5 class="more"></h5>
                     <div class="chart">
                         <canvas id="products"></canvas>
                     </div>
