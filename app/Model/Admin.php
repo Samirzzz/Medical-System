@@ -1,6 +1,6 @@
 <?php
 require_once '../app/Model/User.php';
-include_once '..\includes\db.php';
+include_once '../includes/db.php';
 class Admin extends user{
 	public $aid;
 	public $name;
