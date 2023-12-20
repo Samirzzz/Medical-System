@@ -10,9 +10,7 @@ class ClinicController
         $this->db = Database::getInstance();
         $this->conn = $this->db->getConnection();
     }
-    public function getcid(){
-        return $this->cid;
-    }
+   
     static function clinicsearch($value,$conn)  {
     
         $i=0;
