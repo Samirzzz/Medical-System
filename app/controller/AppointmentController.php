@@ -442,5 +442,26 @@ public function cancelReservation($pid,$appid)
 
 }
 
+public function retreivedoc()
+{
+    $sql = "SELECT * FROM doctor where cid ="0;
+    $result = mysqli_query($this->conn,$sql);
+    
+    if ($result->num_rows > 0) {
+     while ($row = $result->fetch_assoc()) {
+         echo "<tr>";
+         echo "<td>" . $row['Did'] . "</td>";
+         echo "<td>" . $row['firstname'] . "</td>";
+         echo "<td>" . $row['lastname'] . "</td>";
+         echo "<td>" . $row['specialization'] . "</td>";
+         echo "<td><a href='./assigndoctor.php?Did=" . $row['Did'] . "'>Assign</a></td>";
+         echo "</tr>";
+     }
+ } else 
+ {
+     echo "<h1>" ."No doctors found"."</h1" ;
+ }
+}
+
 ?>
 
