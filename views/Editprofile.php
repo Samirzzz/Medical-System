@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $edituser=UserController::editUser($email,$userID,$conn);
     if($edituser)
     {
+        
         if ($UserType == "patient") {
             $editpatient=PatientController::editPatient($Fname,$Lname,$number,$gender,$Address,$userID,$conn);
             if($editpatient)
@@ -87,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $editclinic=ClinicController::editClinic($cname,$cloc,$cnumber,$userID,$conn);
             if($editclinic)
             {
+                $_SESSION['email']=$email;
                 $_SESSION['cname']=$cname;
                 $_SESSION['cnumber']=$cnumber;
                 $_SESSION['cloc']=$cloc;

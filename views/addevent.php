@@ -13,14 +13,6 @@ $doctors = $appointmentcntrl->getClinicDrs($clinic_id);
 
 
 
-// $appointment = new Appointments($conn);
-
-
-// echo ("-----------------------aloooo" . $appointment->getClinicID($_SESSION["ID"]));
-
-
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_date = htmlspecialchars($_POST['date']);
     $a_time = htmlspecialchars($_POST['time']);
@@ -29,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $a_did =htmlspecialchars($_POST['doctorid']);
     $a_cid = $appointmentcntrl->getClinicID($_SESSION["ID"]);
     
-//    echo ("----------------------------" . $a_cid);
     $errors = $appointmentcntrl->validateAppointment($a_date, $a_time, $a_status,$a_price, $a_did, $a_cid);
 
     if (count($errors) === 0) {
@@ -43,13 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             echo "Error: " . mysqli_error($conn);
         }
         
-    // } else {
-        
-    //     echo "Validations :<br>";
-    //     foreach ($errors as $error) {
-    //         echo $error . "<br>";
-    //     }
-    // }
+   
 }
 }
 ?>
@@ -74,12 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <label for="t">Time</label>
     <input type="text" placeholder="Enter the time" id="t" name="time">
     <br>
-    <!-- <label for="dn">Status</label>
-    <input type="text" placeholder="Enter doctor's name" id="dn" name="doctorname"> -->
+
     <br>
 
-    <!-- <label for="pi">patient's id</label>
-    <input type="text" placeholder="Enter patient's id" id="pi" name="patientid"> -->
     <br>
     <label for="di">doctor</label>
      <select id="di" name="doctorid">

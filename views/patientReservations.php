@@ -38,28 +38,22 @@ while($row=mysqli_fetch_array($res22))
     $time = $row["time"]; 
 }
 
-//Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 try {
-    //Server settings                 
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'tabibii.application@gmail.com';                     //SMTP username
-    $mail->Password   = 'sxxy bsog qtdc bhbd';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->isSMTP();                                            
+    $mail->Host       = 'smtp.gmail.com';                     
+    $mail->SMTPAuth   = true;                                  
+    $mail->Username   = 'tabibii.application@gmail.com';                   
+    $mail->Password   = 'sxxy bsog qtdc bhbd';                              
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+    $mail->Port       = 465;                                    
 
-    //Recipients
+    
     $mail->setFrom($curr_email,'Tabibi Application');
-    $mail->addAddress($curr_email);     //Add a recipient             //Name is optional
+    $mail->addAddress($curr_email);               
 
-    // //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
+ 
+    $mail->isHTML(true);                                  
     $mail->Subject = 'Booking Confirmed ';
     $mail->Body    = 'Thank you for booking Your appointment on tabibi application your appointment has been confirmed on '." " ."date : $date ". " time : $time";
 

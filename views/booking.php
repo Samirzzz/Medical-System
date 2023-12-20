@@ -29,7 +29,6 @@ $appointmentcntrl =new AppointmentController();
 </select>
 
 
-    <!-- <input type="submit" value = "search"onclick="updateFormAndSubmit(event)"> -->
     <div id='searching'>
 <?php
 $specUrl = null;
@@ -95,11 +94,7 @@ if (isset($_GET['specialization'])) {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
        
-        /* body {
-            
-            padding-left: 60px;
-            margin-left: 20px;
-        } */
+ 
 
         table {
             width: 70%;

@@ -146,7 +146,6 @@ while ($row = $result->fetch_array()) {
     echo '<td>'.$row["pid"].    '</td>';
     echo '<td>'.$row["age"].'</td>';
     echo '<td>'.$row["number"].'</td>';
-    //echo '<td>'.$row["diagnosis"].'</td>';
    echo '</tr>';
     
 }

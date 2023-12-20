@@ -116,7 +116,6 @@ while ($row = $result->fetch_array()) {
     echo '<td>'.$row["uid"]. '</td>';
     echo '<td>'.$row["email"].    '</td>';
   
-    //echo '<td>'.$row["diagnosis"].'</td>';
    echo '</tr>';
     
 }

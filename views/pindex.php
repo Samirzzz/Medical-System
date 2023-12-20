@@ -163,7 +163,6 @@ echo "appointment id : ".$appID;
 
         <div class="target-vs-sales--container">
             <div class="section--title">
-                <!-- <h3 class="title">Schedule</h3> -->
                 <div class="sales--value">
                     <h3 class="uppercase-text">Welcome! <br> <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></h3>
 
