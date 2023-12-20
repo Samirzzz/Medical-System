@@ -64,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $_SESSION['lastname']=$Lname;
                 $_SESSION['address']=$Address;
                 $_SESSION['gender']=$gender;
+                $_SESSION['number']=$number;
+
                 header("Location:../views/pindex.php");
 
 
