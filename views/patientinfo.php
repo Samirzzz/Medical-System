@@ -48,7 +48,7 @@ require_once '../app/controller/PatientController.php';
                 <div class="d-flex justify-content between align-items-center mb-3">
                     <h4 class="text-right">Patient Profile</h4>
                 </div>
-                <form action="" method="post">
+                <form action="" method="post" onsubmit="return reload()">
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <label class="labels">First Name</label>
@@ -85,7 +85,7 @@ require_once '../app/controller/PatientController.php';
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" name="con" type="submit">Confirm</button>
+                        <button class="btn btn-primary profile-button" name="con" type="submit">Confirm </button>
                     </div>
                 </form>
             </div>
@@ -201,30 +201,18 @@ require_once '../app/controller/PatientController.php';
         }
     }
     
-    if ($_SERVER['REQUEST_METHOD'] == "POST")
-     {
-        if (isset($_POST["sov"])) 
-        {
-            $diagnoseName = $_POST['diagnosename'];
-            $treatmentId = $_POST['treatment_id'];
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["sov"])) {
+        $diagnoseName = $_POST['diagnosename'];
+        $treatmentId = $_POST['treatment_id'];
     
-          
-                $sqlInsertDiagnosis = "INSERT INTO diagnosis (diagnosis_name, treat_id, uid) VALUES ('$diagnoseName', '$treatmentId', '$uid')";
-                $resultInsertDiagnosis = mysqli_query($conn, $sqlInsertDiagnosis);
+        $sqlInsertDiagnosis = "INSERT INTO diagnosis (diagnosis_name, treat_id, uid) VALUES ('$diagnoseName', '$treatmentId', '$uid')";
+        $resultInsertDiagnosis = mysqli_query($conn, $sqlInsertDiagnosis);
     
-                if ($resultInsertDiagnosis)
-                 {
-                    $diagnosisId = mysqli_insert_id($conn); 
-                } else
-                 {
-                    
-                    echo "Error inserting diagnosis: " . mysqli_error($conn);
-                    exit;
-                }
-            }
+        if ($resultInsertDiagnosis) {
+            $diagnosisId = mysqli_insert_id($conn);
     
-            $optionId = $_POST['options'];  
-            $optionValue = $_POST['optionvalue'];
+            $optionId = isset($_POST['options']) ? $_POST['options'] : null;
+            $optionValue = isset($_POST['optionvalue']) ? $_POST['optionvalue'] : null;
     
             $sql = "INSERT INTO d_s_o_v (diagnosis_id, treat_id, d_s_o_id, value) VALUES ('$diagnosisId', '$treatmentId', '$optionId', '$optionValue')";
             $result = mysqli_query($conn, $sql);
@@ -234,7 +222,10 @@ require_once '../app/controller/PatientController.php';
             } else {
                 echo "Error inserting into d_s_o_v: " . mysqli_error($conn);
             }
+        } else {
+            echo "Error inserting into diagnosis: " . mysqli_error($conn);
         }
+    }
     
     ?>
 
