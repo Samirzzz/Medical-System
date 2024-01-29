@@ -85,7 +85,7 @@ require_once '../app/controller/PatientController.php';
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" name="con" type="submit">Confirm </button>
+                        <button class="btn btn-primary profile-button" name="con" type="submit">Confirm</button>
                     </div>
                 </form>
             </div>
@@ -205,12 +205,14 @@ require_once '../app/controller/PatientController.php';
         $diagnoseName = $_POST['diagnosename'];
         $treatmentId = $_POST['treatment_id'];
     
+        // Insert into diagnosis
         $sqlInsertDiagnosis = "INSERT INTO diagnosis (diagnosis_name, treat_id, uid) VALUES ('$diagnoseName', '$treatmentId', '$uid')";
         $resultInsertDiagnosis = mysqli_query($conn, $sqlInsertDiagnosis);
     
         if ($resultInsertDiagnosis) {
             $diagnosisId = mysqli_insert_id($conn);
     
+            // Insert into d_s_o_v
             $optionId = isset($_POST['options']) ? $_POST['options'] : null;
             $optionValue = isset($_POST['optionvalue']) ? $_POST['optionvalue'] : null;
     
