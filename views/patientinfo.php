@@ -98,11 +98,11 @@ require_once '../app/controller/PatientController.php';
                     <br>
                     <form action="" method="post">
                         <label for="diagnosename">Diagnose name</label>
-                        <input type="text" placeholder="diagnose name" id="diagnosename" name="diagnosename">
+                        <input type="text" placeholder="diagnose name" id="diagnosename" name="diagnosename" required>
                         <br>
                         <br>
                         <label for="treatment_id">Treatment</label>
-                        <select id="treatment_id" name="treatment_id">
+                        <select id="treatment_id" name="treatment_id" >
                             <option value="">choose</option>
                             <?php foreach ($treat_opt as $opt) { ?>
 
@@ -114,10 +114,10 @@ require_once '../app/controller/PatientController.php';
                         <br>
                         <br>
                         <label class="labels">Options</label>
-                        <select id="options" name="options"></select>
+                        <select id="options" name="options" required></select>
                         <br>
                         <label class="labels">Option Value: </label>
-                        <input type="text" placeholder="option value" id="optionvalue" name="optionvalue">
+                        <input type="text" placeholder="option value" id="optionvalue" name="optionvalue" required>
                         <br>
                         <button type="submit" name="sov">Submit</button>
                     </form>
@@ -129,6 +129,8 @@ require_once '../app/controller/PatientController.php';
                 <th>Diagnosis</th>
                 <th>Treatment</th>
                 <th>Option Value</th>
+                <th>date</th>
+
             </tr>
         </thead>
         <tbody>
@@ -139,7 +141,7 @@ require_once '../app/controller/PatientController.php';
             if ($rowPid = mysqli_fetch_array($resultPid)) {
                 $uid = $rowPid['uid'];
 
-                $sql = "SELECT diagnosis.diagnosis_name, treatment.treat_name, d_s_o_v.value
+                $sql = "SELECT diagnosis.diagnosis_name, treatment.treat_name, d_s_o_v.value,d_s_o_v.date
                         FROM diagnosis
                         INNER JOIN treatment ON diagnosis.treat_id = treatment.treat_id
                         INNER JOIN d_s_o_v ON diagnosis.diagnosis_id = d_s_o_v.diagnosis_id
@@ -151,11 +153,14 @@ require_once '../app/controller/PatientController.php';
                     $diagnosisName = $row['diagnosis_name'];
                     $treatName = $row['treat_name'];
                     $opt_value = $row['value'];
+                    $date = $row['date'];
 
                     echo '<tr>';
                     echo '<td>' . $diagnosisName . '</td>';
                     echo '<td>' . $treatName . '</td>';
                     echo '<td>' . $opt_value . '</td>';
+                    echo '<td>' . $date . '</td>';
+
                     echo '</tr>';
                 }
             }
@@ -205,14 +210,12 @@ require_once '../app/controller/PatientController.php';
         $diagnoseName = $_POST['diagnosename'];
         $treatmentId = $_POST['treatment_id'];
     
-        // Insert into diagnosis
         $sqlInsertDiagnosis = "INSERT INTO diagnosis (diagnosis_name, treat_id, uid) VALUES ('$diagnoseName', '$treatmentId', '$uid')";
         $resultInsertDiagnosis = mysqli_query($conn, $sqlInsertDiagnosis);
     
         if ($resultInsertDiagnosis) {
             $diagnosisId = mysqli_insert_id($conn);
     
-            // Insert into d_s_o_v
             $optionId = isset($_POST['options']) ? $_POST['options'] : null;
             $optionValue = isset($_POST['optionvalue']) ? $_POST['optionvalue'] : null;
     
